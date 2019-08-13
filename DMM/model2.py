@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+ @Time    : 2019/8/13 14:30
+ @Author  : Pangjy
+ @File    : DMM/model2.py
+ @Software: PyCharm
+ Create this file based on LFDMM
+"""
 import numpy as np
 import random
 import codecs
@@ -29,74 +36,6 @@ class DataPreprocessing(object):
 		self.word2id = {}
 
 class DMMmodel(object):
-	def __init__(self, loadpath):
-		x_data = cPickle.load(open(loadpath, "rb"))
-		train=x_data[0]
-		print(len(train))
-		train_lab = []
-		wordtoix, ixtoword = x_data[2], x_data[3]
-		del x_data
-
-		dpre=DataPreprocessing()
-		dpre.docs_count=len(train)
-		dpre.words_count=len(wordtoix)
-		for i in range(len(train)):
-			doc=Document()
-			doc.words=train[i]
-			doc.length=len(train[i])
-
-			wordcount={}
-			wordcount_list=[]
-			for w in train[i]:
-				if w in wordcount:
-					wordcount[w]+=1
-					wordcount_list.append(wordcount[w])
-				else:
-					wordcount[w]=1
-					wordcount_list.append(wordcount[w])
-			doc.occurenceToIndexCount=wordcount_list
-			dpre.docs.append(doc)
-		dpre.word2id=wordtoix
-		print(dpre.docs_count)
-
-		self.dpre = dpre  # 获取预处理参数（文档预处理实例）
-		# 模型参数
-		self.K = 40  # 主题个数
-		self.beta = 0.01  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
-		self.alpha = 0.1  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
-		self.lam=0.5 # 决定参数
-		self.iter_times = 2  # 最大迭代次数
-		self.top_words_num = 20  # 每个主题特征词个数？？？？
-
-		# self.prob=None # embedding预测单词的概率
-
-		self.phifile = './re/phifile1.txt'  # 词-主题分布文件phi
-		self.thetafile = './re/thetafile1.txt'
-		self.topNfile = './re/topNfile1.txt'  # 每个主题topN词文件
-		self.tassginfile = './re/tassginfile1.txt'  # 最后分派结果文件
-
-		self.p = np.zeros(self.K)  # 概率向量double类型，存储采样的临时变量
-		self.E = np.zeros(self.K,dtype = 'int')  # 每个主题的文档数
-		self.ndsum = np.zeros(self.dpre.docs_count, dtype = 'int')  # 每个doc中词的总数
-		self.F=np.zeros(self.K,dtype = 'int')  #每个topic词的数量
-		self.nw = np.zeros((self.dpre.words_count, self.K), dtype = 'int')  # 词word在主题topic上的数量
-
-		self.Z=np.zeros(self.dpre.docs_count,dtype = 'int')
-
-		# 随机分配主题类型，为每个文档中的各个单词随机分配主题
-		for x in range(self.dpre.docs_count):
-			topic = random.randint(0, self.K - 1)  # 随机取一个主题
-			self.Z[x] = topic  # 第x篇文档的主题为topic
-			self.E[topic]+=1 # 每个主题的文档数
-			self.ndsum[x] = self.dpre.docs[x].length
-			for y in range(self.dpre.docs[x].length):
-				self.nw[self.dpre.docs[x].words[y]][topic] += 1
-				self.F[topic] += 1
-
-		self.theta = np.array([0.0 for y in range(self.K)])  # 全数据集主题分布
-		self.phi = np.array([[0.0 for y in range(self.dpre.words_count)] for x in range(self.K)])  # 主题-词分布
-
-class DMMmodel1(object):
 	def __init__(self, loadpath, K,opt):
 		x_data = cPickle.load(open(loadpath, "rb"))
 		train = x_data[0]
@@ -278,14 +217,6 @@ class DMMmodel1(object):
 			self.Z[i] = topic
 			opt.topic_distribution[i]=p
 
-	def est_parallel0(self,i):
-		topic = self.sampling1(i)
-		return topic
-
-	def est_parallel(self,i):
-		topic = self.sampling2(i)
-		return topic
-
 	def _theta(self):
 		self.theta = self.E + self.alpha
 		self.theta=np.array(self.theta / np.sum(self.theta))
@@ -433,27 +364,11 @@ class DMMmodel1(object):
 					coherence += math.log((countij + 1) / (countj * counti) * self.dpre.docs_count)
 		return coherence / self.K
 
-	# def GetTopicDistribution(self):
-	# 	statistic = pd.value_counts(self.Z,normalize=False)
-	# 	topic_distribution = np.zeros(self.K,dtype='float32')
-	# 	for i in statistic.index:
-	# 		topic_distribution[i] = statistic[i]
-	# 	#print(topic_distribution)
-	# 	topic_distribution[:] = [x / self.K for x in topic_distribution]
-	# 	#topic_distribution = topic_distribution - np.max(topic_distribution)
-	# 	#topic_distribution = np.exp(topic_distribution)/sum(np.exp(topic_distribution))
-	#
-	# 	print("topic_distribution:",topic_distribution)
-		#sumi = 0
-		#for i in topic_distribution:
-			#sumi+=i
-			#print(i)
-		#print("sum:",sumi)
-		#return topic_distribution
 	def Restore_Z(self):
 		data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
 		Stored_Z = data['topic'].values.tolist()
 		return Stored_Z
+
 	def initTopicEmb(self,all_wordemb):
 		self._phi() # 更新词-主题分布 K*word_count
 		topic_emb = np.zeros([self.K,len(all_wordemb[0])],dtype='float32')
@@ -474,6 +389,6 @@ class DMMmodel1(object):
 
 if __name__=='__main__':
 	loadpath='../data/news_train_title.p'
-	dmm=DMMmodel1(loadpath)
+	dmm=DMMmodel(loadpath)
 	dmm.est1()
 	print(dmm.getTopicCoherence())

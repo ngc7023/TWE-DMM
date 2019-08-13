@@ -33,3 +33,4 @@ DMM/.DS_Store
 .DS_Store
 data/news_sohusite_xml.dat
 data/news_tensite_xml.dat
+*.zip

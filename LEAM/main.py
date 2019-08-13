@@ -18,6 +18,8 @@ import multiprocessing
 from LEAM.model import *
 from LEAM.utils import get_minibatches_idx, restore_from_save, tensors_key_in_file, prepare_data_for_emb, load_class_embedding
 import cProfile
+from DMM.model import DMMmodel1
+
 class Options(object):
     def __init__(self):
         self.GPUID = 0
