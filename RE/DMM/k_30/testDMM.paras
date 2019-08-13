@@ -1,8 +1,0 @@
--model	DMM
--corpus	test/classify_corpus_less2.txt
--ntopics	30
--alpha	0.1
--beta	0.1
--niters	2000
--twords	20
--name	DMM/k_30/testDMM
