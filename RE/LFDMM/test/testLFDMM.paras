@@ -1,0 +1,11 @@
+-model	LFDMM
+-corpus	test/corpus.txt
+-vectors	test/wordVectors.txt
+-ntopics	4
+-alpha	0.1
+-beta	0.1
+-lambda	1.0
+-initers	500
+-niters	50
+-twords	20
+-name	testLFDMM

@@ -1,0 +1,9 @@
+Golden-labels in: test/corpus.LABEL
+
+Results for: /Users/ting/Documents/python_code/tensorflow_learning/jLDADMM-master/test/testLDA.theta
+	Purity: 0.5725
+	NMI: 0.17324400002745877
+
+---
+Mean purity: 0.5725, standard deviation: 0.0
+Mean NMI: 0.17324400002745877, standard deviation: 0.0

@@ -1,0 +1,11 @@
+$ java -jar jar/LFTM.jar -model LFLDA -corpus test/classify_corpus_less0.txt -vectors test/classifydata_emb_LFTM.txt -ntopics 10 -alpha 0.1 -beta 0.01 -lambda 0.6 -initers 2000 -niters 200 -twords 20 -name LDA/k_10/testLFLDA
+
+
+$ java -jar jar/LFTM.jar -model LFDMM -corpus test/classify_corpus_less2.txt -vectors test/classifydata_emb_LFTM.txt -ntopics 10 -alpha 0.1 -beta 0.1 -lambda 1.0 -initers 2000 -niters 200 -twords 20 -name DMM/k_10/testLFDMM
+
+
+$ java -jar jar/jLDADMM.jar -model LDA -corpus test/classify_corpus_less2.txt -ntopics 10 -name LDA/k_10/testLDA
+
+
+$ java -jar jar/jLDADMM.jar -model DMM -corpus test/classify_corpus_less2.txt -ntopics 10 -beta 0.1 -name DMM/k_10/testDMM
+
