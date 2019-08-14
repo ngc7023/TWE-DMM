@@ -103,12 +103,16 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		else:
 			# 随机分配主题类型，为每个文档中的各个单词随机分配主题
 			for x in range(len(self.Z)):
-				#todo: compare with original initialize
 				topic = random.randint(0, self.K - 1)  # 随机取一个主题
 				self.Z[x] = topic  # 第x篇文档的主题为topic
 				self.E[topic]+=1   # 每个主题的文档数
+
 				doc = self.dpre.docs[x]
+				self.ndsum[x] = doc.length
 				self.F[topic] += doc.length
+				for y in range(self.dpre.docs[x].length):
+					self.nw[self.dpre.docs[x].words[y]][topic] += 1
+
 				for i in range(doc.length): # 根据LFDMM修改初始化方法
 					word = doc.words[i]
 					subtopic = random.randint(0, 1)
@@ -397,27 +401,20 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			Vbeta = self.dpre.words_count * self.beta  # beta * vocabularySize
 
 			self.E[topic] -= 1
-			for j in range(self.dpre.docs[i].length):
-				word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
+			self.F[topic] -= doc.length
+			for j in range(doc.length):
+				word = doc.words[j]  # 获取第i个文档第j个词的编号
 				self.nw[word][topic] -= 1
-				self.F[topic] -= 1
 
-			for i in range(doc.length):
-				word = doc.words[i]
-				subtopic = doc.WordtopicAssignments[i]
+			for j in range(doc.length):
+				word = doc.words[j]
+				subtopic = doc.WordtopicAssignments[j]
 				if(topic==subtopic):
 					self.topicWordCountLF[word][topic] -= 1
 					self.sumTopicWordCountLF[topic]-= 1
-					if(self.topicWordCountLF[word][topic]<0 or self.sumTopicWordCountLF[topic]<0):
-						print("LF<0")
 				else:
-					#todo: why samller than 0
 					self.topicWordCountDMM[word][topic] -= 1;
 					self.sumTopicWordCountDMM[topic] -= 1;
-					if (self.topicWordCountDMM[word][topic] < 0 or self.sumTopicWordCountDMM[topic]<0):
-						print("DMM<0")
-						print(word)
-						print(topic)
 
 			self.p = self.E + self.alpha
 			for word in doc.words:
@@ -427,19 +424,18 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
 			choices = range(len(dist))
 
-			# print(dist)
 			topic = np.random.choice(choices, p=dist)
 			self.Z[i] = topic
 			# topic = np.argmax(np.random.multinomial(1, p))
 
 			self.E[topic] += 1
-			for j in range(self.dpre.docs[i].length):
-				word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
+			self.F[topic] += doc.length
+			for j in range(doc.length):
+				word = doc.words[j]  # 获取第i个文档第j个词的编号
 				self.nw[word][topic] += 1
-				self.F[topic] += 1
 
-			for i in range(doc.length):
-				word = doc.words[i]
+			for j in range(doc.length):
+				word = doc.words[j]
 				subtopic = topic
 				if ((self.lam*(self.topicWordCountLF[word][topic] + self.beta)/(self.sumTopicWordCountLF[topic] + Vbeta))
 				>((1-self.lam)*(self.topicWordCountDMM[word][topic]+self.beta)/(self.sumTopicWordCountDMM[topic] + Vbeta))):
@@ -449,8 +445,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					self.topicWordCountDMM[word][topic] += 1
 					self.sumTopicWordCountDMM[topic] += 1
 					subtopic += self.K
-
-				doc.WordtopicAssignments[i] = subtopic
+				doc.WordtopicAssignments[j] = subtopic
 
 	def sampleSingleIteration(self,opt):
 		probIdx = 0

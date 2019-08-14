@@ -75,8 +75,10 @@ def main():
 		opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_title_emb.p"
 		# dmm = DMMmodel('../data/news_train_title.p')
 	elif opt.dataset=='classifydata':
-		opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_index.p'
-		opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_emb.p"
+		opt.loadpath = '../data/classifydata/classifydata_index.p'
+		opt.embpath = "../data/classifydata/classifydata_emb.p"
+		# opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_index.p'
+		# opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_emb.p"
 		# dmm = DMMmodel('../data/classifydata/classifydata_index.p')
 	else:
 		pass
@@ -106,20 +108,22 @@ def main():
 	# Train TWE
 	# Prepare Label
 	x = cPickle.load(open(opt.loadpath, "rb"))
-	train_lab, opt.sample_number, dmm.probIdx_start = make_train_data1(x[0],dmm) # lab: 行列 # ProbIdx：文本i的sample的起止值
-	print('sample number: ', opt.sample_number)
-	train_lab = np.array(train_lab, dtype='int32')
+	# train_lab, opt.sample_number, dmm.probIdx_start = make_train_data1(x[0],dmm) # lab: 行列 # ProbIdx：文本i的sample的起止值
+	# print('sample number: ', opt.sample_number)
+	# train_lab = np.array(train_lab, dtype='int32')
 	del x
 	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
 	#opt.gamma = np.zeros([opt.batch_size,opt.num_class],dtype='float32')
 	# 训练DMM，获取最初的Topic_Distribution，无prob
-	dmm.est1(opt)
+	for i in range(200):
+		print(i)
+		dmm.est1(opt)
 	dmm._phi() # 计算Topic_Coherence初始值
 	print("topic coherence:",dmm.getTopicCoherence())
 	print(opt.topic_distribution[0])
 
 	#print("Start Train_TWE")
-	Train_TWE(opt,train_lab,dmm)
+	#Train_TWE(opt,train_lab,dmm)
 
 if __name__ == '__main__':
 	main()

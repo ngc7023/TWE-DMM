@@ -132,4 +132,5 @@ import math
 x = np.array([9.9e-01, 9.9e-01, 1.0e-09, 1.0e-09, 1.0e-09, 1.0e-09, 1.0e-09,
        1.0e-09, 1.0e-09, 1.0e-09], dtype=np.float32)
 y = x / x.sum()
-np.random.multinomial(1, y)
+# np.random.multinomial(1, y)
+print(np.random.choice(len(y),p=y))
