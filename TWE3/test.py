@@ -124,9 +124,12 @@ import math
 #     print(topic_distribution)
 #     return topic_distribution
 # GetTopicDistribution()
-K = 40
-p = [1. / K] * K
-print(np.random.multinomial(1, p))
-topic = np.argmax(np.random.multinomial(1, p))  # 以概率p的分布随机选择主题
-print(topic)
-
+# K = 40
+# p = [1. / K] * K
+# print(np.random.multinomial(1, p))
+# topic = np.argmax(np.random.multinomial(1, p))  # 以概率p的分布随机选择主题
+# print(topic)
+x = np.array([9.9e-01, 9.9e-01, 1.0e-09, 1.0e-09, 1.0e-09, 1.0e-09, 1.0e-09,
+       1.0e-09, 1.0e-09, 1.0e-09], dtype=np.float32)
+y = x / x.sum()
+np.random.multinomial(1, y)

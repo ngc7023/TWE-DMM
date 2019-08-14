@@ -43,15 +43,13 @@ def make_train_data(train,dmm): # 2019-07-26
 def make_train_data1(train,dmm): # 2019-08-06
     len_train = len(train)
     label = [0 for i in range(0,dmm.sample_num)] # 初始化定长list
-    ProbIdx_start = np.zeros(dmm.dpre.docs_count, dtype='int')
     sample_num = 0
     for i in range(len_train): # 每个文本
         len_text = len(train[i]) # 文本长度
-        ProbIdx_start[i] = sample_num
+        sample_num += len_text
         for j in range(len_text): # 每个单词
             label[sample_num] = [i,j]
-            sample_num+=1
-    return label, sample_num, ProbIdx_start
+    return label, sample_num
 def get_train_by_label(labix,maxlen,wordseq_row): # 2019-07-26
     if(labix < maxlen):
         word_sequence = [0]*(maxlen-labix) + wordseq_row[:labix+1]

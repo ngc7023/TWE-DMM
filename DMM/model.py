@@ -208,7 +208,6 @@ class DMMmodel1(object):
 		self.F[topic]-=doc.length
 	
 		Vbeta = self.dpre.words_count * self.beta  # dpre.words_count: 唯一单词总数
-
 		# gibbs sample
 		self.p=(self.E+self.alpha)
 		for word in doc.words:
@@ -241,7 +240,6 @@ class DMMmodel1(object):
 		self.p = (self.E + self.alpha)  # len(E) = K # doc-topic # 每个主题的文档数量+文档下主题的狄利克雷分布alpha
 		for word in doc.words[1:]:  # 这篇文档的单词长度
 			self.p = self.p * ((1 - self.lam) * (self.nw[word] + self.beta) / (self.F + Vbeta) + self.lam * self.prob[probIdx])  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
-			# nw[word]要换成
 			probIdx += 1
 		if (np.sum(self.p) == 0):
 			p = [1./self.K]*self.K
@@ -462,15 +460,6 @@ class DMMmodel1(object):
 			word_dis = word_dis[:,np.newaxis]
 			topic_emb[i] = np.sum(np.multiply(word_dis,all_wordemb),axis=0)
 		return topic_emb
-
-	def sampleSingleInitialIteration(self):
-		for i in range(self.dpre.docs_count):  # 总文档数
-			topic = self.Z[i]
-			doc = self.dpre.docs[i]
-
-			self.E[topic] -= 1 # topic-doc
-			# for word in doc.words:
-
 
 if __name__=='__main__':
 	loadpath='../data/news_train_title.p'

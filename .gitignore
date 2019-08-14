@@ -34,3 +34,16 @@ DMM/.DS_Store
 data/news_sohusite_xml.dat
 data/news_tensite_xml.dat
 *.zip
+TWE3/test.py
+*.pyc
+*.pyc
+*.pyc
+LEAM/__pycache__/model.cpython-37.pyc
+*.pyc
+*.pyc
+*.pyc
+*.pyc
+TWE3/__pycache__/data_process.cpython-37.pyc
+*.pyc
+*.py
+TWE3/test.py
