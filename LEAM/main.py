@@ -214,7 +214,7 @@ def main():
         print('No embedding file found.')
         opt.fix_emb = False
 
-    with tf.device('/gpu:1'):
+    with tf.device('/gpu:0'):
         x_ = tf.placeholder(tf.int32, shape=[opt.batch_size, opt.maxlen],name='x_')
         x_mask_ = tf.placeholder(tf.float32, shape=[opt.batch_size, opt.maxlen],name='x_mask_')
         keep_prob = tf.placeholder(tf.float32,name='keep_prob')
@@ -346,6 +346,7 @@ def Train_TWE(opt,train_lab,dmm): # Option由TWE2/main控制
     except IOError:
         print('No embedding file found.')
         opt.fix_emb = False
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(opt.GPUID)
 
     with tf.device('/gpu:0'):
         x_ = tf.placeholder(tf.int32, shape=[opt.batch_size, opt.maxlen], name='x_')  # 输入训练文本单词id batch_size行，maxlen列
@@ -454,14 +455,14 @@ intra_op_parallelism_threads=4,)
                 iter_cohere +=1
                 # 进行一次gibbs抽样 已处理过所有样本
                 dmm.prob = tmp_prob	
-                dmm.est2(opt)
+                dmm.sampleSingleIteration(opt)
                 if(iter_cohere%10==0):
                     dmm._phi()
-                    print('Topic coherence:', dmm.getTopicCoherence()) 
+                    print('Topic coherence:', dmm.getTopicCoherence())
 
             cPickle.dump([word_emb, topic_emb], open(opt.topicwordemb_path, 'wb'))
             dmm.save1()
-            print('Topic coherence:', dmm.getTopicCoherence())
+            # print('Topic coherence:', dmm.getTopicCoherence())
             
         except KeyboardInterrupt:
             print('Training interupted')

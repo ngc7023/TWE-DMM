@@ -359,6 +359,8 @@ class DMMmodel(object): # modify by Pangjy 08-13
 	def getTopicCoherence(self):
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
 		coherence = 0
+		npmi_coherence = 0
+		original_coherence = 0
 		for x in range(self.K):
 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
 			twords.sort(key = lambda i: i[1], reverse = True)
@@ -377,8 +379,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 						else:
 							if twords[wj] in self.dpre.docs[di].words:
 								countj += 1
-					coherence += math.log((countij + 1) / (countj * counti) * self.dpre.docs_count)
-		return coherence / self.K
+					original_tmp = math.log((countij + 1) / (countj * counti) * self.dpre.docs_count)
+					tmp = math.log((countij + 1e-12) / (countj * counti) * self.dpre.docs_count)
+					coherence += tmp
+					npmi_coherence += tmp/(-math.log((countij/self.dpre.docs_count) + 1.0e-12))
+					original_coherence += original_tmp # 取eplison = 1
+		# todo: modify PMI and NPMI √
+		return coherence / self.K, npmi_coherence / self.K, original_coherence/ self.K
 
 	def Restore_Z(self):
 		data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
@@ -394,7 +401,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			topic_emb[i] = np.sum(np.multiply(word_dis,all_wordemb),axis=0)
 		return topic_emb
 
-	def sampleSingleInitialIteration(self):
+	def sampleSingleInitialIteration(self,opt):
 		for i in range(self.dpre.docs_count):
 			doc = self.dpre.docs[i]
 			topic = self.Z[i]
@@ -421,11 +428,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				self.p = self.p * (self.lam*(self.topicWordCountLF[word] + self.beta)/(self.sumTopicWordCountLF + Vbeta)
 								+ (1-self.lam)*(self.topicWordCountDMM[word]+self.beta)/(self.sumTopicWordCountDMM + Vbeta))
 
-			dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
-			choices = range(len(dist))
-
-			topic = np.random.choice(choices, p=dist)
-			self.Z[i] = topic
+			if (np.sum(self.p) == 0):
+				dist = [1. / self.K] * self.K
+				topic = np.argmax(np.random.multinomial(1, dist))  # 以平均概率随机选择主题
+			else:
+				dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
+				choices = range(len(dist))
+				topic = np.random.choice(choices, p=dist)
 			# topic = np.argmax(np.random.multinomial(1, p))
 
 			self.E[topic] += 1
@@ -447,6 +456,9 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					subtopic += self.K
 				doc.WordtopicAssignments[j] = subtopic
 
+			self.Z[i] = topic
+			opt.topic_distribution[i] =  dist
+
 	def sampleSingleIteration(self,opt):
 		probIdx = 0
 		for i in range(self.dpre.docs_count):
@@ -455,41 +467,59 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			Vbeta = self.dpre.words_count * self.beta  # beta * vocabularySize
 
 			self.E[topic] -= 1
+			self.F[topic] -= doc.length
+			for j in range(doc.length):
+				word = doc.words[j]  # 获取第i个文档第j个词的编号
+				self.nw[word][topic] -= 1
+
 			for j in range(doc.length):
 				word = doc.words[j]
 				subtopic = doc.WordtopicAssignments[j]
-				if (topic == subtopic):
+				if(topic==subtopic):
 					self.topicWordCountLF[word][topic] -= 1
-					self.sumTopicWordCountLF[topic] -= 1
+					self.sumTopicWordCountLF[topic]-= 1
 				else:
 					self.topicWordCountDMM[word][topic] -= 1;
 					self.sumTopicWordCountDMM[topic] -= 1;
 
+			prob_start = probIdx
 			self.p = self.E + self.alpha
 			for word in doc.words:
 				self.p = self.p * (self.lam * self.prob[probIdx]
-				+ (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
+								   + (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
 				probIdx += 1
-			p = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
-			topic = np.argmax(np.random.multinomial(1, p))
+
+				if(np.sum(self.p)==0): # todo: self.p==0
+					dist = [1. / self.K] * self.K
+					topic = np.argmax(np.random.multinomial(1, dist)) # 以平均概率随机选择主题
+				else:
+					dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
+					choices = range(len(dist))
+					topic = np.random.choice(choices, p=dist)
 
 			self.E[topic] += 1
-			for i in range(doc.length):
-				word = doc.words[i]
+			self.F[topic] += doc.length
+			for j in range(doc.length):
+				word = doc.words[j]  # 获取第i个文档第j个词的编号
+				self.nw[word][topic] += 1
+
+			for j in range(doc.length):
+				word = doc.words[j]
 				subtopic = topic
-				if ((self.lam * self.prob[probIdx])
-					> ((1 - self.lam) * (self.topicWordCountDMM[word][topic] + self.beta) / (self.sumTopicWordCountDMM[topic] + Vbeta))):
+				if ((self.lam * self.prob[prob_start])
+						> ((1 - self.lam) * (self.topicWordCountDMM[word][topic] + self.beta) / (self.sumTopicWordCountDMM[topic] + Vbeta))):
 					self.topicWordCountLF[word][topic] += 1
 					self.sumTopicWordCountLF[topic] += 1
 				else:
 					self.topicWordCountDMM[word][topic] += 1
 					self.sumTopicWordCountDMM[topic] += 1
 					subtopic += self.K
-
-				doc.WordtopicAssignments[i] = subtopic
+				doc.WordtopicAssignments[j] = subtopic
+				prob_start += 1
 
 			self.Z[i] = topic
-			opt.topic_distribution[i] = self.p
+			opt.topic_distribution[i] = dist
+
 
 
 # if __name__=='__main__':

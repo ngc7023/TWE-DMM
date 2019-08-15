@@ -91,7 +91,8 @@ def att_emb_ngram_encoder_maxout1(x_emb, W_class, W_class_tran, opt,gamma):
     G = tf.contrib.keras.backend.dot(x_emb_norm, W_class_norm)  # b * s * c   # Ghat：归一化矩阵
     #print(opt.topic_distribution)
     gamma = tf.expand_dims(gamma,1)
-    G = tf.multiply(gamma,G)
+    if(opt.ifGammaUse):
+        G = tf.multiply(gamma,G)
     Gammatmp = gamma
     G = tf.expand_dims(G,-1) #点乘/L2范式 = 余弦相似度 # 每个小格代表一个单词和一个主题的相似程度 # 30 * 30 * 40 * 1
     Gtmp = G 

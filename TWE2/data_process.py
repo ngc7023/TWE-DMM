@@ -58,18 +58,18 @@ def get_train_by_label(labix,maxlen,wordseq_row): # 2019-07-26
     else:
         word_sequence = wordseq_row[labix-maxlen:labix+1]
     return word_sequence
-
-def get_train_by_label1(label,maxlen,allwordseq): # 2019-08-05
-    row = label[0]
-    column = label[1]
-    seq = allwordseq[row].words[:column+1]
-    if(row==0):
-        seq =[0]*(maxlen-len(seq)+1) + seq
-        return seq
-    else:
-        i=1
-        while(len(seq)<maxlen+1):
-            seq = allwordseq[row-i].words+seq
-            i+=1
-        seq = seq[len(seq)-maxlen-1:]
-        return seq
+#
+# def get_train_by_label1(label,maxlen,allwordseq): # 2019-08-05
+#     row = label[0]
+#     column = label[1]
+#     seq = allwordseq[row].words[:column+1]
+#     if(row==0):
+#         seq =[0]*(maxlen-len(seq)+1) + seq
+#         return seq
+#     else:
+#         i=1
+#         while(len(seq)<maxlen+1):
+#             seq = allwordseq[row-i].words+seq
+#             i+=1
+#         seq = seq[len(seq)-maxlen-1:]
+#         return seq

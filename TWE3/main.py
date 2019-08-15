@@ -41,15 +41,17 @@ class TWE_Setting(object):
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
-		
-		self.save_path = "./save_classifydata/"
-		self.log_path = "./log_classifydata/"
-		self.topicwordemb_path = './re/topic-wordemb1.p'
-		self.phifile = './re/phifile1.txt'  # 词-主题分布文件phi
-		self.thetafile = './re/thetafile1.txt'
-		self.topNfile = './re/topNfile1.txt'  # 每个主题topN词文件
-		self.tagassignfile = './re/tassginfile1.txt'  # 最后分派结果文件
-		
+		self.ifGammaUse = False
+		self.setSampleNumber = 20000000
+
+		self.save_path = ""
+		self.log_path = ""
+		self.topicwordemb_path = ""
+		self.phifile = ""  # 词-主题分布文件phi
+		self.thetafile = ""
+		self.topNfile = "" # 每个主题topN词文件
+		self.tagassignfile = ""  # 最后分派结果文件
+
 		self.print_freq = 100
 		self.valid_freq = 100
 		self.num_class = 40         # 主题个数
@@ -64,6 +66,8 @@ class TWE_Setting(object):
 		self.topic_distribution = None
 		self.topic_emb = None
 		self.gamma = None
+
+		self.IterationforInitialization = 1
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -73,9 +77,27 @@ def main():
 	# Prepare training and testing data
 	opt = TWE_Setting()
 	if opt.dataset == 'train_text':
-		opt.loadpath='/home/zliu/topic_modeling/TWE-DMM/data/news_train_text.p'
-		opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_text_emb.p"
+		opt.loadpath = '../data/news_train_text.p'
+		opt.embpath = "../data/train_text_emb.p"
+		# opt.loadpath='/home/zliu/topic_modeling/TWE-DMM/data/news_train_text.p'
+		# opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_text_emb.p"
 		# dmm = DMMmodel('../data/news_train_text.p')
+		if opt.ifGammaUse:
+			opt.save_path = "./save_largeset_gamma/"
+			opt.log_path = "./log_largeset_gamma/"
+			opt.topicwordemb_path = './re_largeset_gamma/topic-wordemb.p'
+			opt.phifile = './re_largeset_gamma/phifile.txt'  # 词-主题分布文件phi
+			opt.thetafile = './re_largeset_gamma/thetafile.txt'
+			opt.topNfile = './re_largeset_gamma/topNfile.txt'  # 每个主题topN词文件
+			opt.tagassignfile = './re_largeset_gamma/tassginfile.txt'  # 最后分派结果文件
+		else:
+			opt.save_path = "./save_largeset_without_gamma/"
+			opt.log_path = "./log_largeset_without_gamma/"
+			opt.topicwordemb_path = './re_largeset_without_gamma/topic-wordemb.p'
+			opt.phifile = './re_largeset_without_gamma/phifile.txt'  # 词-主题分布文件phi
+			opt.thetafile = './re_largeset_without_gamma/thetafile.txt'
+			opt.topNfile = './re_largeset_without_gamma/topNfile.txt'  # 每个主题topN词文件
+			opt.tagassignfile = './re_largeset_without_gamma/tassginfile.txt'  # 最后分派结果文件
 	elif opt.dataset == 'train_title':
 		opt.loadpath='/home/zliu/topic_modeling/TWE-DMM/data/news_train_title.p'
 		opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_title_emb.p"
@@ -83,6 +105,15 @@ def main():
 	elif opt.dataset=='classifydata':
 		opt.loadpath = '../data/classifydata/classifydata_index.p'
 		opt.embpath = "../data/classifydata/classifydata_emb.p"
+
+		opt.save_path = "./save_classifydata/"
+		opt.log_path = "./log_classifydata/"
+		opt.topicwordemb_path = './re/topic-wordemb.p'
+		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/thetafile.txt'
+		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
+
 		# opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_index.p'
 		# opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/classifydata/classifydata_emb.p"
 		# dmm = DMMmodel('../data/classifydata/classifydata_index.p')
@@ -94,11 +125,6 @@ def main():
 	dmm.init_Z(dmm.Z)
 	opt.n_words = dmm.dpre.words_count
 
-	if opt.dataset == 'train_text':
-		dmm.sample_num = 27041529
-	elif opt.dataset=='classifydata':
-		dmm.sample_num = 103648
-		#dmm.sample_num = 107154
 	dmm._phi() # 计算Topic_Coherence初始值
 	print("topic coherence:",dmm.getTopicCoherence())
 
@@ -113,24 +139,27 @@ def main():
 	
 	# Train TWE
 	# Prepare Label
-	# x = cPickle.load(open(opt.loadpath, "rb"))
-	# train_lab, opt.sample_number = make_train_data1(x[0],dmm) # lab: 行列 # ProbIdx：文本i的sample的起止值
-	# print('sample number: ', opt.sample_number)
-	# train_lab = np.array(train_lab, dtype='int32')
-	# del x
-	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
-	#opt.gamma = np.zeros([opt.batch_size,opt.num_class],dtype='float32')
-	# 训练DMM，获取最初的Topic_Distribution，无prob
-	# dmm.est1(opt)
-	for i in range(200):
-		print(i)
-		dmm.sampleSingleInitialIteration()
-	dmm._phi()
-	print("topic coherence:",dmm.getTopicCoherence())
-	print(opt.topic_distribution[0])
+	if(opt.dataset == 'train_text'):
+		opt.setSampleNumber = 20000000
+	x = cPickle.load(open(opt.loadpath, "rb"))
+	train_lab, opt.sample_number = make_train_data1(x[0],opt) # lab: 行列 # ProbIdx：文本i的sample的起止值
+	print('sample number: ', opt.sample_number)
+	train_lab = np.array(train_lab, dtype='int32')
+	del x
 
-	#print("Start Train_TWE")
-	#Train_TWE(opt,train_lab,dmm)
+	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
+
+	for i in range(opt.IterationforInitialization):
+		print(i)
+		dmm.sampleSingleInitialIteration(opt)
+	# print("Calculating topic coherence")
+	# dmm._phi()
+	# PMI,NPMI = dmm.getTopicCoherence()
+	# print("PMI: %f, NPMI: %f" %(PMI,NPMI))
+	# print(opt.topic_distribution[0])
+
+	print("Start Train_TWE")
+	Train_TWE(opt,train_lab,dmm)
 
 if __name__ == '__main__':
 	main()

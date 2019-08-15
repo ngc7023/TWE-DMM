@@ -47,3 +47,5 @@ TWE3/__pycache__/data_process.cpython-37.pyc
 *.pyc
 *.py
 TWE3/test.py
+*.wordVectors
+*.LABEL
