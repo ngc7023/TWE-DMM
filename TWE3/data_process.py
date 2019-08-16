@@ -42,7 +42,7 @@ def make_train_data(train,dmm): # 2019-07-26
     return label, sample_num, ProbIdx_start
 def make_train_data1(train,opt): # 2019-08-06
     if(opt.dataset == 'train_text'):
-        label = [0]* opt.setSample
+        label = [0]* opt.setSampleNumber
         len_train = len(train)
         sample_num = 0
         for i in range(len_train):  # 每个文本
