@@ -42,14 +42,14 @@ def make_train_data(train,dmm): # 2019-07-26
     return label, sample_num, ProbIdx_start
 def make_train_data1(train,opt): # 2019-08-06
     if(opt.dataset == 'train_text'):
-        label = [0]* opt.setSampleNumber
+        label = [0] * opt.setSampleNumber
         len_train = len(train)
         sample_num = 0
         for i in range(len_train):  # 每个文本
             len_text = len(train[i])  # 文本长度
-            sample_num += len_text
             for j in range(len_text):  # 每个单词
                 label[sample_num] = [i,j]
+                sample_num += 1
                 # label.append([i, j])
     else:
         label = []
@@ -57,10 +57,11 @@ def make_train_data1(train,opt): # 2019-08-06
         sample_num = 0
         for i in range(len_train):  # 每个文本
             len_text = len(train[i])  # 文本长度
-            sample_num += len_text
             for j in range(len_text):  # 每个单词
                 # label[sample_num] = [i,j]
                 label.append([i, j])
+                sample_num += 1
+
     return label, sample_num
 def get_train_by_label(labix,maxlen,wordseq_row): # 2019-07-26
     if(labix < maxlen):

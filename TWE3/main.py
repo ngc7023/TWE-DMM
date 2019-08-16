@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'classifydata'
+		self.dataset = 'train_text'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -36,13 +36,13 @@ class TWE_Setting(object):
 		self.n_words = None
 		self.embed_size = 64        # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 128       # default_30
+		self.batch_size = 512       # default_30
 		self.max_epochs = 200       # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
-		self.ifGammaUse = False
-		self.setSampleNumber = 20000000
+		self.ifGammaUse = True
+		self.setSampleNumber = 27728861
 
 		self.save_path = ""
 		self.log_path = ""
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 1
+		self.IterationforInitialization = 200
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -139,8 +139,6 @@ def main():
 	
 	# Train TWE
 	# Prepare Label
-	if(opt.dataset == 'train_text'):
-		opt.setSampleNumber = 20000000
 	x = cPickle.load(open(opt.loadpath, "rb"))
 	train_lab, opt.sample_number = make_train_data1(x[0],opt) # lab: 行列 # ProbIdx：文本i的sample的起止值
 	print('sample number: ', opt.sample_number)
