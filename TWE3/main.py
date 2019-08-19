@@ -4,7 +4,7 @@
  @Author  : Pangjy
  @File    : TWE3
  @Software: PyCharm
- Copy from TWE2, this file use DMM/model2
+ Copy from TWE2, this file use DMM/model2, use chinese dataset
 """
 
 import os, sys

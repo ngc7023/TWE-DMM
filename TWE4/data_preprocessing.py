@@ -18,19 +18,25 @@ def getVocab():
     cols[0] = 'word'
     for i in range(300):
         cols[i + 1] = i
-
-    model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
-    google_list = list(model.vocab.keys())
-    # print(google_list)
-    print("Google list finished")
+    #
+    # model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
+    # google_list = list(model.vocab.keys())
+    # # print(google_list)
+    # print("Google list finished")
     # print(google_list.index('http'))
     # print(google_list.index('android'))
-
+    google_list = []
     vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ')
     stanford_list = vec_stanford['word'].tolist()
     print("stanford list finished")
     # print(stanford_list.index('http'))
     # print(stanford_list.index('android'))
+    file2 = open("stanford_vocab" + '.txt', 'w')
+    for i in range(len(stanford_list)):
+        file2.write(str(stanford_list[i]))  # write函数不能写int类型的参数，所以使用str()转化
+        file2.write('\n')  # 写完一行立马换行
+    file2.close()
+    exit()
     return google_list,stanford_list
 
 def preprocess_corpus(google_list,stanford_list):
@@ -67,13 +73,14 @@ def preprocess_corpus(google_list,stanford_list):
                 if word in wordlist_origin: # 单词标准化
                     index = wordlist_origin.index(word)
                     word = wordlist_true[index]
-                if len(word)>3 and word not in stopWords and word in stanford_list and word in google_list:
+                if len(word)>3 and word not in stopWords and word in google_list:
                     line.append(word)
         if(len(line)!=0):
             frequency_line = collections.Counter(line)
             frequency = frequency + frequency_line
             str_filtered_stopwords.append(line)
     print(frequency)
+    print(len(frequency))
     removedic = []
     for key in frequency:
         if(frequency[key]<3):
@@ -83,8 +90,9 @@ def preprocess_corpus(google_list,stanford_list):
         for word in line:
             if word in removedic:
                 line.remove(word)
-            if(len(line)==0):
-                str_filtered_stopwords.remove(line)
+        if(len(line)==0):
+            str_filtered_stopwords.remove(line)
+
     return str_filtered_stopwords
 
 def Save_list(list1, filename):
@@ -151,11 +159,11 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 
 
 if __name__=='__main__':
-    # google_list,stanford_list = getVocab()
-    # corpus_filtered = preprocess_corpus(google_list,stanford_list)
-    # Save_list(corpus_filtered, 'tweet_filtered')
+    google_list,stanford_list = getVocab()
+    corpus_filtered = preprocess_corpus(google_list,stanford_list)
+    Save_list(corpus_filtered, 'tweet_filtered')
 
-    filename = '../data/corpus_title.txt'
-    encoding = 'utf-8'
-    outputfilename = '../data/news_train_title.p'
-    precess(filename, encoding, outputfilename)
+    # filename = '../data/corpus_title.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/news_train_title.p'
+    # precess(filename, encoding, outputfilename)

@@ -21,7 +21,7 @@ sys.path.append('/home/zliu/topic_modeling/TWE-DMM/')
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 from LEAM.main import *
 from DMM.model2 import *
-from TWE3.data_process import *
+from TWE4.data_process import *
 import cProfile
 class TWE_Setting(object):
 	def __init__(self):
@@ -116,6 +116,7 @@ def main():
 	elif opt.dataset == 'N20short':
 		opt.setSampleNumber = 24334
 		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
+		opt.loadpath = '../data/TACL-datasets/N20short.p'
 
 	else:
 		pass
