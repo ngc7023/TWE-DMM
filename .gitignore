@@ -49,3 +49,5 @@ TWE3/__pycache__/data_process.cpython-37.pyc
 TWE3/test.py
 *.wordVectors
 *.LABEL
+data/full-corpus.csv
+data/GoogleNews-vectors-negative300.bin
