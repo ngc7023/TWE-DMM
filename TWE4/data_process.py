@@ -51,14 +51,14 @@ def make_train_data(train,opt): # 2019-08-19 PJY (for english corpus)
             sample_num += 1
     return label, sample_num
 
-def get_train_by_label(labix,maxlen,wordseq_row): # 2019-07-26
+def get_train_by_label(labix,maxlen,wordseq_row): # 2019-07-26 不拼接，补0
     if(labix < maxlen):
         word_sequence = [0]*(maxlen-labix) + wordseq_row[:labix+1]
     else:
         word_sequence = wordseq_row[labix-maxlen:labix+1]
     return word_sequence
 
-def get_train_by_label1(label,maxlen,allwordseq): # 2019-08-05
+def get_train_by_label1(label,maxlen,allwordseq): # 2019-08-05 拼接
     row = label[0]
     column = label[1]
     seq = allwordseq[row].words[:column+1]
