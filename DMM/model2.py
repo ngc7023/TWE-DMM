@@ -379,13 +379,17 @@ class DMMmodel(object): # modify by Pangjy 08-13
 						else:
 							if twords[wj] in self.dpre.docs[di].words:
 								countj += 1
-					original_tmp = math.log((countij + 1) / (countj * counti) * self.dpre.docs_count)
-					tmp = math.log((countij + 1e-12) / (countj * counti) * self.dpre.docs_count)
-					coherence += tmp
-					npmi_coherence += tmp/(-math.log((countij/self.dpre.docs_count) + 1.0e-12))
-					original_coherence += original_tmp # 取eplison = 1
+					try:
+						tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
+						# tmp = math.log((countij + 1e-12) / (countj * counti) * self.dpre.docs_count)
+						coherence += tmp
+						npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
+					except:
+						print(countj,counti,self.dpre.docs_count)
 		# todo: modify PMI and NPMI √
-		return coherence / self.K, npmi_coherence / self.K, original_coherence/ self.K
+		# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
+		# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
+		return coherence / self.K, npmi_coherence / self.K
 
 	def Restore_Z(self):
 		data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])

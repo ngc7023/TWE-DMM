@@ -34,14 +34,14 @@ class TWE_Setting(object):
 		self.W_class_emb = None     # Label embedding 初始化矩阵
 		self.maxlen = 30            # 序列最大长度
 		self.n_words = None
-		self.embed_size = 300        # embedding 维度
+		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 256       # default_30
+		self.batch_size = 128       # N20short-8 / TMNtitle-128
 		self.max_epochs = 200       # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
-		self.ifGammaUse = False
+		self.ifGammaUse = True
 		self.setSampleNumber = 27728861
 
 		self.save_path = ""
@@ -163,13 +163,14 @@ def main():
 
 	# Initialize DMM
 	print("dataset:",opt.dataset)
+	print("use gamma:",opt.ifGammaUse)
 	dmm = DMMmodel(opt.loadpath,opt.num_class,opt)
 	dmm.init_Z(dmm.Z)
 	opt.n_words = dmm.dpre.words_count
 
+	print("calculating topic coherence:")
 	dmm._phi() # 计算Topic_Coherence初始值
 	print("topic coherence:",dmm.getTopicCoherence())
-
 	print("load data finished")
 	print("docs_count", dmm.dpre.docs_count)
 	print('total words: %d' % opt.n_words)
