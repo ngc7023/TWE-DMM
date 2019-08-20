@@ -68,3 +68,6 @@ TWE4/test.py
 TWE4/re/phifile.txt
 TWE4/checkpoint
 TWE4/re/tassginfile.txt
+TWE4/test.py
+TWE4/re/topNfile.txt
+*.pyc

@@ -409,12 +409,11 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 			self.E[topic] -= 1
 			self.F[topic] -= doc.length
-			for j in range(doc.length):
-				word = doc.words[j]  # 获取第i个文档第j个词的编号
-				self.nw[word][topic] -= 1
 
 			for j in range(doc.length):
 				word = doc.words[j]
+				self.nw[word][topic] -= 1
+
 				subtopic = doc.WordtopicAssignments[j]
 				if(topic==subtopic):
 					self.topicWordCountLF[word][topic] -= 1
@@ -439,12 +438,11 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 			self.E[topic] += 1
 			self.F[topic] += doc.length
-			for j in range(doc.length):
-				word = doc.words[j]  # 获取第i个文档第j个词的编号
-				self.nw[word][topic] += 1
 
 			for j in range(doc.length):
 				word = doc.words[j]
+				self.nw[word][topic] += 1
+
 				subtopic = topic
 				if ((self.lam*(self.topicWordCountLF[word][topic] + self.beta)/(self.sumTopicWordCountLF[topic] + Vbeta))
 				>((1-self.lam)*(self.topicWordCountDMM[word][topic]+self.beta)/(self.sumTopicWordCountDMM[topic] + Vbeta))):

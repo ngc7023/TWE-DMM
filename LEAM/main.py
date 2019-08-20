@@ -333,7 +333,7 @@ def main():
             print("Max Test accuracy %f " % max_test_accuracy)
 
 
-from TWE2.data_process import make_train_data, get_train_by_label,get_train_by_label1
+from TWE2.data_process import get_train_by_label
 import time
 #@profile
 def Train_TWE(opt,train_lab,dmm): # Option由TWE2/main控制

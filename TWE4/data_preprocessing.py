@@ -1,3 +1,11 @@
+"""
+ @Time    : 2019/8/19 9:30
+ @Author  : Pangjy
+ @File    : TWE4/data_preprocessing.py
+ @Software: PyCharm
+ Function process comes from TWE/preprocess_ch.py
+"""
+
 import pandas as pd
 import re
 from nltk import *
@@ -18,25 +26,14 @@ def getVocab():
     cols[0] = 'word'
     for i in range(300):
         cols[i + 1] = i
-    #
-    # model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
-    # google_list = list(model.vocab.keys())
-    # # print(google_list)
-    # print("Google list finished")
-    # print(google_list.index('http'))
-    # print(google_list.index('android'))
-    google_list = []
-    vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ')
+
+    model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
+    google_list = list(model.vocab.keys())
+    print("Google list finished")
+
+    vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ',quoting=3) # quoting用来保留语料里的双引号
     stanford_list = vec_stanford['word'].tolist()
     print("stanford list finished")
-    # print(stanford_list.index('http'))
-    # print(stanford_list.index('android'))
-    file2 = open("stanford_vocab" + '.txt', 'w')
-    for i in range(len(stanford_list)):
-        file2.write(str(stanford_list[i]))  # write函数不能写int类型的参数，所以使用str()转化
-        file2.write('\n')  # 写完一行立马换行
-    file2.close()
-    exit()
     return google_list,stanford_list
 
 def preprocess_corpus(google_list,stanford_list):
@@ -62,6 +59,8 @@ def preprocess_corpus(google_list,stanford_list):
         str = str.replace("twitter", "")
         str = str.replace("microsoft", "")
         str = str.replace("google", "")
+        str = str.replace("http", "") # 去掉链接
+
         stopWords = set(stopwords.words('english'))
         words = word_tokenize(str) # 分词
         line = []
@@ -73,7 +72,7 @@ def preprocess_corpus(google_list,stanford_list):
                 if word in wordlist_origin: # 单词标准化
                     index = wordlist_origin.index(word)
                     word = wordlist_true[index]
-                if len(word)>3 and word not in stopWords and word in google_list:
+                if len(word)>3 and word not in stopWords and word in google_list and word in stanford_list:
                     line.append(word)
         if(len(line)!=0):
             frequency_line = collections.Counter(line)
@@ -92,7 +91,7 @@ def preprocess_corpus(google_list,stanford_list):
                 line.remove(word)
         if(len(line)==0):
             str_filtered_stopwords.remove(line)
-
+    print(len(str_filtered_stopwords))
     return str_filtered_stopwords
 
 def Save_list(list1, filename):
@@ -130,18 +129,19 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 				vocab[w]+=1
 			else:
 				vocab[w]=1
-	vocab1={}
-	for w in vocab:
-		if vocab[w]>20:
-			vocab1[w]=vocab[w]
-	print('len_vocab:',len(vocab1))
+	# vocab1={}                # modify by pjy
+	# for w in vocab:
+	# 	if vocab[w]>20:
+	# 		vocab1[w]=vocab[w]
+
+	print('len_vocab:',len(vocab))
 
 	wordtoix = {}
 	ixtoword = {}
 	wordtoix['UNK'] = 0
 	ixtoword[0] = 'UNK'
 	ix = 1
-	for w in vocab1:
+	for w in vocab:             # modify by pjy
 		wordtoix[w] = ix
 		ixtoword[ix] = w
 		ix += 1
@@ -159,11 +159,23 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 
 
 if __name__=='__main__':
-    google_list,stanford_list = getVocab()
-    corpus_filtered = preprocess_corpus(google_list,stanford_list)
-    Save_list(corpus_filtered, 'tweet_filtered')
+    # Tweet 数据清理，仍然转换为txt
+    # google_list,stanford_list = getVocab()
+    # corpus_filtered = preprocess_corpus(google_list,stanford_list)
+    # Save_list(corpus_filtered, 'tweet_filtered')
 
-    # filename = '../data/corpus_title.txt'
+    # 将原始语料转化为.p文件
+    # filename = '../data/TACL-datasets/tweet_filtered.txt'
     # encoding = 'utf-8'
-    # outputfilename = '../data/news_train_title.p'
+    # outputfilename = '../data/TACL-datasets/tweet_filtered.p'
     # precess(filename, encoding, outputfilename)
+
+    # filename = '../data/TACL-datasets/TMNfull.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/TACL-datasets/TMNfull.p'
+    # precess(filename, encoding, outputfilename)
+
+    filename = '../data/TACL-datasets/TMNtitle.txt'
+    encoding = 'utf-8'
+    outputfilename = '../data/TACL-datasets/TMNtitle.p'
+    precess(filename, encoding, outputfilename)

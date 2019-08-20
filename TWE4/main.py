@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'N20short'
+		self.dataset = 'TMNtitle'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -36,12 +36,12 @@ class TWE_Setting(object):
 		self.n_words = None
 		self.embed_size = 300        # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 512       # default_30
+		self.batch_size = 256       # default_30
 		self.max_epochs = 200       # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
-		self.ifGammaUse = True
+		self.ifGammaUse = False
 		self.setSampleNumber = 27728861
 
 		self.save_path = ""
@@ -114,14 +114,55 @@ def main():
 		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
 		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
 	elif opt.dataset == 'N20short':
-		opt.setSampleNumber = 24334
+		opt.setSampleNumber = 24326 # number of subsequence
 		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
 		opt.loadpath = '../data/TACL-datasets/N20short.p'
+		opt.embpath = '../data/TACL-datasets/N20short_emb.p'
+
+		opt.save_path = "./save/"
+		opt.log_path = "./log/"
+
+		opt.topicwordemb_path = './re/topic-wordemb.p'
+		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/thetafile.txt'
+		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
+
+	elif opt.dataset == 'TMNfull':
+		opt.setSampleNumber = 597933
+		opt.corpus_path = '../data/TACL-datasets/TMNfull.txt'
+		opt.loadpath = '../data/TACL-datasets/TMNfull.p'
+		opt.embpath = '../data/TACL-datasets/TMNfull_emb.p'
+
+		opt.save_path = "./save/"
+		opt.log_path = "./log/"
+
+		opt.topicwordemb_path = './re/topic-wordemb.p'
+		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/thetafile.txt'
+		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
+
+	elif opt.dataset == 'TMNtitle':
+		opt.setSampleNumber = 160234
+		opt.corpus_path = '../data/TACL-datasets/TMNtitle.txt'
+		opt.loadpath = '../data/TACL-datasets/TMNtitle.p'
+		opt.embpath = '../data/TACL-datasets/TMNtitle_emb.p'
+
+		opt.save_path = "./save_classifydata/"
+		opt.log_path = "./log_classifydata/"
+
+		opt.topicwordemb_path = './re_classifydata/topic-wordemb.p'
+		opt.phifile = './re_classifydata/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re_classifydata/thetafile.txt'
+		opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re_classifydata/tassginfile.txt'  # 最后分派结果文件
 
 	else:
 		pass
 
 	# Initialize DMM
+	print("dataset:",opt.dataset)
 	dmm = DMMmodel(opt.loadpath,opt.num_class,opt)
 	dmm.init_Z(dmm.Z)
 	opt.n_words = dmm.dpre.words_count
@@ -141,7 +182,7 @@ def main():
 	# Train TWE
 	# Prepare Label
 	x = cPickle.load(open(opt.loadpath, "rb"))
-	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列 # ProbIdx：文本i的sample的起止值
+	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
 	print('sample number: ', opt.sample_number)
 	train_lab = np.array(train_lab, dtype='int32')
 	del x
@@ -151,10 +192,9 @@ def main():
 	for i in range(opt.IterationforInitialization):
 		print(i)
 		dmm.sampleSingleInitialIteration(opt)
-	# print("Calculating topic coherence")
-	# dmm._phi()
-	# PMI,NPMI = dmm.getTopicCoherence()
-	# print("PMI: %f, NPMI: %f" %(PMI,NPMI))
+	print("Calculating topic coherence")
+	dmm._phi()
+	print(dmm.getTopicCoherence())
 	# print(opt.topic_distribution[0])
 
 	print("Start Train_TWE")
