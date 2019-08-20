@@ -71,3 +71,5 @@ TWE4/re/tassginfile.txt
 TWE4/test.py
 TWE4/re/topNfile.txt
 *.pyc
+TWE4/test.py
+*.pyc
