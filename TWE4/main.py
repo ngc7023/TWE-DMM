@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'TMNtitle'
+		self.dataset = 'N20small'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -36,7 +36,7 @@ class TWE_Setting(object):
 		self.n_words = None
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 128       # N20short-8 / TMNtitle-128
+		self.batch_size = 8       # N20short-8 / TMNtitle-128
 		self.max_epochs = 200       # default_200
 		self.dropout = 0.5
 		self.part_data = False
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 200
+		self.IterationforInitialization = 1
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -158,6 +158,21 @@ def main():
 		opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
 		opt.tagassignfile = './re_classifydata/tassginfile.txt'  # 最后分派结果文件
 
+	elif opt.dataset == 'N20small':
+		opt.setSampleNumber = 35206
+		opt.corpus_path = '../data/TACL-datasets/N20small.txt'
+		opt.loadpath = '../data/TACL-datasets/N20small.p'
+		opt.embpath = '../data/TACL-datasets/N20small_emb.p'
+
+		opt.save_path = "./save_classifydata/"
+		opt.log_path = "./log_classifydata/"
+
+		opt.topicwordemb_path = './re_classifydata/topic-wordemb.p'
+		opt.phifile = './re_classifydata/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re_classifydata/thetafile.txt'
+		opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re_classifydata/tassginfile.txt'  # 最后分派结果文件
+
 	else:
 		pass
 
@@ -196,7 +211,7 @@ def main():
 	print("Calculating topic coherence")
 	dmm._phi()
 	print(dmm.getTopicCoherence())
-	# print(opt.topic_distribution[0])
+	print(opt.topic_distribution[0])
 
 	print("Start Train_TWE")
 	Train_TWE(opt,train_lab,dmm)

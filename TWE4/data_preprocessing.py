@@ -17,82 +17,123 @@ import gensim
 import codecs
 import re
 import _pickle as cPickle
+import emoji
+import string
+from zhon import hanzi
+from langdetect import detect
+from langdetect import detect_langs
 
 from gensim.models.word2vec import Word2Vec
 import _pickle
 
 def getVocab():
-    cols = [0] * 301
-    cols[0] = 'word'
-    for i in range(300):
-        cols[i + 1] = i
-
-    model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
-    google_list = list(model.vocab.keys())
+    # model = gensim.models.KeyedVectors.load_word2vec_format('../data/GoogleNews-vectors-negative300.bin', binary=True)
+    # google_list = list(model.vocab.keys())
+    df = pd.read_csv("google_list.txt",names=['word2vec_word'])
+    google_list = df['word2vec_word'].values.tolist()
     print("Google list finished")
 
-    vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ',quoting=3) # quoting用来保留语料里的双引号
-    stanford_list = vec_stanford['word'].tolist()
-    print("stanford list finished")
-    return google_list,stanford_list
+    # cols = [0] * 301
+    # cols[0] = 'word'
+    # for i in range(300):
+    #     cols[i + 1] = i
+    # vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ',quoting=3) # quoting用来保留语料里的双引号
+    # stanford_list = vec_stanford['word'].tolist()
+    # print("stanford list finished")
+    return google_list
 
-def preprocess_corpus(google_list,stanford_list):
-    full_corpus = pd.read_csv('../data/full-corpus.csv')
+def demoji(text):
+	emoji_pattern = re.compile("["
+		u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+        u"\U00010000-\U0010ffff"
+	                           "]+", flags=re.UNICODE)
+	return(emoji_pattern.sub(r'', text))
+
+def preprocess_corpus(google_list):
+    full_corpus = pd.read_csv('../data/full-corpus.csv',encoding='utf-8')
     del full_corpus['Sentiment']
     del full_corpus['TweetId']
     del full_corpus['TweetDate']
+    df = full_corpus
+    # 清除标点和数字等
+    trantab_english = str.maketrans({key: None for key in string.punctuation})
+    trantab_chinese = str.maketrans({key: None for key in hanzi.punctuation})
+    trantab_number = str.maketrans({key: None for key in ['0','1','2','3','4','5','6','7','8','9','£','€']})
 
-    emnlp_dict = pd.read_csv('../data/emnlp_dict.txt',sep='	',names=['origin','true'])
-    wordlist_origin = []
+    wordlist_origin = [] #  词标准化
     wordlist_true = []
+    emnlp_dict = pd.read_csv('../data/emnlp_dict.txt',sep='	',names=['origin','true'])
     for index,row in emnlp_dict.iterrows():
         wordlist_origin.append(row['origin'])
         wordlist_true.append(row['true'])
-    frequency = collections.Counter([])
 
-    df = full_corpus
-    str_filtered_stopwords = []
+    df_filtered = []
+    frequency = collections.Counter([])
     for index, row in df.iterrows():
-        str = row['TweetText']
-        str = str.lower() # 小写
-        str = str.replace("apple", "")
-        str = str.replace("twitter", "")
-        str = str.replace("microsoft", "")
-        str = str.replace("google", "")
-        str = str.replace("http", "") # 去掉链接
+        Flag_removeline = False
+        row_str = row['TweetText']
+        row_str = demoji(row_str)
+        row_str = row_str.translate(trantab_english)
+        row_str = row_str.translate(trantab_chinese)
+        row_str = row_str.translate(trantab_number)
+
+        row_str = row_str.lower() # 小写
+        row_str = row_str.replace("apple", "")
+        row_str = row_str.replace("twitter", "")
+        row_str = row_str.replace("microsoft", "")
+        row_str = row_str.replace("google", "")
+        row_str = row_str.replace("http", "") # 去掉链接
 
         stopWords = set(stopwords.words('english'))
-        words = word_tokenize(str) # 分词
+        words = word_tokenize(row_str) # 分词
         line = []
+        line_str = ""
         for word in words:
+            if word in wordlist_origin:  # 单词标准化
+                index = wordlist_origin.index(word)
+                word = wordlist_true[index]
             word = re.sub(r'[^a-zA-Z]', '', word)  # 只保留英文
             if(word==''):
-                continue
+                Flag_removeline = True # 确定本doc是英文的
+                break
             else:
-                if word in wordlist_origin: # 单词标准化
-                    index = wordlist_origin.index(word)
-                    word = wordlist_true[index]
-                if len(word)>3 and word not in stopWords and word in google_list and word in stanford_list:
-                    line.append(word)
-        if(len(line)!=0):
-            frequency_line = collections.Counter(line)
-            frequency = frequency + frequency_line
-            str_filtered_stopwords.append(line)
-    print(frequency)
-    print(len(frequency))
+                line.append(word)
+                line_str += word
+        if(Flag_removeline):
+            continue
+        else:
+            line2 = []
+            for word in line:
+                if len(word)>3 and word not in stopWords and word in google_list:
+                    line2.append(word)
+            if(len(line2)!=0):
+                frequency_line = collections.Counter(line2)
+                frequency = frequency + frequency_line
+                df_filtered.append(line2)
+    # print(frequency)
+    # print(len(frequency))
     removedic = []
     for key in frequency:
         if(frequency[key]<3):
             removedic.append(key)
 
-    for line in str_filtered_stopwords:
+    for line in df_filtered:
+        line_str = ""
         for word in line:
+            line_str = line_str+word+" "
             if word in removedic:
                 line.remove(word)
-        if(len(line)==0):
-            str_filtered_stopwords.remove(line)
-    print(len(str_filtered_stopwords))
-    return str_filtered_stopwords
+        if(len(line)==0 or detect(line_str)!='en'):
+            df_filtered.remove(line)
+            continue
+
+    print("number of doc:",len(df_filtered))
+    return df_filtered
 
 def Save_list(list1, filename):
     file2 = open(filename + '.txt', 'w')
@@ -158,10 +199,32 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 	cPickle.dump([doccententindex,docno_list,wordtoix, ixtoword,doctext_list], open(outputfilename, "wb"))
 
 
+def Detect_filtered():
+    df = pd.read_csv("tweet_filtered.txt",names='')
+    count = 0
+    for index,row in df.iterrows():
+        res = str(detect_langs(row.name)[0])[:2]
+        if(res!="en"):
+            if(res!='en'):
+                df.drop(index)
+                count+=1
+    print(count)
+    # df.to_csv("langdetect_tweet.txt",index=False, header=None)
+
+    file = open("langdetect_tweet" + '.txt', 'w')
+    for index, row in df.iterrows():
+        file.write(row.name)
+        file.write('\n')
+    file.close()
+
+
 if __name__=='__main__':
     # Tweet 数据清理，仍然转换为txt
-    # google_list,stanford_list = getVocab()
-    # corpus_filtered = preprocess_corpus(google_list,stanford_list)
+
+    Detect_filtered()
+    # google_list= getVocab()
+    # # google_list = []
+    # corpus_filtered = preprocess_corpus(google_list)
     # Save_list(corpus_filtered, 'tweet_filtered')
 
     # 将原始语料转化为.p文件
@@ -175,7 +238,12 @@ if __name__=='__main__':
     # outputfilename = '../data/TACL-datasets/TMNfull.p'
     # precess(filename, encoding, outputfilename)
 
-    filename = '../data/TACL-datasets/TMNtitle.txt'
-    encoding = 'utf-8'
-    outputfilename = '../data/TACL-datasets/TMNtitle.p'
-    precess(filename, encoding, outputfilename)
+    # filename = '../data/TACL-datasets/TMNtitle.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/TACL-datasets/TMNtitle.p'
+    # precess(filename, encoding, outputfilename)
+    #
+    # filename = '../data/TACL-datasets/N20small.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/TACL-datasets/N20small.p'
+    # precess(filename, encoding, outputfilename)

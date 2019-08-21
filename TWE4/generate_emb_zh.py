@@ -65,15 +65,20 @@ def emb_LFTM(embfile,vocabfile,outputfile):
 
 
 if __name__=='__main__':
-	datafile = '../data/TACL-datasets/TMNtitle.p'
-	outputfile = '../data/TACL-datasets/TMNtitle_emb.p'
-	generate_emb(datafile, outputfile)
+	# datafile = '../data/TACL-datasets/TMNtitle.p'
+	# outputfile = '../data/TACL-datasets/TMNtitle_emb.p'
+	# generate_emb(datafile, outputfile)
 
 	# datafile = '../data/TACL-datasets/TMNfull.p'
 	# outputfile = '../data/TACL-datasets/TMNfull_emb.p'
 	# generate_emb(datafile, outputfile)
 
-	# datafile='../data/TACL-datasets/N20short.p'
+	datafile = '../data/TACL-datasets/N20small.p'
+	outputfile = '../data/TACL-datasets/N20small_emb.p'
+	generate_emb(datafile, outputfile)
+
+
+# datafile='../data/TACL-datasets/N20short.p'
 	# outputfile='../data/TACL-datasets/N20short_emb.p'
 	# generate_emb(datafile,outputfile)
 

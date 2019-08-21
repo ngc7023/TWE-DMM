@@ -360,10 +360,10 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
 		coherence = 0
 		npmi_coherence = 0
-		original_coherence = 0
 		for x in range(self.K):
 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
 			twords.sort(key = lambda i: i[1], reverse = True)
+			twords_origin = twords[:self.top_words_num]
 			twords = [w[0] for w in twords[:self.top_words_num]]
 			for wi in range(len(twords)):
 				for wj in range(wi + 1, len(twords)):
@@ -381,11 +381,21 @@ class DMMmodel(object): # modify by Pangjy 08-13
 								countj += 1
 					try:
 						tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
-						# tmp = math.log((countij + 1e-12) / (countj * counti) * self.dpre.docs_count)
 						coherence += tmp
 						npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
+						# todo: counti == 0
+						print("not excepetion:")
+						print(wi, wj, counti, countj, self.dpre.docs_count)
+						print(twords_origin)
+						print(twords_origin[wi])
+						print(twords_origin[wj])
 					except:
-						print(countj,counti,self.dpre.docs_count)
+						print("exception")
+						print(wi,wj,counti,countj,self.dpre.docs_count)
+						print(twords_origin)
+						print(twords_origin[wi])
+						print(twords_origin[wj])
+
 		# todo: modify PMI and NPMI √
 		# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
 		# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
@@ -470,12 +480,11 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 			self.E[topic] -= 1
 			self.F[topic] -= doc.length
-			for j in range(doc.length):
-				word = doc.words[j]  # 获取第i个文档第j个词的编号
-				self.nw[word][topic] -= 1
 
 			for j in range(doc.length):
 				word = doc.words[j]
+				self.nw[word][topic] -= 1
+
 				subtopic = doc.WordtopicAssignments[j]
 				if(topic==subtopic):
 					self.topicWordCountLF[word][topic] -= 1
@@ -488,7 +497,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			self.p = self.E + self.alpha
 			for word in doc.words:
 				self.p = self.p * (self.lam * self.prob[probIdx]
-								   + (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
+						+ (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
 				probIdx += 1
 
 				if(np.sum(self.p)==0): # todo: self.p==0
@@ -501,12 +510,11 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 			self.E[topic] += 1
 			self.F[topic] += doc.length
-			for j in range(doc.length):
-				word = doc.words[j]  # 获取第i个文档第j个词的编号
-				self.nw[word][topic] += 1
 
 			for j in range(doc.length):
 				word = doc.words[j]
+				self.nw[word][topic] += 1
+
 				subtopic = topic
 				if ((self.lam * self.prob[prob_start])
 						> ((1 - self.lam) * (self.topicWordCountDMM[word][topic] + self.beta) / (self.sumTopicWordCountDMM[topic] + Vbeta))):

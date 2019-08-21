@@ -73,3 +73,4 @@ TWE4/re/topNfile.txt
 *.pyc
 TWE4/test.py
 *.pyc
+LEAM/__pycache__/main.cpython-37.pyc
