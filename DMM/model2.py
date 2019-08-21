@@ -357,10 +357,14 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				f.write(str(self.Z[x]) + '\n ')
 
 	def getTopicCoherence(self):
+		empty_topic = 0
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
 		coherence = 0
 		npmi_coherence = 0
 		for x in range(self.K):
+			if(self.F[x]==0):
+				empty_topic += 1
+				continue
 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
 			twords.sort(key = lambda i: i[1], reverse = True)
 			twords_origin = twords[:self.top_words_num]
@@ -380,26 +384,23 @@ class DMMmodel(object): # modify by Pangjy 08-13
 							if twords[wj] in self.dpre.docs[di].words:
 								countj += 1
 					try:
+						# todo: modify PMI and NPMI √
+						# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
+						# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
 						tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
 						coherence += tmp
 						npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
-						# todo: counti == 0
-						print("not excepetion:")
-						print(wi, wj, counti, countj, self.dpre.docs_count)
-						print(twords_origin)
-						print(twords_origin[wi])
-						print(twords_origin[wj])
+						# todo: counti == 0 √
 					except:
 						print("exception")
-						print(wi,wj,counti,countj,self.dpre.docs_count)
-						print(twords_origin)
-						print(twords_origin[wi])
-						print(twords_origin[wj])
-
-		# todo: modify PMI and NPMI √
-		# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
-		# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
-		return coherence / self.K, npmi_coherence / self.K
+						exit()
+						# print(wi,wj,counti,countj)
+						# print(twords_origin)
+						# print(x)
+						# print(self.nw.T[x])
+						# print(twords_origin[wi])
+						# print(twords_origin[wj])
+		return coherence / (self.K-empty_topic), npmi_coherence / (self.K-empty_topic)
 
 	def Restore_Z(self):
 		data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])

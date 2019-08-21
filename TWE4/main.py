@@ -211,7 +211,7 @@ def main():
 	print("Calculating topic coherence")
 	dmm._phi()
 	print(dmm.getTopicCoherence())
-	print(opt.topic_distribution[0])
+	# print(opt.topic_distribution[0])
 
 	print("Start Train_TWE")
 	Train_TWE(opt,train_lab,dmm)
