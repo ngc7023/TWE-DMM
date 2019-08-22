@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'N20small'
+		self.dataset = 'N20short'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -36,7 +36,7 @@ class TWE_Setting(object):
 		self.n_words = None
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 8       # N20short-8 / TMNtitle-128
+		self.batch_size = 8         # N20short-8 / N20small-16/ Tweet-8
 		self.max_epochs = 200       # default_200
 		self.dropout = 0.5
 		self.part_data = False
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 1
+		self.IterationforInitialization = 2
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -79,9 +79,7 @@ def main():
 	if opt.dataset == 'train_text':
 		opt.loadpath = '../data/news_train_text.p'
 		opt.embpath = "../data/train_text_emb.p"
-		# opt.loadpath='/home/zliu/topic_modeling/TWE-DMM/data/news_train_text.p'
-		# opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_text_emb.p"
-		# dmm = DMMmodel('../data/news_train_text.p')
+
 		if opt.ifGammaUse:
 			opt.save_path = "./save_largeset_gamma/"
 			opt.log_path = "./log_largeset_gamma/"
@@ -98,35 +96,51 @@ def main():
 			opt.thetafile = './re_largeset_without_gamma/thetafile.txt'
 			opt.topNfile = './re_largeset_without_gamma/topNfile.txt'  # 每个主题topN词文件
 			opt.tagassignfile = './re_largeset_without_gamma/tassginfile.txt'  # 最后分派结果文件
-	elif opt.dataset == 'train_title':
-		opt.loadpath='/home/zliu/topic_modeling/TWE-DMM/data/news_train_title.p'
-		opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_title_emb.p"
-		# dmm = DMMmodel('../data/news_train_title.p')
-	elif opt.dataset=='classifydata':
-		opt.loadpath = '../data/classifydata/classifydata_index.p'
-		opt.embpath = "../data/classifydata/classifydata_emb.p"
 
-		opt.save_path = "./save_classifydata/"
-		opt.log_path = "./log_classifydata/"
-		opt.topicwordemb_path = './re/topic-wordemb.p'
-		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re/thetafile.txt'
-		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
 	elif opt.dataset == 'N20short':
 		opt.setSampleNumber = 24326 # number of subsequence
 		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
 		opt.loadpath = '../data/TACL-datasets/N20short.p'
 		opt.embpath = '../data/TACL-datasets/N20short_emb.p'
 
-		opt.save_path = "./save/"
-		opt.log_path = "./log/"
+		opt.save_path = "./save/save_N20short/"
+		opt.log_path = "./log/log_N20short/"
 
-		opt.topicwordemb_path = './re/topic-wordemb.p'
-		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re/thetafile.txt'
-		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
+		opt.topicwordemb_path = './re/re_N20short/topic-wordemb.p'
+		opt.phifile = './re/re_N20short/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/re_N20short/thetafile.txt'
+		opt.topNfile = './re/re_N20short/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/re_N20short/tassginfile.txt'  # 最后分派结果文件
+
+	elif opt.dataset == 'N20small':
+		opt.setSampleNumber = 35206
+		opt.corpus_path = '../data/TACL-datasets/N20small.txt'
+		opt.loadpath = '../data/TACL-datasets/N20small.p'
+		opt.embpath = '../data/TACL-datasets/N20small_emb.p'
+
+		opt.save_path = "./save/save_N20small"
+		opt.log_path = "./log/log_N20small"
+
+		opt.topicwordemb_path = './re/re_N20small/topic-wordemb.p'
+		opt.phifile = './re/re_N20small/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/re_N20small/thetafile.txt'
+		opt.topNfile = './re/re_N20small/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/re_N20small/tassginfile.txt'  # 最后分派结果文件
+
+	elif opt.dataset == 'N20':
+		opt.setSampleNumber = 10000000 # 未知
+		opt.corpus_path = '../data/TACL-datasets/N20.txt'
+		opt.loadpath = '../data/TACL-datasets/N20.p'
+		opt.embpath = '../data/TACL-datasets/N20.p'
+
+		opt.save_path = "./save/save_N20"
+		opt.log_path = "./log/log_N20"
+
+		opt.topicwordemb_path = './re/re_N20/topic-wordemb.p'
+		opt.phifile = './re/re_N20/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/re_N20/thetafile.txt'
+		opt.topNfile = './re/re_N20/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/re_N20/tassginfile.txt'  # 最后分派结果文件
 
 	elif opt.dataset == 'TMNfull':
 		opt.setSampleNumber = 597933
@@ -134,14 +148,14 @@ def main():
 		opt.loadpath = '../data/TACL-datasets/TMNfull.p'
 		opt.embpath = '../data/TACL-datasets/TMNfull_emb.p'
 
-		opt.save_path = "./save/"
-		opt.log_path = "./log/"
+		opt.save_path = "./save/save_TMNfull"
+		opt.log_path = "./log/log_TMNfull"
 
-		opt.topicwordemb_path = './re/topic-wordemb.p'
-		opt.phifile = './re/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re/thetafile.txt'
-		opt.topNfile = './re/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re/tassginfile.txt'  # 最后分派结果文件
+		opt.topicwordemb_path = './re/re_TMNfull/topic-wordemb.p'
+		opt.phifile = './re/re_TMNfull/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/re_TMNfull/thetafile.txt'
+		opt.topNfile = './re/re_TMNfull/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/re_TMNfull/tassginfile.txt'  # 最后分派结果文件
 
 	elif opt.dataset == 'TMNtitle':
 		opt.setSampleNumber = 160234
@@ -158,20 +172,21 @@ def main():
 		opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
 		opt.tagassignfile = './re_classifydata/tassginfile.txt'  # 最后分派结果文件
 
-	elif opt.dataset == 'N20small':
-		opt.setSampleNumber = 35206
-		opt.corpus_path = '../data/TACL-datasets/N20small.txt'
-		opt.loadpath = '../data/TACL-datasets/N20small.p'
-		opt.embpath = '../data/TACL-datasets/N20small_emb.p'
 
-		opt.save_path = "./save_classifydata/"
-		opt.log_path = "./log_classifydata/"
+	elif opt.dataset == 'Tweet':
+		opt.setSampleNumber = 16404
+		opt.corpus_path = '../data/TACL-datasets/langdetect_tweet.txt'
+		opt.loadpath = '../data/TACL-datasets/langdetect_tweet.p'
+		opt.embpath = '../data/TACL-datasets/langdetect_tweet_emb.p'
 
-		opt.topicwordemb_path = './re_classifydata/topic-wordemb.p'
-		opt.phifile = './re_classifydata/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re_classifydata/thetafile.txt'
-		opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re_classifydata/tassginfile.txt'  # 最后分派结果文件
+		opt.save_path = "./save/save_tweet/"
+		opt.log_path = "./log/log_tweet/"
+
+		opt.topicwordemb_path = './re/re_tweet/topic-wordemb.p'
+		opt.phifile = './re/re_tweet/phifile.txt'  # 词-主题分布文件phi
+		opt.thetafile = './re/re_tweet/thetafile.txt'
+		opt.topNfile = './re/re_tweet/topNfile.txt'  # 每个主题topN词文件
+		opt.tagassignfile = './re/re_tweet/tassginfile.txt'  # 最后分派结果文件
 
 	else:
 		pass
@@ -184,37 +199,41 @@ def main():
 	opt.n_words = dmm.dpre.words_count
 
 	print("calculating topic coherence:")
-	dmm._phi() # 计算Topic_Coherence初始值
-	print("topic coherence:",dmm.getTopicCoherence())
-	print("load data finished")
-	print("docs_count", dmm.dpre.docs_count)
-	print('total words: %d' % opt.n_words)
-	print("batch_size:",opt.batch_size)
-	print("topic number:",opt.num_class)
-	print("save path:",opt.save_path)
-	print("log path:",opt.log_path)
-	print("dmm save path:",opt.tagassignfile)
-	
-	# Train TWE
-	# Prepare Label
-	x = cPickle.load(open(opt.loadpath, "rb"))
-	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
-	print('sample number: ', opt.sample_number)
-	train_lab = np.array(train_lab, dtype='int32')
-	del x
+	print("topic coherence:",dmm.Gensim_getTopicCoherence())
 
-	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
+	# print("calculating topic coherence:")
+	# dmm._phi() # 计算Topic_Coherence初始值
+	# print("topic coherence:",dmm.getTopicCoherence())
 
-	for i in range(opt.IterationforInitialization):
-		print(i)
-		dmm.sampleSingleInitialIteration(opt)
-	print("Calculating topic coherence")
-	dmm._phi()
-	print(dmm.getTopicCoherence())
-	# print(opt.topic_distribution[0])
-
-	print("Start Train_TWE")
-	Train_TWE(opt,train_lab,dmm)
+	# print("load data finished")
+	# print("docs_count", dmm.dpre.docs_count)
+	# print('total words: %d' % opt.n_words)
+	# print("batch_size:",opt.batch_size)
+	# print("topic number:",opt.num_class)
+	# print("save path:",opt.save_path)
+	# print("log path:",opt.log_path)
+	# print("dmm save path:",opt.tagassignfile)
+	#
+	# # Train TWE
+	# # Prepare Label
+	# x = cPickle.load(open(opt.loadpath, "rb"))
+	# train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
+	# print('sample number: ', opt.sample_number)
+	# train_lab = np.array(train_lab, dtype='int32')
+	# del x
+    #
+	# opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
+    #
+	# for i in range(opt.IterationforInitialization):
+	# 	print(i)
+	# 	dmm.sampleSingleInitialIteration(opt)
+	# print("Calculating topic coherence")
+	# dmm._phi()
+	# print(dmm.getTopicCoherence())
+	# # print(opt.topic_distribution[0])
+    #
+	# print("Start Train_TWE")
+	# Train_TWE(opt,train_lab,dmm)
 
 if __name__ == '__main__':
 	main()

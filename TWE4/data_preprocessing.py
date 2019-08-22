@@ -17,7 +17,6 @@ import gensim
 import codecs
 import re
 import _pickle as cPickle
-import emoji
 import string
 from zhon import hanzi
 from langdetect import detect
@@ -200,28 +199,28 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 
 
 def Detect_filtered():
+    file = open("langdetect_tweet" + '.txt', 'w')
     df = pd.read_csv("tweet_filtered.txt",names='')
     count = 0
     for index,row in df.iterrows():
         res = str(detect_langs(row.name)[0])[:2]
+        # print(res)
         if(res!="en"):
-            if(res!='en'):
-                df.drop(index)
-                count+=1
-    print(count)
-    # df.to_csv("langdetect_tweet.txt",index=False, header=None)
-
-    file = open("langdetect_tweet" + '.txt', 'w')
-    for index, row in df.iterrows():
-        file.write(row.name)
-        file.write('\n')
+            print(row.name)
+            count+=1
+            continue
+        else:
+            file.write(str(row.name))
+            file.write('\n')
+            # print("writing")
     file.close()
+    print(count)
 
 
 if __name__=='__main__':
     # Tweet 数据清理，仍然转换为txt
 
-    Detect_filtered()
+    # Detect_filtered()
     # google_list= getVocab()
     # # google_list = []
     # corpus_filtered = preprocess_corpus(google_list)
@@ -246,4 +245,14 @@ if __name__=='__main__':
     # filename = '../data/TACL-datasets/N20small.txt'
     # encoding = 'utf-8'
     # outputfilename = '../data/TACL-datasets/N20small.p'
+    # precess(filename, encoding, outputfilename)
+    #
+    filename = '../data/TACL-datasets/N20.txt'
+    encoding = 'utf-8'
+    outputfilename = '../data/TACL-datasets/N20.p'
+    precess(filename, encoding, outputfilename)
+
+    # filename = '../data/TACL-datasets/langdetect_tweet.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/TACL-datasets/langdetect_tweet.p'
     # precess(filename, encoding, outputfilename)
