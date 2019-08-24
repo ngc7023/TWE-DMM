@@ -8,6 +8,7 @@ import pandas as pd
 import math
 import emoji
 import re
+
 # start1=time.time()
 # s1 = [0 for i in range(0,1000000)]
 # for i in range(1,10000):
@@ -137,16 +138,49 @@ import re
 # # np.random.multinomial(1, y)
 # print(np.random.choice(len(y),p=y))
 
-from langdetect import detect,detect_langs
-str_line = "check	video	live	ipads	video	memory	ipad	brilliant"
-res = str(detect_langs(str_line)[0])[:2]
+# from langdetect import detect,detect_langs
+# str_line = "check	video	live	ipads	video	memory	ipad	brilliant"
+# res = str(detect_langs(str_line)[0])[:2]
+#
+# for i in range(10):
+#     print(i)
+#     print(str(detect_langs(str_line)[0])[:2])
+#
+# print(detect_langs(str_line))
+# if(res!="en"):
+#     if(res!='en'):
+#         print(str_line)
+#         print(detect_langs(str_line))
 
-for i in range(10):
-    print(i)
-    print(str(detect_langs(str_line)[0])[:2])
+# from gensim.corpora import Dictionary
+# from gensim.models import CoherenceModel
+#
+# record = []
+# L = 40
+# topics = []
+# for i in range(40):
+#     topics.append(str(i))
+# cm = CoherenceModel(topics=topics, texts=texts, dictionary=_dict,
+#                         window_size=10, coherence='c_uci', topn=L, processes=4)
+# print(cm.get_coherence())
 
-print(detect_langs(str_line))
-if(res!="en"):
-    if(res!='en'):
-        print(str_line)
-        print(detect_langs(str_line))
+
+# from gensim.corpora.dictionary import Dictionary
+# def print_dict(dic):
+#     for key in dic:
+#         print(key,dic[key])
+# a = [[u'巴西',u'巴西',u'英格兰'],[u'巴西',u'西班牙',u'法国']]
+# b = [u'巴西',u'巴西',u'比利时',u'法国',u'法国']
+# # a用来构造词典
+# dic = Dictionary(a)
+# print(type(dic))
+#
+# df = pd.read_csv('../data/TACL-datasets/N20short.txt')
+# ldf = df.values.tolist()
+# print(len(ldf))
+# res = []
+# for line in ldf:
+#     res.append(line[0].split())
+# print(res)
+
+print(' '.join(str(i) for i in [1,2,3,4]))

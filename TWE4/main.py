@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'N20short'
+		self.dataset = 'Tweet'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 2
+		self.IterationforInitialization = 200
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -198,42 +198,51 @@ def main():
 	dmm.init_Z(dmm.Z)
 	opt.n_words = dmm.dpre.words_count
 
+	dmm._phi() # 计算Topic_Coherence初始值
+	# print(dmm.phi[0])
 	print("calculating topic coherence:")
-	print("topic coherence:",dmm.Gensim_getTopicCoherence())
+	print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
 
-	# print("calculating topic coherence:")
-	# dmm._phi() # 计算Topic_Coherence初始值
-	# print("topic coherence:",dmm.getTopicCoherence())
+	print("calculating topic coherence:")
+	print("topic coherence:",dmm.getTopicCoherence())
 
-	# print("load data finished")
-	# print("docs_count", dmm.dpre.docs_count)
-	# print('total words: %d' % opt.n_words)
-	# print("batch_size:",opt.batch_size)
-	# print("topic number:",opt.num_class)
-	# print("save path:",opt.save_path)
-	# print("log path:",opt.log_path)
-	# print("dmm save path:",opt.tagassignfile)
-	#
-	# # Train TWE
-	# # Prepare Label
-	# x = cPickle.load(open(opt.loadpath, "rb"))
-	# train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
-	# print('sample number: ', opt.sample_number)
-	# train_lab = np.array(train_lab, dtype='int32')
-	# del x
-    #
-	# opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
-    #
-	# for i in range(opt.IterationforInitialization):
-	# 	print(i)
-	# 	dmm.sampleSingleInitialIteration(opt)
-	# print("Calculating topic coherence")
-	# dmm._phi()
-	# print(dmm.getTopicCoherence())
+	print("load data finished")
+	print("docs_count", dmm.dpre.docs_count)
+	print('total words: %d' % opt.n_words)
+	print("batch_size:",opt.batch_size)
+	print("topic number:",opt.num_class)
+	print("save path:",opt.save_path)
+	print("log path:",opt.log_path)
+	print("dmm save path:",opt.tagassignfile)
+
+	# Train TWE
+	# Prepare Label
+	x = cPickle.load(open(opt.loadpath, "rb"))
+	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
+	print('sample number: ', opt.sample_number)
+	train_lab = np.array(train_lab, dtype='int32')
+	del x
+
+	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
+
+	for i in range(opt.IterationforInitialization):
+		print(i)
+		dmm.sampleSingleInitialIteration(opt)
+	print("Calculating topic coherence")
+	dmm._phi()
+	# print(dmm.phi[0])
+	# print(dmm.nw[0])
+	# exit()
+	print("calculating topic coherence:")
+	print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
+
+	print("calculating topic coherence:")
+	print("topic coherence:",dmm.getTopicCoherence())
+
 	# # print(opt.topic_distribution[0])
     #
-	# print("Start Train_TWE")
-	# Train_TWE(opt,train_lab,dmm)
+	print("Start Train_TWE")
+	Train_TWE(opt,train_lab,dmm)
 
 if __name__ == '__main__':
 	main()

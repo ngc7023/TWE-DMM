@@ -186,7 +186,7 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 		ixtoword[ix] = w
 		ix += 1
 
-	doccententindex = []
+	doccententindex = [];
 	for doc in doccontent_list:
 		docix_list = []
 		for w in doc:
@@ -246,11 +246,17 @@ if __name__=='__main__':
     # encoding = 'utf-8'
     # outputfilename = '../data/TACL-datasets/N20small.p'
     # precess(filename, encoding, outputfilename)
-    #
-    filename = '../data/TACL-datasets/N20.txt'
+
+
+    filename = '../data/TACL-datasets/N20short.txt'
     encoding = 'utf-8'
-    outputfilename = '../data/TACL-datasets/N20.p'
+    outputfilename = '../data/TACL-datasets/N20short.p'
     precess(filename, encoding, outputfilename)
+
+    # filename = '../data/TACL-datasets/N20.txt'
+    # encoding = 'utf-8'
+    # outputfilename = '../data/TACL-datasets/N20.p'
+    # precess(filename, encoding, outputfilename)
 
     # filename = '../data/TACL-datasets/langdetect_tweet.txt'
     # encoding = 'utf-8'
