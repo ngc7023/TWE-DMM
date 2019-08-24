@@ -459,6 +459,7 @@ intra_op_parallelism_threads=4,)
                 if(iter_cohere%10==0):
                     dmm._phi()
                     print('Topic coherence:', dmm.getTopicCoherence())
+                    print('Gensim npmi:',dmm.Gensim_getTopicCoherence())
 
             cPickle.dump([word_emb, topic_emb], open(opt.topicwordemb_path, 'wb'))
             dmm.save1()

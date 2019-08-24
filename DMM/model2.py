@@ -13,6 +13,10 @@ from collections import OrderedDict
 import math
 import _pickle as cPickle
 import pandas as pd
+from gensim.models import CoherenceModel
+from gensim.corpora import Dictionary
+
+
 
 class Document(object):
 	def __init__(self):
@@ -32,23 +36,47 @@ class DataPreprocessing(object):
 
 class DMMmodel(object): # modify by Pangjy 08-13
 	def __init__(self, loadpath, K,opt):
+		self.corpus_path = opt.corpus_path
+		self.phifile = opt.phifile  # 词-主题分布文件phi
+		self.thetafile = opt.thetafile
+		self.topNfile = opt.topNfile  # 每个主题topN词文件
+		self.tagassignfile = opt.tagassignfile # 最后分派结果文件
+
 		x_data = cPickle.load(open(loadpath, "rb"))
 		train = x_data[0]
-		wordtoix= x_data[2]
+		wordtoix, ixtoword = x_data[2], x_data[3]
 		del x_data
 
 		dpre = DataPreprocessing()
 		dpre.docs_count = len(train)
 		dpre.words_count = len(wordtoix)
+
+		dpre.word2id = wordtoix
+		dpre.id2word = ixtoword
+		del wordtoix,ixtoword
+		df = pd.read_csv(self.corpus_path,names=[''])
+		list_df = df.values.tolist()
+		# # print(dpre.docs_count)
+		# # print(len(list_df))
+		self.text = [0] * dpre.docs_count
+		count_text = 0
+		for line in list_df:
+			self.text[count_text] = line[0].split()
+			count_text += 1
+
 		for i in range(len(train)):  # train[i]是某篇文档
 			doc = Document()
 			word_length = len(train[i])
 			doc.words = train[i]
+			# self.text[i] = list(map(lambda x: dpre.id2word[x], train[i]))
+			# self.text[i] = train[i].apply(lambda x : self.ixtoword[x])
 			doc.length = word_length
 			doc.WordtopicAssignments = np.zeros(word_length,dtype='int')
 			dpre.docs.append(doc)
-		dpre.word2id = wordtoix
-		del wordtoix
+		# print(self.text)
+		self._dict = Dictionary(self.text)
+
+
 		self.dpre = dpre  # 获取预处理参数（文档预处理实例）
 		# 模型参数
 		self.K = K  # 主题个数
@@ -62,11 +90,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		# topic word embedding 预测每个词的概率
 		self.prob = []
 		self.probIdx = []
-
-		self.phifile = opt.phifile  # 词-主题分布文件phi
-		self.thetafile = opt.thetafile
-		self.topNfile = opt.topNfile  # 每个主题topN词文件
-		self.tagassignfile = opt.tagassignfile # 最后分派结果文件
 
 		self.p = np.zeros(self.K,dtype='float64')  # 概率向量double类型，存储采样的临时变量
 		self.E = np.zeros(self.K, dtype='int')  # 每个主题的文档数
@@ -356,6 +379,37 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			for x in range(self.dpre.docs_count):
 				f.write(str(self.Z[x]) + '\n ')
 
+	def Gensim_getTopicCoherence(self):
+		topnwords = []
+		# get topn words
+		self._phi()
+		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
+		topic_rec = []
+		for x in range(self.K):
+			twords = [(n, self.phi[x][n]) for n in range(1,self.dpre.words_count)] # todo:topicN不够的时候怎么办
+			twords.sort(key=lambda i: i[1], reverse=True)  # 根据phi[x][n]排序
+			list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
+			for word in list:
+				if(word=='UNK'):
+					topic_rec.append(x)
+			topnwords.append(list)
+		print(topnwords)
+		print(topic_rec)
+		try:
+			cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+								window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
+			cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+								window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
+			print( cm.get_coherence(),cm2.get_coherence())
+		except:
+			print(topic_rec)
+			for x in topic_rec:
+				print(topnwords[x])
+				print("word sum:",self.F[x])
+				print(self.nw.T[x])
+		return cm.get_coherence(),cm2.get_coherence()
+
+
 	def getTopicCoherence(self):
 		empty_topic = 0
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
@@ -384,22 +438,26 @@ class DMMmodel(object): # modify by Pangjy 08-13
 							if twords[wj] in self.dpre.docs[di].words:
 								countj += 1
 					try:
-						# todo: modify PMI and NPMI √
+						# todo: modify PMI and NPMI ing
 						# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
 						# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
-						tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
-						coherence += tmp
-						npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
-						# todo: counti == 0 √
+						if(counti==0 or countj ==0):
+							continue
+						else:
+							tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
+							coherence += tmp
+							npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
+						# todo: counti == 0 空topic 或 topic的词数<topn
 					except:
 						print("exception")
-						exit()
-						# print(wi,wj,counti,countj)
-						# print(twords_origin)
-						# print(x)
-						# print(self.nw.T[x])
-						# print(twords_origin[wi])
-						# print(twords_origin[wj])
+						print(wi,wj,counti,countj)
+						print(twords_origin)
+						print(x)
+						print(self.nw.T[x])
+						print(twords_origin[wi])
+						print(twords_origin[wj])
+						continue
+		print("empty topic:",empty_topic)
 		return coherence / (self.K-empty_topic), npmi_coherence / (self.K-empty_topic)
 
 	def Restore_Z(self):
