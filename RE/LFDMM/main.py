@@ -18,7 +18,7 @@ import multiprocessing
 import timeit
 import operator
 
-sys.path.append('/home/zliu/topic_modeling/TWE-DMM/')
+sys.path.append('../TWE-DMM/')
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 import cProfile
 from RE.LFDMM.DMMModel import *
@@ -27,12 +27,12 @@ class TWE_Setting(object):
     def __init__(self):
         # LEAM
         self.GPUID = 0
-        self.dataset = 'classifydata'
+        self.dataset = 'TMNtitle'
         self.fix_emb = True  # Word embedding 初始化方式判断
         self.restore = True
         self.W_emb = None  # Word embedding初始化矩阵
         self.W_class_emb = None  # Label embedding 初始化矩阵
-        self.maxlen = 30  # 序列最大长度
+        self.maxlen = 300  # 序列最大长度
         self.n_words = None
         self.embed_size = 64  # embedding 维度
         self.lr = 1e-3  # 学习率
@@ -42,17 +42,17 @@ class TWE_Setting(object):
         self.part_data = False
         self.portion = 1.0
 
-        self.save_path = "./save_classifydata/"
-        self.log_path = "./log_classifydata/"
-        self.topicwordemb_path = './re/topic-wordemb1.p'
-        self.phifile = './re/phifile1.txt'  # 词-主题分布文件phi
-        self.thetafile = './re/thetafile1.txt'
-        self.topNfile = './re/topNfile1.txt'  # 每个主题topN词文件
-        self.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
+        # self.save_path = "./save_classifydata/"
+        # self.log_path = "./log_classifydata/"
+        # self.topicwordemb_path = './re/topic-wordemb.p'
+        # self.phifile = './re/phifile1.txt'  # 词-主题分布文件phi
+        # self.thetafile = './re/thetafile1.txt'
+        # self.topNfile = './re/topNfile1.txt'  # 每个主题topN词文件
+        # self.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
 
         self.print_freq = 100
         self.valid_freq = 100
-        self.num_class = 20  # 主题个数
+        self.num_class = 7  # 主题个数
 
         self.optimizer = 'Adam'
         self.clip_grad = 5
@@ -75,22 +75,54 @@ def main():
     # Prepare training and testing data
     opt = TWE_Setting()
     if opt.dataset == 'train_text':
-        opt.loadpath = '../data/news_train_text.p'
+        opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/news_train_text.p'
         opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_text_emb.p"
     # dmm = DMMmodel('../data/news_train_text.p')
     elif opt.dataset == 'train_title':
-        opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/news_train_title.p'
+        opt.loadpath = '../data/news_train_title.p'
         opt.embpath = "/home/zliu/topic_modeling/TWE-DMM/data/train_title_emb.p"
     # dmm = DMMmodel('../data/news_train_title.p')
     elif opt.dataset == 'classifydata':
         opt.loadpath = '../data/classifydata/classifydata_index.p'
         opt.embpath = "../data/classifydata/classifydata_emb.p"
     # dmm = DMMmodel('../data/classifydata/classifydata_index.p')
+
+    elif opt.dataset == 'Tweet':
+        opt.setSampleNumber = 16404
+        opt.corpus_path = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/langdetect_tweet.txt'
+        opt.loadpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/langdetect_tweet.p'
+        opt.embpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/langdetect_tweet_emb.p'
+
+        opt.save_path = "./save/save_tweet/"
+        opt.log_path = "./log/log_tweet/"
+
+        opt.topicwordemb_path = './re/re_tweet/topic-wordemb.p'
+        opt.phifile = './re/re_tweet/phifile.txt'  # 词-主题分布文件phi
+        opt.thetafile = './re/re_tweet/thetafile.txt'
+        opt.topNfile = './re/re_tweet/topNfile.txt'  # 每个主题topN词文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
+
+    elif opt.dataset == 'TMNtitle':
+        opt.setSampleNumber = 160234
+        opt.corpus_path = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/TMNtitle.txt'
+        opt.loadpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/TMNtitle.p'
+        opt.embpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/TMNtitle_emb.p'
+
+        opt.save_path = "./save_classifydata/"
+        opt.log_path = "./log_classifydata/"
+
+        opt.topicwordemb_path = './re_classifydata/topic-wordemb.p'
+        opt.phifile = './re_classifydata/phifile.txt'  # 词-主题分布文件phi
+        opt.thetafile = './re_classifydata/thetafile.txt'
+        opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
+
+
     else:
         pass
 
     # Initialize DMM
-    dmm = DMMmodel1(opt.loadpath, opt.num_class, opt)
+    dmm = DMMmodel(opt.loadpath, opt.num_class, opt)
     dmm.init_Z(dmm.Z)
     opt.n_words = dmm.dpre.words_count
 
@@ -101,7 +133,7 @@ def main():
         #dmm.sample_num = 107154
     dmm._phi()  # 计算Topic_Coherence初始值
     print("calculating topic coherence")
-    print("topic coherence:", dmm.getTopicCoherence())
+    print("topic coherence:", dmm.Gensim_getTopicCoherence())
 
     # print("load data finished")
     # print("docs_count", dmm.dpre.docs_count)

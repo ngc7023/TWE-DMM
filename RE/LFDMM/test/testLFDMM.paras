@@ -1,7 +1,7 @@
 -model	LFDMM
--corpus	test/corpus.txt
--vectors	test/wordVectors.txt
--ntopics	4
+-corpus	data/TMNtitle.txt
+-vectors	data/TMNfull.Google300D.wordVectors
+-ntopics	7
 -alpha	0.1
 -beta	0.1
 -lambda	1.0
