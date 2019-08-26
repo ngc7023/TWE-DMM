@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'Tweet'
+		self.dataset = 'N20short'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -36,8 +36,8 @@ class TWE_Setting(object):
 		self.n_words = None
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
-		self.batch_size = 8         # N20short-8 / N20small-16/ Tweet-8
-		self.max_epochs = 200       # default_200
+		self.batch_size = 16        # N20short-16 / N20small-16/ Tweet-8
+		self.max_epochs = 50        # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
@@ -207,7 +207,8 @@ def main():
 	print("topic coherence:",dmm.getTopicCoherence())
 
 	print("load data finished")
-	print("docs_count", dmm.dpre.docs_count)
+	print("Topic number:",opt.num_class)
+	print("docs_count:", dmm.dpre.docs_count)
 	print('total words: %d' % opt.n_words)
 	print("batch_size:",opt.batch_size)
 	print("topic number:",opt.num_class)
@@ -228,16 +229,20 @@ def main():
 	for i in range(opt.IterationforInitialization):
 		print(i)
 		dmm.sampleSingleInitialIteration(opt)
+	print("save dmm model")
 	print("Calculating topic coherence")
 	dmm._phi()
+	dmm.save1()
 	# print(dmm.phi[0])
 	# print(dmm.nw[0])
 	# exit()
 	print("calculating topic coherence:")
-	print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
+	print("Gensim topic coherence(PMI NPMI):",dmm.Gensim_getTopicCoherence())
 
-	print("calculating topic coherence:")
-	print("topic coherence:",dmm.getTopicCoherence())
+	exit()
+    #
+	# print("calculating topic coherence:")
+	# print("topic coherence:",dmm.getTopicCoherence())
 
 	# # print(opt.topic_distribution[0])
     #

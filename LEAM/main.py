@@ -15,6 +15,7 @@ from math import floor
 import math
 import multiprocessing
 
+from DMM.model2 import *
 from LEAM.model import *
 from LEAM.utils import get_minibatches_idx, restore_from_save, tensors_key_in_file, prepare_data_for_emb, load_class_embedding
 import cProfile
@@ -458,11 +459,12 @@ intra_op_parallelism_threads=4,)
                 dmm.sampleSingleIteration(opt)
                 if(iter_cohere%10==0):
                     dmm._phi()
-                    print('Topic coherence:', dmm.getTopicCoherence())
-                    print('Gensim npmi:',dmm.Gensim_getTopicCoherence())
+                    # print('Topic coherence:', dmm.getTopicCoherence())
+                    print("Gensim topic coherence(PMI NPMI):", dmm.Gensim_getTopicCoherence())
 
             cPickle.dump([word_emb, topic_emb], open(opt.topicwordemb_path, 'wb'))
             dmm.save1()
+            print("Gensim topic coherence(PMI NPMI):", dmm.Gensim_getTopicCoherence())
             # print('Topic coherence:', dmm.getTopicCoherence())
             
         except KeyboardInterrupt:

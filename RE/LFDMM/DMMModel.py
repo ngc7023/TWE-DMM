@@ -745,7 +745,7 @@ class DMMmodel(object):  # modify by Pangjy 08-13
         self.alpha = 0.1  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
         self.lam = 0.5  # 决定参数
         self.iter_times = 100  # 最大迭代次数
-        self.top_words_num = 15  # 每个主题特征词个数？？？？
+        self.top_words_num = 20  # 每个主题特征词个数？？？？
         self.sample_num = 0
 
         # topic word embedding 预测每个词的概率
@@ -777,6 +777,7 @@ class DMMmodel(object):  # modify by Pangjy 08-13
     def init_Z(self, Z):
         self.Z = Z
         if np.sum(self.Z) != 0:  # 根据DMM的抽样结果恢复DMM模型
+            print("Initilize Z with Assignment File")
             for x in range(len(self.Z)):
                 topic = self.Z[x]
                 self.E[topic] += 1  # 每个主题的文档数
@@ -786,6 +787,7 @@ class DMMmodel(object):  # modify by Pangjy 08-13
                     self.F[topic] += 1
         else:
             # 随机分配主题类型，为每个文档中的各个单词随机分配主题
+            print("Random Z")
             for x in range(len(self.Z)):
                 topic = random.randint(0, self.K - 1)  # 随机取一个主题
                 self.Z[x] = topic  # 第x篇文档的主题为topic
@@ -1127,11 +1129,14 @@ class DMMmodel(object):  # modify by Pangjy 08-13
         return coherence / (self.K - empty_topic), npmi_coherence / (self.K - empty_topic)
 
     def Restore_Z(self):
-        data = pd.read_csv(self.tagassignfile, sep=' ',names=[1,2,3,4,5])
-        print(data)
-        Stored_Z = data[1].values.tolist()
-        print(Stored_Z)
+        data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
+        Stored_Z = data['topic'].values.tolist()
         return Stored_Z
+        # data = pd.read_csv(self.tagassignfile, sep=' ',names=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
+        # print(data)
+        # Stored_Z = data[0].values.tolist()
+        # print(Stored_Z)
+        # return Stored_Z
 
     def initTopicEmb(self, all_wordemb):
         self._phi()  # 更新词-主题分布 K*word_count

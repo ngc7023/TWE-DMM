@@ -32,10 +32,6 @@ def getVocab():
     google_list = df['word2vec_word'].values.tolist()
     print("Google list finished")
 
-    # cols = [0] * 301
-    # cols[0] = 'word'
-    # for i in range(300):
-    #     cols[i + 1] = i
     # vec_stanford = pd.read_csv('../data/glove.42B.300d.txt',names=cols,sep=' ',quoting=3) # quoting用来保留语料里的双引号
     # stanford_list = vec_stanford['word'].tolist()
     # print("stanford list finished")

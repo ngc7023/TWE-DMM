@@ -16,8 +16,6 @@ import pandas as pd
 from gensim.models import CoherenceModel
 from gensim.corpora import Dictionary
 
-
-
 class Document(object):
 	def __init__(self):
 		self.words = []
@@ -116,7 +114,9 @@ class DMMmodel(object): # modify by Pangjy 08-13
 	def init_Z(self,Z):
 		self.Z=Z
 		if np.sum(self.Z)!=0: # 根据DMM的抽样结果恢复DMM模型
-			for x in range(len(self.Z)):
+			print("Set Z with Assignment file")
+
+			for x in range(self.dpre.docs_count):
 				topic = self.Z[x]
 				self.E[topic] += 1  # 每个主题的文档数
 				self.ndsum[x] = self.dpre.docs[x].length
@@ -125,6 +125,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					self.F[topic] += 1
 		else:
 			# 随机分配主题类型，为每个文档中的各个单词随机分配主题
+			print("Random Z")
 			for x in range(len(self.Z)):
 				topic = random.randint(0, self.K - 1)  # 随机取一个主题
 				self.Z[x] = topic  # 第x篇文档的主题为topic
@@ -265,7 +266,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		for i in range(self.dpre.docs_count):
 			Vbeta = self.dpre.words_count * self.beta
 			theta = self.E + self.alpha
-			for j in range(1,self.dpre.docs[i].length):  # default_(0,length)
+			for j in range(self.dpre.docs[i].length):  # default_(0,length)
 				word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
 				theta = theta * ((1 - self.lam) * (self.nw[word] + self.beta) / (self.F + Vbeta) + self.lam *self.prob[self.probIdx])
 				self.probIdx += 1
@@ -320,30 +321,30 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 	def save1(self):
 		self._phi()
-		self._theta1()
+		# self._theta1() # todo: theta1是否需要改动
 		# 保存phi 主题-词分布 # K * [word_number]
-		with codecs.open(self.phifile, 'w') as f:
-			for x in range(self.K):
-				for y in range(self.dpre.words_count):
-					f.write(str(self.phi[x][y]) + ' ')
-				f.write('\n')
-		# 保存theta 文档-主题分布 # docs * [K]
-		with codecs.open(self.thetafile, 'w') as f:
-			for x in range(self.dpre.docs_count):
-				for y in range(self.K):
-					f.write(str(self.theta[x][y])+' ')
-				f.write('\n')
-			# 保存每个主题topic的topN词
-			with codecs.open(self.topNfile, 'w', 'utf-8') as f:
-				self.top_words_num = min(self.top_words_num, self.dpre.words_count)
-				for x in range(self.K):
-					f.write('Topic' + str(x) + ': ')
-					twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
-					twords.sort(key = lambda i: i[1], reverse = True)
-					for y in range(self.top_words_num):
-						word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
-						f.write(str(twords[y][0]) + '(' + word + '_' + str(twords[y][1]) + ') ')
-					f.write('\n')
+		# with codecs.open(self.phifile, 'w') as f:
+		# 	for x in range(self.K):
+		# 		for y in range(self.dpre.words_count):
+		# 			f.write(str(self.phi[x][y]) + ' ')
+		# 		f.write('\n')
+		# # 保存theta 文档-主题分布 # docs * [K]
+		# with codecs.open(self.thetafile, 'w') as f:
+		# 	for x in range(self.dpre.docs_count):
+		# 		for y in range(self.K):
+		# 			f.write(str(self.theta[x][y])+' ')
+		# 		f.write('\n')
+		# 	# 保存每个主题topic的topN词
+		# 	with codecs.open(self.topNfile, 'w', 'utf-8') as f:
+		# 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
+		# 		for x in range(self.K):
+		# 			f.write('Topic' + str(x) + ': ')
+		# 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
+		# 			twords.sort(key = lambda i: i[1], reverse = True)
+		# 			for y in range(self.top_words_num):
+		# 				word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
+		# 				f.write(str(twords[y][0]) + '(' + word + '_' + str(twords[y][1]) + ') ')
+		# 			f.write('\n')
 		# 保存最后退出时，文档的主题
 		with codecs.open(self.tagassignfile, 'w') as f:
 			for x in range(self.dpre.docs_count):
@@ -400,7 +401,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 								window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
 			cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
 								window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
-			print( cm.get_coherence(),cm2.get_coherence())
+			print(cm.get_coherence(),cm2.get_coherence())
 		except:
 			print(topic_rec)
 			for x in topic_rec:
@@ -501,6 +502,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 								+ (1-self.lam)*(self.topicWordCountDMM[word]+self.beta)/(self.sumTopicWordCountDMM + Vbeta))
 
 			if (np.sum(self.p) == 0):
+				print("assign topic by average prob")
 				dist = [1. / self.K] * self.K
 				topic = np.argmax(np.random.multinomial(1, dist))  # 以平均概率随机选择主题
 			else:

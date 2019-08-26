@@ -27,7 +27,7 @@ class TWE_Setting(object):
     def __init__(self):
         # LEAM
         self.GPUID = 0
-        self.dataset = 'TMNtitle'
+        self.dataset = 'N20small'
         self.fix_emb = True  # Word embedding 初始化方式判断
         self.restore = True
         self.W_emb = None  # Word embedding初始化矩阵
@@ -52,7 +52,7 @@ class TWE_Setting(object):
 
         self.print_freq = 100
         self.valid_freq = 100
-        self.num_class = 7  # 主题个数
+        self.num_class = 40  # 主题个数
 
         self.optimizer = 'Adam'
         self.clip_grad = 5
@@ -100,7 +100,7 @@ def main():
         opt.phifile = './re/re_tweet/phifile.txt'  # 词-主题分布文件phi
         opt.thetafile = './re/re_tweet/thetafile.txt'
         opt.topNfile = './re/re_tweet/topNfile.txt'  # 每个主题topN词文件
-        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/Tweet_Assign_80.txt'  # 最后分派结果文件
 
     elif opt.dataset == 'TMNtitle':
         opt.setSampleNumber = 160234
@@ -117,6 +117,35 @@ def main():
         opt.topNfile = './re_classifydata/topNfile.txt'  # 每个主题topN词文件
         opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/testLFDMM.topicAssignments'  # 最后分派结果文件
 
+    elif opt.dataset == 'N20short':
+        opt.setSampleNumber = 24326  # number of subsequence
+        opt.corpus_path = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20short.txt'
+        opt.loadpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20short.p'
+        opt.embpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20short_emb.p'
+
+        opt.save_path = "./save/save_N20short/"
+        opt.log_path = "./log/log_N20short/"
+
+        opt.topicwordemb_path = './re/re_N20short/topic-wordemb.p'
+        opt.phifile = './re/re_N20short/phifile.txt'  # 词-主题分布文件phi
+        opt.thetafile = './re/re_N20short/thetafile.txt'
+        opt.topNfile = './re/re_N20short/topNfile.txt'  # 每个主题topN词文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/N20short_500DMM.txt'  # 最后分派结果文件
+
+    elif opt.dataset == 'N20small':
+        opt.setSampleNumber = 35206
+        opt.corpus_path = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20small.txt'
+        opt.loadpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20small.p'
+        opt.embpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/data/TACL-datasets/N20small_emb.p'
+
+        opt.save_path = "./save/save_N20small"
+        opt.log_path = "./log/log_N20small"
+
+        opt.topicwordemb_path = './re/re_N20small/topic-wordemb.p'
+        opt.phifile = './re/re_N20small/phifile.txt'  # 词-主题分布文件phi
+        opt.thetafile = './re/re_N20small/thetafile.txt'
+        opt.topNfile = './re/re_N20small/topNfile.txt'  # 每个主题topN词文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/N20small_TWE-DMM.txt'  # 最后分派结果文件
 
     else:
         pass
