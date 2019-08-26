@@ -183,4 +183,9 @@ import re
 #     res.append(line[0].split())
 # print(res)
 
-print(' '.join(str(i) for i in [1,2,3,4]))
+# from palmetto.palmettopy.palmetto import *
+# palmetto = Palmetto()
+# words = ["cake", "apple", "banana", "cherry", "chocolate"]
+# print(palmetto.get_coherence(words,coherence_type="npmi"))
+
+# df = pd.read_csv('../data/TACL-datasets/N20short.txt')

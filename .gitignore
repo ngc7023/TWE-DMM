@@ -81,3 +81,8 @@ TWE4/test.py
 *.pyc
 *.pyc
 RE/LFDMM/__pycache__/DMMModel.cpython-37.pyc
+RE/LFDMM/test/testLFDMM.phi
+RE/LFDMM/test/testLFDMM.paras
+RE/LFDMM/test/testLFDMM.phi
+RE/LFDMM/test/testLFDMM.theta
+RE/LFDMM/test/testLFDMM.topicAssignments
