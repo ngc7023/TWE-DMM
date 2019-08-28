@@ -189,3 +189,14 @@ import re
 # print(palmetto.get_coherence(words,coherence_type="npmi"))
 
 # df = pd.read_csv('../data/TACL-datasets/N20short.txt')
+
+# import pickle as cPickle
+# embpath = '../data/TACL-datasets/N20short_emb.p'
+# # embpath = "../data/classifydata/classifydata_emb.p"
+#
+# # embpath = '../data/TACL-datasets/N20.p'
+# tmp = cPickle.load(open(embpath, 'rb'))[0]
+# print(tmp)
+# # W_emb = np.array(cPickle.load(open(embpath, 'rb'))[0], dtype='float32')
+
+print(random.randint(0, 1))

@@ -512,13 +512,18 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				# for word in doc.words:
 				# 	self.p = self.p * (
 				# 	self.lam * (self.topicWordCountLF[word] + self.beta) / (self.sumTopicWordCountLF + Vbeta)
+				# 	+ (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))
+				# 	print(self.p)
+				# exit()
 				dist = [1. / self.K] * self.K
 				topic = np.argmax(np.random.multinomial(1, dist))  # 以平均概率随机选择主题
+				# print(" ")
 			else:
-				dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
-				choices = range(len(dist))
-				topic = np.random.choice(choices, p=dist)
-			# topic = np.argmax(np.random.multinomial(1, p))
+				count_p +=1
+				# print("!")
+				p = np.squeeze(np.array(self.p / np.sum(self.p)))
+				topic = np.argmax(np.random.multinomial(1, p))
+				dist = p
 				# dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
 				# choices = range(len(dist))
 				# topic = np.random.choice(choices, p=dist)

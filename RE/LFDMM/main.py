@@ -18,7 +18,7 @@ import multiprocessing
 import timeit
 import operator
 
-sys.path.append('../TWE-DMM/')
+sys.path.append('/home/zliu/topic_modeling/TWE-DMM/')
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 import cProfile
 from RE.LFDMM.DMMModel import *
@@ -27,7 +27,7 @@ class TWE_Setting(object):
     def __init__(self):
         # LEAM
         self.GPUID = 0
-        self.dataset = 'N20small'
+        self.dataset = 'N20short'
         self.fix_emb = True  # Word embedding 初始化方式判断
         self.restore = True
         self.W_emb = None  # Word embedding初始化矩阵
@@ -130,7 +130,7 @@ def main():
         opt.phifile = './re/re_N20short/phifile.txt'  # 词-主题分布文件phi
         opt.thetafile = './re/re_N20short/thetafile.txt'
         opt.topNfile = './re/re_N20short/topNfile.txt'  # 每个主题topN词文件
-        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/N20short_500DMM.txt'  # 最后分派结果文件
+        opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/N20short_Assign_500DMM2.txt'  # 最后分派结果文件
 
     elif opt.dataset == 'N20small':
         opt.setSampleNumber = 35206
@@ -146,6 +146,22 @@ def main():
         opt.thetafile = './re/re_N20small/thetafile.txt'
         opt.topNfile = './re/re_N20small/topNfile.txt'  # 每个主题topN词文件
         opt.tagassignfile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/RE/LFDMM/test/N20small_TWE-DMM.txt'  # 最后分派结果文件
+
+    elif opt.dataset == 'N20full':
+        opt.setSampleNumber = 1944129  # 未知
+        opt.corpus_path = '/home/zliu/topic_modeling/TWE-DMM/data/TACL-datasets/N20.txt'
+        opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/data/TACL-datasets/N20.p'
+        opt.embpath = '/home/zliu/topic_modeling/TWE-DMM/data/TACL-datasets/N20_emb.p'
+
+        opt.save_path = "./save/save_N20"
+        opt.log_path = "./log/log_N20"
+
+        opt.topicwordemb_path = './re/re_N20/topic-wordemb.p'
+        opt.phifile = './re/re_N20/phifile.txt'  # 词-主题分布文件phi
+        opt.thetafile = './re/re_N20/thetafile.txt'
+        opt.topNfile = './re/re_N20/topNfile.txt'  # 每个主题topN词文件
+        opt.tagassignfile = './re/re_N20/tassginfile.txt'  # 最后分派结果文件
+        opt.tagassignfile = '/home/zliu/topic_modeling/TWE-DMM/RE/LFDMM/test/N20full_Assign.txt'  # 最后分派结果文件
 
     else:
         pass
@@ -163,6 +179,7 @@ def main():
     dmm._phi()  # 计算Topic_Coherence初始值
     print("calculating topic coherence")
     print("topic coherence:", dmm.Gensim_getTopicCoherence())
+    print(dmm.E)
 
     # print("load data finished")
     # print("docs_count", dmm.dpre.docs_count)

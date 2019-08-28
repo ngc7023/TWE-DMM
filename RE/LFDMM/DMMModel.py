@@ -1129,14 +1129,19 @@ class DMMmodel(object):  # modify by Pangjy 08-13
         return coherence / (self.K - empty_topic), npmi_coherence / (self.K - empty_topic)
 
     def Restore_Z(self):
-        data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
-        Stored_Z = data['topic'].values.tolist()
-        return Stored_Z
-        # data = pd.read_csv(self.tagassignfile, sep=' ',names=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
-        # print(data)
-        # Stored_Z = data[0].values.tolist()
-        # print(Stored_Z)
+
+        # data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
+        # Stored_Z = data['topic'].values.tolist()
         # return Stored_Z
+
+        cols = [0] * 1000
+        for i in range(1000):
+            cols[i] = i
+
+        data = pd.read_csv(self.tagassignfile, sep=' ',names=cols)
+        Stored_Z = data[0].values.tolist()
+        print(Stored_Z)
+        return Stored_Z
 
     def initTopicEmb(self, all_wordemb):
         self._phi()  # 更新词-主题分布 K*word_count
