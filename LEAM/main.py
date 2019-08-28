@@ -457,10 +457,13 @@ intra_op_parallelism_threads=4,)
                 # 进行一次gibbs抽样 已处理过所有样本
                 dmm.prob = tmp_prob	
                 dmm.sampleSingleIteration(opt)
-                if(iter_cohere%10==0):
-                    dmm._phi()
+                dmm._phi()
                     # print('Topic coherence:', dmm.getTopicCoherence())
-                    print("Gensim topic coherence(PMI NPMI):", dmm.Gensim_getTopicCoherence())
+                print("Gensim topic coherence(PMI NPMI):", dmm.Gensim_getTopicCoherence())
+
+                if(iter_cohere%25==0):
+                    print("Model saved!")
+                    dmm.save1()
 
             cPickle.dump([word_emb, topic_emb], open(opt.topicwordemb_path, 'wb'))
             dmm.save1()

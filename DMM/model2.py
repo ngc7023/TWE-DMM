@@ -126,6 +126,8 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		else:
 			# 随机分配主题类型，为每个文档中的各个单词随机分配主题
 			print("Random Z")
+			count0=0
+			count1=0
 			for x in range(len(self.Z)):
 				topic = random.randint(0, self.K - 1)  # 随机取一个主题
 				self.Z[x] = topic  # 第x篇文档的主题为topic
@@ -134,21 +136,21 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				doc = self.dpre.docs[x]
 				self.ndsum[x] = doc.length
 				self.F[topic] += doc.length
-				for y in range(self.dpre.docs[x].length):
-					self.nw[self.dpre.docs[x].words[y]][topic] += 1
-
 				for i in range(doc.length): # 根据LFDMM修改初始化方法
+					self.nw[self.dpre.docs[x].words[i]][topic] += 1
 					word = doc.words[i]
 					subtopic = random.randint(0, 1)
 					if(subtopic==0):
+						count0 +=1
 						self.sumTopicWordCountDMM[topic]+=1
 						self.topicWordCountDMM[word][topic] +=1
 						doc.WordtopicAssignments[i] = topic+self.K
 					else:
+						count1 +=1
 						self.sumTopicWordCountLF[topic]+= 1
 						self.topicWordCountLF[word][topic] += 1
 						doc.WordtopicAssignments[i] = topic
-
+			print("count:",count0,count1)
 	def sampling(self, i):
 		# 换主题
 		topic = self.Z[i]  # 第i个文档的主题
@@ -395,13 +397,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					topic_rec.append(x)
 			topnwords.append(list)
 		print(topnwords)
-		print(topic_rec)
+		print("empty topic:",len(topic_rec))
 		try:
 			cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
 								window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
 			cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
 								window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
-			print(cm.get_coherence(),cm2.get_coherence())
+			# print(cm.get_coherence(),cm2.get_coherence())
 		except:
 			print(topic_rec)
 			for x in topic_rec:
@@ -476,6 +478,8 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		return topic_emb
 
 	def sampleSingleInitialIteration(self,opt):
+		count_pz = 0
+		count_p = 0
 		for i in range(self.dpre.docs_count):
 			doc = self.dpre.docs[i]
 			topic = self.Z[i]
@@ -500,9 +504,14 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			for word in doc.words:
 				self.p = self.p * (self.lam*(self.topicWordCountLF[word] + self.beta)/(self.sumTopicWordCountLF + Vbeta)
 								+ (1-self.lam)*(self.topicWordCountDMM[word]+self.beta)/(self.sumTopicWordCountDMM + Vbeta))
-
+			# print(self.p)
 			if (np.sum(self.p) == 0):
-				print("assign topic by average prob")
+				count_pz +=1
+				# self.p = self.E + self.alpha
+				# print(self.p)
+				# for word in doc.words:
+				# 	self.p = self.p * (
+				# 	self.lam * (self.topicWordCountLF[word] + self.beta) / (self.sumTopicWordCountLF + Vbeta)
 				dist = [1. / self.K] * self.K
 				topic = np.argmax(np.random.multinomial(1, dist))  # 以平均概率随机选择主题
 			else:
@@ -510,6 +519,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				choices = range(len(dist))
 				topic = np.random.choice(choices, p=dist)
 			# topic = np.argmax(np.random.multinomial(1, p))
+				# dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
+				# choices = range(len(dist))
+				# topic = np.random.choice(choices, p=dist)
+				# print(self.p)
+				# print(dist)
+				# exit()
+				# topic = np.argmax(np.random.multinomial(1, p))
 
 			self.E[topic] += 1
 			self.F[topic] += doc.length
@@ -528,12 +544,19 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					self.sumTopicWordCountDMM[topic] += 1
 					subtopic += self.K
 				doc.WordtopicAssignments[j] = subtopic
-
+			# print("dist:",dist)
+			# exit()
 			self.Z[i] = topic
 			opt.topic_distribution[i] =  dist
 
+		print("assign topic by average prob:", count_pz)
+		print("assign topic by normal prob:", count_p)
+		print(self.E)
+
 	def sampleSingleIteration(self,opt):
 		probIdx = 0
+		count_pz = 0
+		count_p = 0
 		for i in range(self.dpre.docs_count):
 			doc = self.dpre.docs[i]
 			topic = self.Z[i]
@@ -562,13 +585,15 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				probIdx += 1
 
 				if(np.sum(self.p)==0): # todo: self.p==0
+					# print("assign topic by average prob in DMM model")
+					count_pz += 1
 					dist = [1. / self.K] * self.K
 					topic = np.argmax(np.random.multinomial(1, dist)) # 以平均概率随机选择主题
 				else:
+					count_p += 1
 					dist = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
 					choices = range(len(dist))
 					topic = np.random.choice(choices, p=dist)
-
 			self.E[topic] += 1
 			self.F[topic] += doc.length
 
@@ -590,7 +615,8 @@ class DMMmodel(object): # modify by Pangjy 08-13
 
 			self.Z[i] = topic
 			opt.topic_distribution[i] = dist
-
+		print("assign topic by average prob:", count_pz)
+		print("assign topic by normal prob:", count_p)
 
 
 # if __name__=='__main__':

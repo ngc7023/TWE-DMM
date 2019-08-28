@@ -37,7 +37,7 @@ class TWE_Setting(object):
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
 		self.batch_size = 16        # N20short-16 / N20small-16/ Tweet-8
-		self.max_epochs = 50        # default_200
+		self.max_epochs = 0        # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 200
+		self.IterationforInitialization = 500
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -127,11 +127,11 @@ def main():
 		opt.topNfile = './re/re_N20small/topNfile.txt'  # 每个主题topN词文件
 		opt.tagassignfile = './re/re_N20small/tassginfile.txt'  # 最后分派结果文件
 
-	elif opt.dataset == 'N20':
-		opt.setSampleNumber = 10000000 # 未知
+	elif opt.dataset == 'N20full':
+		opt.setSampleNumber = 1944129
 		opt.corpus_path = '../data/TACL-datasets/N20.txt'
 		opt.loadpath = '../data/TACL-datasets/N20.p'
-		opt.embpath = '../data/TACL-datasets/N20.p'
+		opt.embpath = '../data/TACL-datasets/N20_emb.p'
 
 		opt.save_path = "./save/save_N20"
 		opt.log_path = "./log/log_N20"
@@ -203,8 +203,8 @@ def main():
 	print("calculating topic coherence:")
 	print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
 
-	print("calculating topic coherence:")
-	print("topic coherence:",dmm.getTopicCoherence())
+	# print("calculating topic coherence:")
+	# print("topic coherence:",dmm.getTopicCoherence())
 
 	print("load data finished")
 	print("Topic number:",opt.num_class)
@@ -218,12 +218,11 @@ def main():
 
 	# Train TWE
 	# Prepare Label
-	x = cPickle.load(open(opt.loadpath, "rb"))
-	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
-	print('sample number: ', opt.sample_number)
-	train_lab = np.array(train_lab, dtype='int32')
-	del x
-
+	# x = cPickle.load(open(opt.loadpath, "rb"))
+	# train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
+	# print('sample number: ', opt.sample_number)
+	# train_lab = np.array(train_lab, dtype='int32')
+	# del x
 	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
 
 	for i in range(opt.IterationforInitialization):
@@ -238,9 +237,7 @@ def main():
 	# exit()
 	print("calculating topic coherence:")
 	print("Gensim topic coherence(PMI NPMI):",dmm.Gensim_getTopicCoherence())
-
-	exit()
-    #
+	print(dmm.E)
 	# print("calculating topic coherence:")
 	# print("topic coherence:",dmm.getTopicCoherence())
 
