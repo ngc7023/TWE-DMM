@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'Tweet'
+		self.dataset = 'N20small'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -101,7 +101,7 @@ def main():
 		opt.setSampleNumber = 24326 # number of subsequence
 		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
 		opt.loadpath = '../data/TACL-datasets/N20short.p'
-		opt.embpath = '../data/TACL-datasets/N20short_emb.p'
+		opt.embpath = '../data/TACL-datasets/N20short_word2vec_emb.p'
 
 		opt.save_path = "./save/save_N20short/"
 		opt.log_path = "./log/log_N20short/"
@@ -116,7 +116,7 @@ def main():
 		opt.setSampleNumber = 35206
 		opt.corpus_path = '../data/TACL-datasets/N20small.txt'
 		opt.loadpath = '../data/TACL-datasets/N20small.p'
-		opt.embpath = '../data/TACL-datasets/N20small_emb.p'
+		opt.embpath = '../data/TACL-datasets/N20small_word2vec_emb.p'
 
 		opt.save_path = "./save/save_N20small"
 		opt.log_path = "./log/log_N20small"
@@ -232,18 +232,14 @@ def main():
 	print("save dmm model")
 	print("Calculating topic coherence")
 	dmm._phi()
-	dmm.save1()
-	# print(dmm.phi[0])
-	# print(dmm.nw[0])
-	# exit()
+	dmm.save1(opt)
+
 	print("calculating topic coherence:")
 	print("Gensim topic coherence(PMI NPMI):",dmm.Gensim_getTopicCoherence())
-	print(dmm.E)
+	# print(dmm.E)
 	# print("calculating topic coherence:")
 	# print("topic coherence:",dmm.getTopicCoherence())
 
-	# # print(opt.topic_distribution[0])
-    #
 	print("Start Train_TWE")
 	Train_TWE(opt,train_lab,dmm)
 

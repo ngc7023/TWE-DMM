@@ -463,16 +463,16 @@ intra_op_parallelism_threads=4,)
 
                 if(iter_cohere%25==0):
                     print("Model saved!")
-                    dmm.save1()
+                    dmm.save1(opt)
 
             cPickle.dump([word_emb, topic_emb], open(opt.topicwordemb_path, 'wb'))
-            dmm.save1()
+            dmm.save1(opt)
             print("Gensim topic coherence(PMI NPMI):", dmm.Gensim_getTopicCoherence())
             # print('Topic coherence:', dmm.getTopicCoherence())
             
         except KeyboardInterrupt:
             print('Training interupted')
-            dmm.save1()
+            dmm.save1(opt)
             print('Topic model is saved!')
 
 if __name__ == '__main__':

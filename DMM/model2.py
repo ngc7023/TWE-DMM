@@ -263,27 +263,18 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		self.theta = self.E + self.alpha
 		self.theta=np.array(self.theta / np.sum(self.theta))
 
-	def _theta1(self):  # 文章-主题分布
-		self.probIdx = 0
-		for i in range(self.dpre.docs_count):
-			Vbeta = self.dpre.words_count * self.beta
-			theta = self.E + self.alpha
-			for j in range(self.dpre.docs[i].length):  # default_(0,length)
-				word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
-				theta = theta * ((1 - self.lam) * (self.nw[word] + self.beta) / (self.F + Vbeta) + self.lam *self.prob[self.probIdx])
-				self.probIdx += 1
-			self.theta[i] = theta  # [[K],[K],....] doc_count
-
-	def _theta2(self):  # 计算Topic_Distribution初始值
-		self.probIdx = 0
-		for i in range(self.dpre.docs_count):
-			Vbeta = self.dpre.words_count * self.beta
-			theta = self.E + self.alpha
-			for j in range(1,self.dpre.docs[i].length):  # default_(0,length)
-				word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
-				theta = theta * (self.nw[word] + self.beta) / (self.F + Vbeta)
-				self.probIdx += 1
-			self.theta[i] = theta  # [[K],[K],....] doc_count
+	# def _theta1(self,opt):  # 文章-主题分布
+	# 	for i in range(self.dpre.docs_count):
+	# 		self.theta[i] = opt.topic_distribution[i]
+		# self.probIdx = 0
+		# for i in range(self.dpre.docs_count):
+		# 	Vbeta = self.dpre.words_count * self.beta
+		# 	theta = self.E + self.alpha
+		# 	for j in range(self.dpre.docs[i].length):  # default_(0,length)
+		# 		word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
+		# 		theta = theta * ((1 - self.lam) * (self.nw[word] + self.beta) / (self.F + Vbeta) + self.lam *self.prob[self.probIdx])
+		# 		self.probIdx += 1
+		# 	self.theta[i] = theta  # [[K],[K],....] doc_count
 
 	def _phi(self):
 		for i in range(self.K):
@@ -321,42 +312,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			for x in range(self.dpre.docs_count):
 				f.write(str(x) + ':' + str(self.Z[x]) + '\t')
 
-	def save1(self):
+	def save1(self,opt):
 		self._phi()
-		# self._theta1() # todo: theta1是否需要改动
-		# 保存phi 主题-词分布 # K * [word_number]
-		# with codecs.open(self.phifile, 'w') as f:
-		# 	for x in range(self.K):
-		# 		for y in range(self.dpre.words_count):
-		# 			f.write(str(self.phi[x][y]) + ' ')
-		# 		f.write('\n')
-		# # 保存theta 文档-主题分布 # docs * [K]
-		# with codecs.open(self.thetafile, 'w') as f:
-		# 	for x in range(self.dpre.docs_count):
-		# 		for y in range(self.K):
-		# 			f.write(str(self.theta[x][y])+' ')
-		# 		f.write('\n')
-		# 	# 保存每个主题topic的topN词
-		# 	with codecs.open(self.topNfile, 'w', 'utf-8') as f:
-		# 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
-		# 		for x in range(self.K):
-		# 			f.write('Topic' + str(x) + ': ')
-		# 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
-		# 			twords.sort(key = lambda i: i[1], reverse = True)
-		# 			for y in range(self.top_words_num):
-		# 				word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
-		# 				f.write(str(twords[y][0]) + '(' + word + '_' + str(twords[y][1]) + ') ')
-		# 			f.write('\n')
-		# 保存最后退出时，文档的主题
-		with codecs.open(self.tagassignfile, 'w') as f:
-			for x in range(self.dpre.docs_count):
-				f.write(str(self.Z[x]) + '\n ')
-	def save2(self):
-		self._phi()
-		self._theta2()
+		self.theta = opt.topic_distribution
+		# self._theta1(opt) # todo: theta1是否需要改动
 		# 保存phi 主题-词分布 # K * [word_number]
 		with codecs.open(self.phifile, 'w') as f:
-			for x in range(self.K):	
+			for x in range(self.K):
 				for y in range(self.dpre.words_count):
 					f.write(str(self.phi[x][y]) + ' ')
 				f.write('\n')
@@ -397,7 +359,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					topic_rec.append(x)
 			topnwords.append(list)
 		print(topnwords)
-		print("empty topic:",len(topic_rec))
+		# print("empty topic:",len(topic_rec))
 		try:
 			cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
 								window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
@@ -441,7 +403,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 							if twords[wj] in self.dpre.docs[di].words:
 								countj += 1
 					try:
-						# todo: modify PMI and NPMI ing
+						# todo: getTopicCoherence: modify PMI and NPMI ing, counti == 0 空topic 或 topic的词数<topn
 						# PMI: m_lr(S_i) = log[(P(W', W*) + e) / (P(W') * P(W*))]
 						# NPMI: m_nlr(S_i) = m_lr(S_i) / -log[P(W', W*) + e]
 						if(counti==0 or countj ==0):
@@ -450,7 +412,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 							tmp = math.log(self.dpre.docs_count*(countij+1.0e-12*self.dpre.docs_count)/(counti*countj))
 							coherence += tmp
 							npmi_coherence += tmp/(-math.log(countij/self.dpre.docs_count+1.0e-12))
-						# todo: counti == 0 空topic 或 topic的词数<topn
 					except:
 						print("exception")
 						print(wi,wj,counti,countj)
@@ -504,7 +465,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			for word in doc.words:
 				self.p = self.p * (self.lam*(self.topicWordCountLF[word] + self.beta)/(self.sumTopicWordCountLF + Vbeta)
 								+ (1-self.lam)*(self.topicWordCountDMM[word]+self.beta)/(self.sumTopicWordCountDMM + Vbeta))
-			# print(self.p)
 			if (np.sum(self.p) == 0):
 				count_pz +=1
 				# self.p = self.E + self.alpha
@@ -517,10 +477,8 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				# exit()
 				dist = [1. / self.K] * self.K
 				topic = np.argmax(np.random.multinomial(1, dist))  # 以平均概率随机选择主题
-				# print(" ")
 			else:
 				count_p +=1
-				# print("!")
 				p = np.squeeze(np.array(self.p / np.sum(self.p)))
 				topic = np.argmax(np.random.multinomial(1, p))
 				dist = p
@@ -549,14 +507,11 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					self.sumTopicWordCountDMM[topic] += 1
 					subtopic += self.K
 				doc.WordtopicAssignments[j] = subtopic
-			# print("dist:",dist)
-			# exit()
 			self.Z[i] = topic
 			opt.topic_distribution[i] =  dist
 
 		print("assign topic by average prob:", count_pz)
 		print("assign topic by normal prob:", count_p)
-		print(self.E)
 
 	def sampleSingleIteration(self,opt):
 		probIdx = 0
@@ -589,7 +544,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 						+ (1 - self.lam) * (self.topicWordCountDMM[word] + self.beta) / (self.sumTopicWordCountDMM + Vbeta))  # F: 每个topic词的数量; prob shape = (sample_number, word_number)某个样本下一个词是word的概率;
 				probIdx += 1
 
-				if(np.sum(self.p)==0): # todo: self.p==0
+				if(np.sum(self.p)==0): # todo: self.p==0 推测是由于doc太长引起的问题，浮点数逐渐趋于0，N20short、N20有该问题，N20small无
 					# print("assign topic by average prob in DMM model")
 					count_pz += 1
 					dist = [1. / self.K] * self.K
