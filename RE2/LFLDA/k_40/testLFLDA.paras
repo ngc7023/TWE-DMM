@@ -1,0 +1,11 @@
+-model	LFLDA
+-corpus	test/classify_corpus_less2.txt
+-vectors	test/classifydata_emb_LFTM.txt
+-ntopics	40
+-alpha	0.1
+-beta	0.01
+-lambda	0.6
+-initers	2000
+-niters	200
+-twords	20
+-name	LDA/k_40/testLFLDA

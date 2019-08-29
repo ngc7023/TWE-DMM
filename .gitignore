@@ -89,3 +89,4 @@ RE/LFDMM/test/testLFDMM.topicAssignments
 *.pyc
 *.pyc
 TWE4/test.py
+TWE/data_analysis.py
