@@ -1,3 +1,6 @@
+"""
+    Pangjy普通的草稿本
+"""
 import time
 import random
 import numpy as np
@@ -199,4 +202,6 @@ import re
 # print(tmp)
 # # W_emb = np.array(cPickle.load(open(embpath, 'rb'))[0], dtype='float32')
 
-print(random.randint(0, 1))
+a = ['a','b']
+b = ['c']
+print(a+b)

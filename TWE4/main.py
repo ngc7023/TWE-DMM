@@ -27,7 +27,7 @@ class TWE_Setting(object):
 	def __init__(self):
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'N20short'
+		self.dataset = 'Tweet'
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -37,12 +37,12 @@ class TWE_Setting(object):
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
 		self.batch_size = 16        # N20short-16 / N20small-16/ Tweet-8
-		self.max_epochs = 0        # default_200
+		self.max_epochs = 1        # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
 		self.ifGammaUse = True
-		self.setSampleNumber = 27728861
+		self.setSampleNumber = 0
 
 		self.save_path = ""
 		self.log_path = ""
@@ -67,7 +67,7 @@ class TWE_Setting(object):
 		self.topic_emb = None
 		self.gamma = None
 
-		self.IterationforInitialization = 500
+		self.IterationforInitialization = 1
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
 			yield attr, value
@@ -177,7 +177,8 @@ def main():
 		opt.setSampleNumber = 16404
 		opt.corpus_path = '../data/TACL-datasets/langdetect_tweet.txt'
 		opt.loadpath = '../data/TACL-datasets/langdetect_tweet.p'
-		opt.embpath = '../data/TACL-datasets/langdetect_tweet_emb.p'
+		# opt.embpath = '../data/TACL-datasets/langdetect_tweet_glove_emb.p'
+		opt.embpath = '../data/TACL-datasets/langdetect_tweet_word2vec_emb.p'
 
 		opt.save_path = "./save/save_tweet/"
 		opt.log_path = "./log/log_tweet/"
@@ -218,11 +219,11 @@ def main():
 
 	# Train TWE
 	# Prepare Label
-	# x = cPickle.load(open(opt.loadpath, "rb"))
-	# train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
-	# print('sample number: ', opt.sample_number)
-	# train_lab = np.array(train_lab, dtype='int32')
-	# del x
+	x = cPickle.load(open(opt.loadpath, "rb"))
+	train_lab, opt.sample_number = make_train_data(x[0],opt) # lab: 行列
+	print('sample number: ', opt.sample_number)
+	train_lab = np.array(train_lab, dtype='int32')
+	del x
 	opt.topic_distribution = np.zeros([dmm.dpre.docs_count,dmm.K],dtype='float32')
 
 	for i in range(opt.IterationforInitialization):

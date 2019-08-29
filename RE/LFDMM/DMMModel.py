@@ -1130,9 +1130,9 @@ class DMMmodel(object):  # modify by Pangjy 08-13
 
     def Restore_Z(self):
 
-        # data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
-        # Stored_Z = data['topic'].values.tolist()
-        # return Stored_Z
+        data = pd.read_csv(self.tagassignfile, sep='\t', names=['topic'])
+        Stored_Z = data['topic'].values.tolist()
+        return Stored_Z
 
         cols = [0] * 1000
         for i in range(1000):
