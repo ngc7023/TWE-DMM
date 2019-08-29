@@ -202,6 +202,5 @@ import re
 # print(tmp)
 # # W_emb = np.array(cPickle.load(open(embpath, 'rb'))[0], dtype='float32')
 
-a = ['a','b']
-b = ['c']
-print(a+b)
+a = [1,2,3,4,5,6,7,0,0,0,0]
+print(a[:a.index(0)])

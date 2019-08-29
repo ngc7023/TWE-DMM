@@ -315,7 +315,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 	def save1(self,opt):
 		self._phi()
 		self.theta = opt.topic_distribution
-		# self._theta1(opt) # todo: theta1是否需要改动
 		# 保存phi 主题-词分布 # K * [word_number]
 		with codecs.open(self.phifile, 'w') as f:
 			for x in range(self.K):

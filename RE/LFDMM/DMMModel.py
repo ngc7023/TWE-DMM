@@ -1052,29 +1052,24 @@ class DMMmodel(object):  # modify by Pangjy 08-13
         # get topn words
         self._phi()
         self.top_words_num = min(self.top_words_num, self.dpre.words_count)
-        topic_rec = []
         for x in range(self.K):
             twords = [(n, self.phi[x][n]) for n in range(1, self.dpre.words_count)]  # todo:topicN不够的时候怎么办
             twords.sort(key=lambda i: i[1], reverse=True)  # 根据phi[x][n]排序
-            list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
-            for word in list:
-                if (word == 'UNK'):
-                    topic_rec.append(x)
-            topnwords.append(list)
-        print(topnwords)
-        print(topic_rec)
-        try:
-            cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+            twords = twords[0:self.top_words_num]
+            num = 0.1 / (self.F[x] + self.dpre.words_count * 0.1)
+            num = float('%.19f' % num)
+            # (1, 0.0001225790634959549) 表示N20small此处开始无有效的topNword
+            if((1, num) in twords):
+                # print("!")
+                twords = twords[:twords.index((1, num))]
+            if(len(twords)>1):
+                list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
+                topnwords.append(list)
+        print("valid topic number:",len(topnwords))
+        cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
                                 window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
-            cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+        cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
                                  window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
-            print(cm.get_coherence(), cm2.get_coherence())
-        except:
-            print(topic_rec)
-            for x in topic_rec:
-                print(topnwords[x])
-                print("word sum:", self.F[x])
-                print(self.nw.T[x])
         return cm.get_coherence(), cm2.get_coherence()
 
     def getTopicCoherence(self):
