@@ -44,7 +44,7 @@ class LDAmodel(object):
 		self.K = 20  # 主题个数
 		self.beta = 0.01  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = 0.1  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
-		self.iter_times = 100  # 最大迭代次数
+		self.iter_times = 200  # 最大迭代次数
 		self.top_words_num = 20  # 每个主题特征词个数？？？？
 		# 文件变量
 		self.phifile = '../data/phifile.txt'  # 词-主题分布文件phi
@@ -171,7 +171,10 @@ class LDAmodel(object):
 		return coherence / self.K
 
 if __name__=='__main__':
-	loadpath='../data/news_train_text.p'
+	# modified by Pangjy
+	# loadpath='../data/news_train_text.p'
+	loadpath='../data/classifydata2/langdetect_tweet.p'
 	lda=LDAmodel(loadpath)
 	lda.est()
-	print(lda.getTopicCoherence())
+	# print(lda.getTopicCoherence())
+

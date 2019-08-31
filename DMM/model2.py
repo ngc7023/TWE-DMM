@@ -126,8 +126,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		else:
 			# 随机分配主题类型，为每个文档中的各个单词随机分配主题
 			print("Random Z")
-			count0=0
-			count1=0
 			for x in range(len(self.Z)):
 				topic = random.randint(0, self.K - 1)  # 随机取一个主题
 				self.Z[x] = topic  # 第x篇文档的主题为topic
@@ -141,16 +139,13 @@ class DMMmodel(object): # modify by Pangjy 08-13
 					word = doc.words[i]
 					subtopic = random.randint(0, 1)
 					if(subtopic==0):
-						count0 +=1
 						self.sumTopicWordCountDMM[topic]+=1
 						self.topicWordCountDMM[word][topic] +=1
 						doc.WordtopicAssignments[i] = topic+self.K
 					else:
-						count1 +=1
 						self.sumTopicWordCountLF[topic]+= 1
 						self.topicWordCountLF[word][topic] += 1
 						doc.WordtopicAssignments[i] = topic
-			print("count:",count0,count1)
 	def sampling(self, i):
 		# 换主题
 		topic = self.Z[i]  # 第i个文档的主题
@@ -344,34 +339,30 @@ class DMMmodel(object): # modify by Pangjy 08-13
 				f.write(str(self.Z[x]) + '\n ')
 
 	def Gensim_getTopicCoherence(self):
-		topnwords = []
+		invalid_topic = 0
 		# get topn words
+		topnwords = []
 		self._phi()
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
-		topic_rec = []
 		for x in range(self.K):
-			twords = [(n, self.phi[x][n]) for n in range(1,self.dpre.words_count)] # todo:topicN不够的时候怎么办
+			twords = [(n, self.phi[x][n]) for n in range(1, self.dpre.words_count)]  # todo:topicN不够的时候怎么办
 			twords.sort(key=lambda i: i[1], reverse=True)  # 根据phi[x][n]排序
-			list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
-			for word in list:
-				if(word=='UNK'):
-					topic_rec.append(x)
-			topnwords.append(list)
-		print(topnwords)
-		# print("empty topic:",len(topic_rec))
-		try:
-			cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-								window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
-			cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-								window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
-			# print(cm.get_coherence(),cm2.get_coherence())
-		except:
-			print(topic_rec)
-			for x in topic_rec:
-				print(topnwords[x])
-				print("word sum:",self.F[x])
-				print(self.nw.T[x])
-		return cm.get_coherence(),cm2.get_coherence()
+			twords = twords[0:self.top_words_num]
+			num = 0.1 / (self.F[x] + self.dpre.words_count * 0.1)
+			num = float('%.19f' % num)
+			# (1, 0.0001225790634959549) 表示N20small此处开始无有效的topNword
+			if ((1, num) in twords):
+				invalid_topic += 1
+				twords = twords[:twords.index((1, num))]
+			if (len(twords) > 1):
+				list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
+				topnwords.append(list)
+		print("topic number in setting: %d   invalid topic number: %d   final topic number: %d"%(self.K,invalid_topic,len(topnwords)))
+		cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+							window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
+		cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
+							 window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
+		return cm.get_coherence(), cm2.get_coherence()
 
 
 	def getTopicCoherence(self):
@@ -435,6 +426,9 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			word_dis = self.phi[i]
 			word_dis = word_dis[:,np.newaxis]
 			topic_emb[i] = np.sum(np.multiply(word_dis,all_wordemb),axis=0)
+		# topic_emb -= np.mean(topic_emb,axis=0)
+		# topic_emb /= np.std(topic_emb,axis=0)
+		# print(topic_emb[0]) # todo: topic_embedding 在gamma带下来之后，是不符合原emb范围的
 		return topic_emb
 
 	def sampleSingleInitialIteration(self,opt):

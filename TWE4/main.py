@@ -28,6 +28,7 @@ class TWE_Setting(object):
 		# LEAM
 		self.GPUID = 0
 		self.dataset = 'N20small'
+		self.emb_type = "word2vec"  # or glove
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.restore = False
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -37,12 +38,12 @@ class TWE_Setting(object):
 		self.embed_size = 300       # embedding 维度
 		self.lr = 1e-3              # 学习率
 		self.batch_size = 16        # N20short-16 / N20small-16/ Tweet-8
-		self.max_epochs = 1        # default_200
+		self.max_epochs = 1         # default_200
 		self.dropout = 0.5
 		self.part_data = False
 		self.portion = 1.0
 		self.ifGammaUse = True
-		self.setSampleNumber = 0
+		self.setSampleNumber = 0    # 记录subsequence的数量
 
 		self.save_path = ""
 		self.log_path = ""
@@ -76,33 +77,15 @@ def main():
 	np.set_printoptions(threshold=np.inf)
 	# Prepare training and testing data
 	opt = TWE_Setting()
-	if opt.dataset == 'train_text':
-		opt.loadpath = '../data/news_train_text.p'
-		opt.embpath = "../data/train_text_emb.p"
 
-		if opt.ifGammaUse:
-			opt.save_path = "./save_largeset_gamma/"
-			opt.log_path = "./log_largeset_gamma/"
-			opt.topicwordemb_path = './re_largeset_gamma/topic-wordemb.p'
-			opt.phifile = './re_largeset_gamma/phifile.txt'  # 词-主题分布文件phi
-			opt.thetafile = './re_largeset_gamma/thetafile.txt'
-			opt.topNfile = './re_largeset_gamma/topNfile.txt'  # 每个主题topN词文件
-			opt.tagassignfile = './re_largeset_gamma/tassginfile.txt'  # 最后分派结果文件
-		else:
-			opt.save_path = "./save_largeset_without_gamma/"
-			opt.log_path = "./log_largeset_without_gamma/"
-			opt.topicwordemb_path = './re_largeset_without_gamma/topic-wordemb.p'
-			opt.phifile = './re_largeset_without_gamma/phifile.txt'  # 词-主题分布文件phi
-			opt.thetafile = './re_largeset_without_gamma/thetafile.txt'
-			opt.topNfile = './re_largeset_without_gamma/topNfile.txt'  # 每个主题topN词文件
-			opt.tagassignfile = './re_largeset_without_gamma/tassginfile.txt'  # 最后分派结果文件
-
-	elif opt.dataset == 'N20short':
+	if opt.dataset == 'N20short':
 		opt.setSampleNumber = 24326 # number of subsequence
 		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
 		opt.loadpath = '../data/TACL-datasets/N20short.p'
-		opt.embpath = '../data/TACL-datasets/N20short_word2vec_emb.p'
-
+		if(opt.emb_type=='word2vec'):
+			opt.embpath = '../data/TACL-datasets/N20short_word2vec_emb.p'
+		elif(opt.emb_type=='glove'):
+			opt.embpath = '../data/TACL-datasets/N20short_glove_emb.p'
 		opt.save_path = "./save/save_N20short/"
 		opt.log_path = "./log/log_N20short/"
 
@@ -116,7 +99,10 @@ def main():
 		opt.setSampleNumber = 35206
 		opt.corpus_path = '../data/TACL-datasets/N20small.txt'
 		opt.loadpath = '../data/TACL-datasets/N20small.p'
-		opt.embpath = '../data/TACL-datasets/N20small_word2vec_emb.p'
+		if(opt.emb_type=='word2vec'):
+			opt.embpath = '../data/TACL-datasets/N20small_word2vec_emb.p'
+		elif (opt.emb_type == 'glove'):
+			opt.embpath = '../data/TACL-datasets/N20small_glove_emb.p'
 
 		opt.save_path = "./save/save_N20small"
 		opt.log_path = "./log/log_N20small"
@@ -131,8 +117,10 @@ def main():
 		opt.setSampleNumber = 1944129
 		opt.corpus_path = '../data/TACL-datasets/N20.txt'
 		opt.loadpath = '../data/TACL-datasets/N20.p'
-		opt.embpath = '../data/TACL-datasets/N20_emb.p'
-
+		if (opt.emb_type == 'word2vec'):
+			opt.embpath = '../data/TACL-datasets/N20_emb.p'
+		elif (opt.emb_type == 'glove'):
+			opt.embpath = '../data/TACL-datasets/N20_glove_emb.p'
 		opt.save_path = "./save/save_N20"
 		opt.log_path = "./log/log_N20"
 
@@ -146,7 +134,10 @@ def main():
 		opt.setSampleNumber = 597933
 		opt.corpus_path = '../data/TACL-datasets/TMNfull.txt'
 		opt.loadpath = '../data/TACL-datasets/TMNfull.p'
-		opt.embpath = '../data/TACL-datasets/TMNfull_emb.p'
+		if (opt.emb_type == 'word2vec'):
+			opt.embpath = '../data/TACL-datasets/TMNfull_emb.p'
+		elif (opt.emb_type == 'glove'):
+			opt.embpath = '../data/TACL-datasets/TMNfull_glove_emb.p'
 
 		opt.save_path = "./save/save_TMNfull"
 		opt.log_path = "./log/log_TMNfull"
@@ -161,7 +152,10 @@ def main():
 		opt.setSampleNumber = 160234
 		opt.corpus_path = '../data/TACL-datasets/TMNtitle.txt'
 		opt.loadpath = '../data/TACL-datasets/TMNtitle.p'
-		opt.embpath = '../data/TACL-datasets/TMNtitle_emb.p'
+		if (opt.emb_type == 'word2vec'):
+			opt.embpath = '../data/TACL-datasets/TMNtitle_emb.p'
+		elif (opt.emb_type == 'glove'):
+			opt.embpath = '../data/TACL-datasets/TMNtitle_glove_emb.p'
 
 		opt.save_path = "./save_classifydata/"
 		opt.log_path = "./log_classifydata/"
@@ -177,8 +171,10 @@ def main():
 		opt.setSampleNumber = 16404
 		opt.corpus_path = '../data/TACL-datasets/langdetect_tweet.txt'
 		opt.loadpath = '../data/TACL-datasets/langdetect_tweet.p'
-		# opt.embpath = '../data/TACL-datasets/langdetect_tweet_glove_emb.p'
-		opt.embpath = '../data/TACL-datasets/langdetect_tweet_word2vec_emb.p'
+		if (opt.emb_type == 'word2vec'):
+			opt.embpath = '../data/TACL-datasets/langdetect_tweet_word2vec_emb.p'
+		elif (opt.emb_type == 'glove'):
+			opt.embpath = '../data/TACL-datasets/langdetect_tweet_glove_emb.p'
 
 		opt.save_path = "./save/save_tweet/"
 		opt.log_path = "./log/log_tweet/"
@@ -195,17 +191,14 @@ def main():
 	# Initialize DMM
 	print("dataset:",opt.dataset)
 	print("use gamma:",opt.ifGammaUse)
+	print("embdding type",opt.emb_type)
 	dmm = DMMmodel(opt.loadpath,opt.num_class,opt)
 	dmm.init_Z(dmm.Z)
 	opt.n_words = dmm.dpre.words_count
 
 	dmm._phi() # 计算Topic_Coherence初始值
-	# print(dmm.phi[0])
 	print("calculating topic coherence:")
 	print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
-
-	# print("calculating topic coherence:")
-	# print("topic coherence:",dmm.getTopicCoherence())
 
 	print("load data finished")
 	print("Topic number:",opt.num_class)
@@ -229,11 +222,10 @@ def main():
 	for i in range(opt.IterationforInitialization):
 		print(i)
 		dmm.sampleSingleInitialIteration(opt)
-	print("save dmm model")
-	print("Calculating topic coherence")
-	dmm._phi()
+	print("save dmm model\n")
 	dmm.save1(opt)
 
+	dmm._phi()
 	print("calculating topic coherence:")
 	print("Gensim topic coherence(PMI NPMI):",dmm.Gensim_getTopicCoherence())
 	# print(dmm.E)

@@ -202,5 +202,24 @@ import re
 # print(tmp)
 # # W_emb = np.array(cPickle.load(open(embpath, 'rb'))[0], dtype='float32')
 
-a = [1,2,3,4,5,6,7,0,0,0,0]
-print(a[:a.index(0)])
+# a = [1,2,3,4,5,6,7,0,0,0,0]
+# print(a[:a.index(0)])
+
+# multiply
+# allword_emb = [[1,2],[2,3],[3,4],[4,5],[6,7]]
+# word_dis = np.array([0.2,0.2,0.2,0.2,0.2])
+# word_dis = word_dis[:,np.newaxis]
+# print(np.sum(np.multiply(word_dis,allword_emb),axis=0))
+#
+# topic_emb = np.zeros([self.K,len(all_wordemb[0])],dtype='float32')
+# 		for i in range(self.K):
+# 			word_dis = self.phi[i]
+# 			word_dis = word_dis[:,np.newaxis]
+# 			topic_emb[i] = np.sum(np.multiply(word_dis,all_wordemb),axis=0)
+
+# print(str(format(0.01,'.6f'))
+
+X = [[1,2,3],[4,5,6],[7,8,9]]
+X -= np.mean(X,axis=0)
+X /= np.std(X,axis=0)
+print(X)
