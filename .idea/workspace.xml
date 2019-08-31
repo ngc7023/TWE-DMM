@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="034f7777-ce2c-41a1-ba1b-6f2b0cf0eca5" name="Default Changelist" comment="Initial commit">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TWE5/save/save_tweet/checkpoint" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/实验结果.xlsx" afterPath="$PROJECT_DIR$/实验结果.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DMM/model2.py" afterPath="$PROJECT_DIR$/DMM/model2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RE/LFDMM/DMMModel.py" afterPath="$PROJECT_DIR$/RE/LFDMM/DMMModel.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LDA/model.py" afterPath="$PROJECT_DIR$/LDA/model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/main.py" afterPath="$PROJECT_DIR$/LEAM/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/main_multiclass.py" afterPath="$PROJECT_DIR$/LEAM/main_multiclass.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE/main.py" afterPath="$PROJECT_DIR$/TWE/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE4/main.py" afterPath="$PROJECT_DIR$/TWE4/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE4/test.py" afterPath="$PROJECT_DIR$/TWE4/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,6 +22,26 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="model2.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/DMM/model2.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="726">
+                    <caret line="104" column="14" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="14" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FUSProjectUsageTrigger">
@@ -75,43 +101,97 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="model2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DMM/model2.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TWE4/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="281" column="31" selection-start-line="281" selection-start-column="31" selection-end-line="281" selection-end-column="31" />
+            <state relative-caret-position="2601">
+              <caret line="194" column="45" selection-start-line="194" selection-start-column="32" selection-end-line="194" selection-end-column="45" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE4/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="205" column="20" selection-start-line="205" selection-start-column="20" selection-end-line="205" selection-end-column="20" />
-              <folding>
-                <element signature="e#25#36#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RE2/LFDMM/main.py">
+        <entry file="file://$PROJECT_DIR$/TWE5/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3173">
-              <caret line="180" column="50" selection-start-line="180" selection-start-column="50" selection-end-line="180" selection-end-column="50" />
+            <state relative-caret-position="228">
+              <caret line="197" column="14" selection-start-line="197" selection-start-column="14" selection-end-line="197" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DMMModel.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RE/LFDMM/DMMModel.py">
+      <file leaf-file-name="main_multiclass.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LEAM/main_multiclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="1063" column="28" selection-start-line="1063" selection-start-column="28" selection-end-line="1063" selection-end-column="28" />
+            <state relative-caret-position="57">
+              <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MDK-LDA.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MDKLDA/MDK-LDA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1653">
+              <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+              <folding>
+                <element signature="e#58#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LDA/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="16" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LLA/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2774">
+              <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LDA.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MDKLDA/LDA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="90" column="39" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
+              <folding>
+                <element signature="e#179#197#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DMM/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1957">
+              <caret line="109" column="14" selection-start-line="109" selection-start-column="14" selection-end-line="109" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data_preprocess_tweet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TWE4/Tweet数据处理/data_preprocess_tweet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="28" column="48" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,18 +236,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TWE/model.py" />
-        <option value="$PROJECT_DIR$/TWE/new_main2.py" />
-        <option value="$PROJECT_DIR$/TWE/DMM.py" />
-        <option value="$PROJECT_DIR$/TWE/new_utils.py" />
-        <option value="$PROJECT_DIR$/TWE/new_main3.py" />
-        <option value="$PROJECT_DIR$/LLA/main.py" />
-        <option value="$PROJECT_DIR$/TWE_server/utils.py" />
-        <option value="$PROJECT_DIR$/LDA/model.py" />
-        <option value="$PROJECT_DIR$/TWE_server/main.py" />
         <option value="$PROJECT_DIR$/TWE_origin/main.py" />
         <option value="$PROJECT_DIR$/TWE2_server/main.py" />
-        <option value="$PROJECT_DIR$/TWE/main.py" />
         <option value="$PROJECT_DIR$/TWE2/test.py" />
         <option value="$PROJECT_DIR$/Evaluation/new_tsne.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -200,17 +270,28 @@
         <option value="$PROJECT_DIR$/TWE4/data_process.py" />
         <option value="$PROJECT_DIR$/TWE4/Classify.py" />
         <option value="$PROJECT_DIR$/DMM/model.py" />
-        <option value="$PROJECT_DIR$/LEAM/main.py" />
-        <option value="$PROJECT_DIR$/TWE4/generate_emb_en.py" />
-        <option value="$PROJECT_DIR$/DMM/model2.py" />
-        <option value="$PROJECT_DIR$/TWE4/main.py" />
         <option value="$PROJECT_DIR$/RE2/LFDMM/main.py" />
-        <option value="$PROJECT_DIR$/TWE4/test.py" />
         <option value="$PROJECT_DIR$/RE/LFDMM/DMMModel.py" />
+        <option value="$PROJECT_DIR$/RE2/LFDMM/DMMModel.py" />
+        <option value="$PROJECT_DIR$/TWE4/main.py" />
+        <option value="$PROJECT_DIR$/LEAM/main.py" />
+        <option value="$PROJECT_DIR$/TWE/main.py" />
+        <option value="$PROJECT_DIR$/TWE4/generate_emb_en.py" />
+        <option value="$PROJECT_DIR$/TWE4/test.py" />
+        <option value="$PROJECT_DIR$/DMM/model2.py" />
+        <option value="$PROJECT_DIR$/LDA/model.py" />
+        <option value="$PROJECT_DIR$/TWE4/SimilarityMatrix.py" />
+        <option value="$PROJECT_DIR$/model/GKLDA.py" />
+        <option value="$PROJECT_DIR$/MDK-LDA/MDK-LDA.py" />
+        <option value="$PROJECT_DIR$/MDK-LDA/LDA.py" />
+        <option value="$PROJECT_DIR$/LEAM/main_multiclass.py" />
+        <option value="$PROJECT_DIR$/TWE5/main.py" />
+        <option value="$PROJECT_DIR$/MDKLDA/LDA.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-21" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
@@ -292,7 +373,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="TWE4" />
+              <option name="myItemId" value="TWE5" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -306,25 +387,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RE2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TWE-DMM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TWE-DMM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RE2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LFDMM" />
+              <option name="myItemId" value="MDKLDA" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -362,10 +425,10 @@
       <recent name="$PROJECT_DIR$/LLA/re/topic/k_40" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$/TWE4" />
       <recent name="$PROJECT_DIR$/TWE" />
       <recent name="$PROJECT_DIR$/palmetto" />
-      <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$/TWE3" />
     </key>
   </component>
@@ -382,40 +445,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.main (1)">
-    <configuration default="false" name="Classify" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Evaluation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE4/Classify.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="generate_emb_en" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TWE4" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE4/generate_emb_en.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -433,7 +462,24 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LDA" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TWE-DMM" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LDA/model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SimilarityMatrix" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -445,7 +491,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE4/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE4/SimilarityMatrix.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="LDA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MDK-LDA" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TWE-DMM" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MDK-LDA/LDA.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -457,12 +520,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RE2/LFDMM" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TWE5" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RE2/LFDMM/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE5/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -659,19 +722,19 @@
       <item index="0" class="java.lang.String" itemvalue="Python.LLA-main" />
       <item index="1" class="java.lang.String" itemvalue="Python.TWE2-server-main" />
       <item index="2" class="java.lang.String" itemvalue="Python." />
-      <item index="3" class="java.lang.String" itemvalue="Python.Classify" />
-      <item index="4" class="java.lang.String" itemvalue="Python.generate_emb_en" />
-      <item index="5" class="java.lang.String" itemvalue="Python.main" />
-      <item index="6" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.main" />
+      <item index="4" class="java.lang.String" itemvalue="Python.model" />
+      <item index="5" class="java.lang.String" itemvalue="Python.SimilarityMatrix" />
+      <item index="6" class="java.lang.String" itemvalue="Python.LDA" />
       <item index="7" class="java.lang.String" itemvalue="Python.main (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.main (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.generate_emb_en" />
-        <item index="3" class="java.lang.String" itemvalue="Python.main" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Classify" />
+        <item index="1" class="java.lang.String" itemvalue="Python.LDA" />
+        <item index="2" class="java.lang.String" itemvalue="Python.SimilarityMatrix" />
+        <item index="3" class="java.lang.String" itemvalue="Python.model" />
+        <item index="4" class="java.lang.String" itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -724,26 +787,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="-21" y="23" width="1280" height="777" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25972995" sideWeight="0.7098901" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28668943" sideWeight="0.5567911" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28613138" sideWeight="0.5567911" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3051095" sideWeight="0.1810961" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29692832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08029197" sideWeight="0.47498015" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24525547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4452555" sideWeight="0.47498015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30656934" sideWeight="0.47974584" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5284672" sideWeight="0.81890386" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494043" sideWeight="0.492126" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3080292" sideWeight="0.49354005" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22477064" sideWeight="0.2901099" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1839416" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21313868" sideWeight="0.81890386" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1839416" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31970802" sideWeight="0.5567911" order="6" side_tool="false" content_ui="tabs" />
@@ -816,7 +879,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="46" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -825,132 +888,8 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Experiment.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/data_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/text_emb_LFTM.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/classifydata/classifydata_emb_LFTM.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/classifydata/classifydata_emb.p">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/preprocess_yahoo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/main_multiclass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="80" column="1" selection-start-line="80" selection-start-column="1" selection-end-line="80" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/preprocess_yahoo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2538">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/preprocess_ch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="116" column="16" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4514">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Evaluation/topicEmb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-562">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/evaluation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="677" column="0" selection-start-line="677" selection-start-column="0" selection-end-line="677" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/main_multiclass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="93" column="15" selection-start-line="93" selection-start-column="15" selection-end-line="93" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/glove_generate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE/generate_emb_glove.py" />
-    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52641">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet_label.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52440">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet.txt" />
+    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet_label.txt" />
     <entry file="file://$PROJECT_DIR$/TWE/generate_emb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
@@ -973,7 +912,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,7 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28538">
           <caret line="1520" column="15" selection-start-line="1520" selection-start-column="15" selection-end-line="1520" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -989,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
           <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,7 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="136" column="19" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1005,7 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1539">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,7 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-703">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,7 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-323">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,65 +961,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1273">
           <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet.wordVectors.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/google_list.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/tweet_filteredlabel.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/tweet_filtered.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/preprocess_classifydata_modified.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/Tweet数据处理/data_preprocess_tweet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/glove_to_word2vec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/langdetect_tweet.wordVectors.txt" />
+    <entry file="file://$PROJECT_DIR$/TWE4/google_list.txt" />
+    <entry file="file://$PROJECT_DIR$/TWE4/tweet_filteredlabel.txt" />
+    <entry file="file://$PROJECT_DIR$/TWE4/tweet_filtered.txt" />
+    <entry file="file://$PROJECT_DIR$/TWE4/preprocess_classifydata_modified.py" />
+    <entry file="file://$PROJECT_DIR$/TWE4/glove_to_word2vec.py" />
     <entry file="file://$PROJECT_DIR$/TWE4/data_preprocess_en.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,9 +981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="88" column="11" selection-start-line="88" selection-start-column="11" selection-end-line="88" selection-end-column="11" />
-          <folding>
-            <element signature="e#147#174#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1105,9 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="100" column="25" selection-start-line="100" selection-start-column="25" selection-end-line="100" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1115,39 +995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DMM/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="419" column="27" selection-start-line="419" selection-start-column="27" selection-end-line="419" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/generate_emb_en.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="124" column="21" selection-start-line="124" selection-start-column="21" selection-end-line="124" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="469" column="70" selection-start-line="469" selection-start-column="70" selection-end-line="469" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1155,17 +1002,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
           <caret line="188" column="54" selection-start-line="188" selection-start-column="54" selection-end-line="188" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE4/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="205" column="20" selection-start-line="205" selection-start-column="20" selection-end-line="205" selection-end-column="20" />
-          <folding>
-            <element signature="e#25#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1173,31 +1009,193 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="262" column="29" selection-start-line="262" selection-start-column="29" selection-end-line="262" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RE2/LFDMM/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3173">
+        <state relative-caret-position="619">
           <caret line="180" column="50" selection-start-line="180" selection-start-column="50" selection-end-line="180" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RE/LFDMM/DMMModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="1050" column="0" selection-start-line="1050" selection-start-column="0" selection-end-line="1072" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RE2/LFDMM/DMMModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19855">
+          <caret line="1053" column="17" selection-start-line="1053" selection-start-column="17" selection-end-line="1053" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1045">
+          <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2115">
+          <caret line="199" column="71" selection-start-line="199" selection-start-column="71" selection-end-line="199" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/generate_emb_en.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="344" column="32" selection-start-line="344" selection-start-column="32" selection-end-line="344" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4066">
+          <caret line="223" column="20" selection-start-line="223" selection-start-column="20" selection-end-line="223" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Evaluation/llacoherence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Evaluation/new_tsne.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="24" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/Tweet数据处理/data_preprocess_tweet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/Tweet数据处理/langdetect_tweet.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/SimilarityMatrix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="82" column="10" selection-start-line="82" selection-start-column="10" selection-end-line="82" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/GKLDA.py" />
+    <entry file="file://$PROJECT_DIR$/MDKLDA/MDK-LDA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1653">
+          <caret line="95" column="26" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
+          <folding>
+            <element signature="e#58#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LLA/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2774">
+          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LDA/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DMM/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1957">
+          <caret line="109" column="14" selection-start-line="109" selection-start-column="14" selection-end-line="109" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re/res.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/main_multiclass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE4/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2601">
+          <caret line="194" column="45" selection-start-line="194" selection-start-column="32" selection-end-line="194" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="197" column="14" selection-start-line="197" selection-start-column="14" selection-end-line="197" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DMM/model2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="281" column="31" selection-start-line="281" selection-start-column="31" selection-end-line="281" selection-end-column="31" />
+        <state relative-caret-position="726">
+          <caret line="104" column="14" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RE/LFDMM/DMMModel.py">
+    <entry file="file://$PROJECT_DIR$/MDKLDA/LDA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="1063" column="28" selection-start-line="1063" selection-start-column="28" selection-end-line="1063" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="90" column="39" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
+          <folding>
+            <element signature="e#179#197#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
