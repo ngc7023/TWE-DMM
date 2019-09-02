@@ -72,6 +72,6 @@ loadpath = '../data/classifydata2/langdetect_tweet.p'
 # from MDKLDA_model.MDKLDA import *
 from MDKLDA_model.LDA import *
 lda = LDAmodel(opt.loadpath,opt)
-statis = np.zeros((lda.dpre.words_count-1,lda.dpre.words_count-1),dtype='int')
-for line in lda.text:
-	for word in line:
+# statis = np.zeros((lda.dpre.words_count-1,lda.dpre.words_count-1),dtype='int')
+# for line in lda.text:
+# 	for word in line:

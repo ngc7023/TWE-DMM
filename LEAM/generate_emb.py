@@ -1,6 +1,6 @@
 import numpy as np
 import gensim
-import cPickle
+import pickle as cPickle
 
 loadpath = "./data/yahoo.p"
 x = cPickle.load(open(loadpath, "rb"))
