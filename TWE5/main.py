@@ -20,7 +20,9 @@ import operator
 # sys.path.append('/home/zliu/topic_modeling/TWE-DMM/')
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 from LEAM.main import *
-from MDKLDA.LDA import *
+from MDKLDA_model.LDA import *
+from MDKLDA_model.MDKLDA import *
+from MDKLDA_model.MustSet import *
 from TWE5.data_process import *
 import cProfile
 class TWE_Setting(object):
@@ -31,12 +33,14 @@ class TWE_Setting(object):
 		self.sample_number = None
 		self.topic_distribution = None
 		self.topic_emb = None
-		self.gamma = None
+		self.NN_gamma = None
 		self.IterationforInitialization = 1
-
+		self.top_words_num = 20
+		self.beta = 0.1
+		self.alpha = 1
 		# LEAM
 		self.GPUID = 0
-		self.dataset = 'tweet'
+		self.dataset = 'Tweet'
 		self.emb_type = "word2vec"  # or glove
 		self.fix_emb = True         # Word embedding 初始化方式判断
 		self.W_emb = None           # Word embedding初始化矩阵
@@ -51,7 +55,7 @@ class TWE_Setting(object):
 		self.part_data = False
 		self.portion = 1.0
 		# LEAM - added
-		self.ifGammaUse = True
+		self.ifNN_gammaUse = True
 		self.setSampleNumber = 0    # 记录subsequence的数量
 
 		self.save_path = ""
@@ -171,12 +175,13 @@ def main():
 
 	elif opt.dataset == 'Tweet':
 		opt.setSampleNumber = 16404
-		opt.corpus_path = '../data/TACL-datasets/langdetect_tweet.txt'
-		opt.loadpath = '../data/TACL-datasets/langdetect_tweet.p'
+		opt.corpus_path = '../data/classifydata2/langdetect_tweet.txt'
+		opt.loadpath = '../data/classifydata2/langdetect_tweet.p'
+		opt.labelpath = '../data/classifydata2/langdetect_tweet_label.txt'
 		if (opt.emb_type == 'word2vec'):
-			opt.embpath = '../data/TACL-datasets/langdetect_tweet_word2vec_emb.p'
+			opt.embpath = '../data/classifydata2/langdetect_tweet_word2vec_emb.p'
 		elif (opt.emb_type == 'glove'):
-			opt.embpath = '../data/TACL-datasets/langdetect_tweet_glove_emb.p'
+			opt.embpath = '../data/classifydata2/langdetect_tweet_glove_emb.p'
 
 		opt.save_path = "./save/save_tweet/"
 		opt.log_path = "./log/log_tweet/"
@@ -192,32 +197,32 @@ def main():
 
 	# Initilaize LDA
 	print("dataset:",opt.dataset)
-	print("use gamma:",opt.ifGammaUse)
+	print("use gamma in NN:",opt.ifNN_gammaUse)
 	print("embdding type",opt.emb_type)
 
 	lda = LDAmodel(opt.loadpath, opt)
-	# # Initialize DMM
-	# print("dataset:",opt.dataset)
-	# print("use gamma:",opt.ifGammaUse)
-	# print("embdding type",opt.emb_type)
-	# dmm = DMMmodel(opt.loadpath,opt.num_class,opt)
-	# dmm.init_Z(dmm.Z)
-	# opt.n_words = dmm.dpre.words_count
+	lda.est()
+
+	mustsets_obj = MustSets()
+	mustsets_obj.InitMustSets(lda.dpre.word2id,lda.text,opt.labelpath)
     #
-	# dmm._phi() # 计算Topic_Coherence初始值
-	# print("calculating topic coherence:")
-	# print("Gensim topic coherence:",dmm.Gensim_getTopicCoherence())
+	# opt.n_words = lda.dpre.words_count
     #
+	mdklda = MDKLDAmodel(opt.loadpath,opt,lda,mustsets_obj)
+	mdklda.initializeFirstMarkovChainUsingExistingZ(lda.Z)
+	mdklda.run()
+	print(mdklda.Gensim_getTopicCoherence())
 	# print("load data finished")
 	# print("Topic number:",opt.num_class)
-	# print("docs_count:", dmm.dpre.docs_count)
+	# print("docs_count:", lda.dpre.docs_count)
 	# print('total words: %d' % opt.n_words)
 	# print("batch_size:",opt.batch_size)
 	# print("topic number:",opt.num_class)
 	# print("save path:",opt.save_path)
 	# print("log path:",opt.log_path)
 	# print("dmm save path:",opt.tagassignfile)
-    #
+
+
 	# # Train TWE
 	# # Prepare Label
 	# x = cPickle.load(open(opt.loadpath, "rb"))

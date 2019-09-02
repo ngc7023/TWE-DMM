@@ -219,7 +219,7 @@ import re
 
 # print(str(format(0.01,'.6f'))
 
-X = [[1,2,3],[4,5,6],[7,8,9]]
-X -= np.mean(X,axis=0)
-X /= np.std(X,axis=0)
-print(X)
+# X = [[1,2,3],[4,5,6],[7,8,9]]
+# X -= np.mean(X,axis=0)
+# X /= np.std(X,axis=0)
+# print(X)

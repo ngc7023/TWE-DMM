@@ -83,7 +83,6 @@ class DMMmodel(object): # modify by Pangjy 08-13
 		self.lam = 0.5  # 决定参数
 		self.iter_times = 100  # 最大迭代次数
 		self.top_words_num = 20  # 每个主题特征词个数？？？？
-		self.sample_num = 0
 
 		# topic word embedding 预测每个词的概率
 		self.prob = []
@@ -348,7 +347,7 @@ class DMMmodel(object): # modify by Pangjy 08-13
 			twords = [(n, self.phi[x][n]) for n in range(1, self.dpre.words_count)]  # todo:topicN不够的时候怎么办
 			twords.sort(key=lambda i: i[1], reverse=True)  # 根据phi[x][n]排序
 			twords = twords[0:self.top_words_num]
-			num = 0.1 / (self.F[x] + self.dpre.words_count * 0.1)
+			num = self.beta / (self.F[x] + self.dpre.words_count * self.beta)
 			num = float('%.19f' % num)
 			# (1, 0.0001225790634959549) 表示N20small此处开始无有效的topNword
 			if ((1, num) in twords):

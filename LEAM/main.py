@@ -24,7 +24,7 @@ from DMM.model import DMMmodel1
 class Options(object):
     def __init__(self):
         self.GPUID = 0
-        self.dataset = 'yelp_full'
+        self.dataset = 'agnews'
         self.fix_emb = True
         self.restore = False
         self.W_emb = 64 # default_none
@@ -51,7 +51,7 @@ class Options(object):
 
 
     def __iter__(self):
-        for attr, value in self.__dict__.iteritems():
+        for attr, value in self.__dict__.items():
             yield attr, value
 
 def emb_classifier(x, x_mask, y, dropout, opt, class_penalty):
@@ -186,7 +186,7 @@ def main():
                         'middle',
                         'good',
                         'best']
-    x = cPickle.load(open(loadpath, "rb"))
+    x = cPickle.load(open(loadpath, "rb"),encoding='iso-8859-1')
     train, val, test = x[0], x[1], x[2]
     train_lab, val_lab, test_lab = x[3], x[4], x[5]
     wordtoix, ixtoword = x[6], x[7]
@@ -209,7 +209,7 @@ def main():
     print('Total words: %d' % opt.n_words)
 
     try:
-        opt.W_emb = np.array(cPickle.load(open(embpath, 'rb')),dtype='float32')
+        opt.W_emb = np.array(cPickle.load(open(embpath, 'rb'),encoding='iso-8859-1'),dtype='float32')
         opt.W_class_emb =  load_class_embedding( wordtoix, opt)
     except IOError:
         print('No embedding file found.')
