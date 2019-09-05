@@ -52,19 +52,23 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 				vocab[w]+=1
 			else:
 				vocab[w]=1
-	# vocab1={}                # modify by pjy
-	# for w in vocab:
-	# 	if vocab[w]>20:
-	# 		vocab1[w]=vocab[w]
 
-	print('len_vocab:',len(vocab))
+	vocab1={}                # 过滤次数少的单词
+	for w in vocab:
+		if vocab[w]>3:
+			vocab1[w]=vocab[w]
+
+	print('len_vocab:',len(vocab1))
 
 	wordtoix = {}
 	ixtoword = {}
 	wordtoix['UNK'] = 0
+	wordtoix['END'] = 1
 	ixtoword[0] = 'UNK'
-	ix = 1
-	for w in vocab:             # modify by pjy
+	ixtoword[1] = 'END'
+
+	ix = 2 # 从2开始存
+	for w in vocab1:
 		wordtoix[w] = ix
 		ixtoword[ix] = w
 		ix += 1
@@ -82,7 +86,7 @@ def precess(filename,encoding,outputfilename): # copy from TWE/preprocess_ch.py
 
 
 if __name__=='__main__':
-    filename = '../data/TACL-datasets/TMNfull.txt'
+    # filename = '../data/TACL-datasets/TMNfull.txt'
     # encoding = 'utf-8'
     # outputfilename = '../data/TACL-datasets/TMNfull.p'
     # precess(filename, encoding, outputfilename)
@@ -108,8 +112,8 @@ if __name__=='__main__':
     # outputfilename = '../data/TACL-datasets/N20.p'
     # precess(filename, encoding, outputfilename)
 
-    # filename = '../data/TACL-datasets/langdetect_tweet.txt'
-    # encoding = 'utf-8'
-    # outputfilename = '../data/TACL-datasets/langdetect_tweet.p'
-    # precess(filename, encoding, outputfilename)
+    filename = '../data/TACL-datasets/langdetect_tweet.txt'
+    encoding = 'utf-8'
+    outputfilename = '../data/TACL-datasets/langdetect_tweet.p'
+    precess(filename, encoding, outputfilename)
 

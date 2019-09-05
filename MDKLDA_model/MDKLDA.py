@@ -15,7 +15,6 @@ import _pickle as cPickle
 import pandas as pd
 from gensim.models import CoherenceModel
 from gensim.corpora import Dictionary
-
 class Document(object):
 	def __init__(self):
 		self.words = []
@@ -40,10 +39,10 @@ class MDKLDAmodel(object):
 
 		# mustset
 		self.mustsets_obj = mustsets_obj
-		self.MS = self.mustsets_obj.length
+		self.MS = self.mustsets_obj.MS
 
 		# 由opt控制的变量
-		self.K = opt.num_class  # 主题个数
+		self.K = opt.num_topic  # 主题个数
 		self.corpus_path = opt.corpus_path
 		self.phifile = opt.phifile  # 词-主题分布文件phi
 		self.thetafile = opt.thetafile
@@ -52,17 +51,18 @@ class MDKLDAmodel(object):
 
 		# 	The number of iterations for burn-in period.
 		# todo 参数设定
-		self.nBurnin = 2
+		self.nBurnin = 0
 		# 	The number of Gibbs sampling iterations.
-		self.iter_times = 2  # 最大迭代次数
+		self.iter_times = 200  # 最大迭代次数
 		# 	The length of interval to sample for calculating posterior distribution.
-		self.sampleLag = 0
+		self.sampleLag = 5
 
 		# Hyperparameters
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = opt.alpha  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
 		# 	// The coefficient randa for computing hyperparamter randaGamma
-		self.lambdaForComputingGamma = 2000
+		# self.lambdaForComputingGamma = 2000
+		# self.lambdaForComputingGamma = 200000000
 		random.seed(0)
 		# todo: randomseed
 
@@ -85,23 +85,27 @@ class MDKLDAmodel(object):
 
 		self.top_words_num = opt.top_words_num  # 每个主题特征词个数
 
-		self.ndt = np.zeros((self.dpre.docs_count, self.K), dtype = 'int')  # 每个doc中各个topic的词的总数
-		self.ndsum = np.zeros(self.dpre.docs_count,dtype='int')
+		self.ndt = np.zeros((self.dpre.docs_count, self.K), dtype = 'float')  # 每个doc中各个topic的词的总数
+		self.ndsum = np.zeros(self.dpre.docs_count,dtype='float')
 
-		self.nts = np.zeros((self.K,self.MS), dtype='int') # K * num(msset)
-		self.ntsum = np.zeros(self.K,dtype='int') # K
+		self.nts = np.zeros((self.K,self.MS), dtype='float') # K * num(msset)
+		self.ntsum = np.zeros(self.K,dtype='float') # K
 
 		self.Z = np.array(
 			[[0 for y in range(self.dpre.docs[x].length)] for x in range(self.dpre.docs_count)])  # 每个文档中词的主题分配
 		self.Y = np.array(
 			[[0 for y in range(self.dpre.docs[x].length)] for x in range(self.dpre.docs_count)])  # 每个文档中词的ms分配
+		# // ntsw[k][ms][i]: number of ith word in the mset ms assigned to topic t and
+		# // set ms, size T * MS * size of ms.
 		self.ntsw = np.array([[[0 for y in range(len(self.mustsets_obj.mustsets[x]))] for x in range(self.MS)] for m in range(self.K)]) # K * num(msset) * sizeof(ms)
-		self.ntssum = np.zeros((self.K,self.MS), dtype='int') # K * num(msset)
+		# // ntsw[k][ms]: number of any word assigned to topic t and mset ms, size T *
+		# // MS * size of ms.
+		self.ntssum = np.zeros((self.K,self.MS), dtype='float') # K * num(msset)
 
 		self.theta = np.array([[0.0 for y in range(self.K)] for x in range(self.dpre.docs_count)])  # 文档-主题分布
 		self.thetasum = np.array([[0.0 for y in range(self.K)] for x in range(self.dpre.docs_count)])
-		self.phi = np.zeros((self.K,self.MS), dtype='int')  # Topic-mset distribution, size T * MS.
-		self.phisum = np.zeros((self.K,self.MS), dtype='int')
+		self.phi = np.zeros((self.K,self.MS), dtype='float')  # Topic-mset distribution, size T * MS.
+		self.phisum = np.zeros((self.K,self.MS), dtype='float')
 		self.eta = np.array([[[0 for y in range(len(self.mustsets_obj.mustsets[x]))] for x in range(self.MS)] for m in range(self.K)]) # K * num(msset) * sizeof(ms)
 		self.etasum = np.array([[[0 for y in range(len(self.mustsets_obj.mustsets[x]))] for x in range(self.MS)] for m in range(self.K)]) # K * num(msset) * sizeof(ms)
 		self.omega = np.zeros((self.K,self.dpre.words_count),dtype='double')
@@ -112,18 +116,28 @@ class MDKLDAmodel(object):
 
 		# 	Number of times to add the sum arrays, such as thetasum and phisum.
 		self.numstats = 0
+		self.test_lab = None
 
-
-	def getGammaBasedOnMustsetSize(self,size):
+	def getGammaBasedOnMustsetSize(self, size):
+		# return 1
 		if(size==1):
 			return 1
 		else:
-			return math.exp(math.log(self.lambdaForComputingGamma)-size)
+			# res = math.exp(math.log(self.lambdaForComputingGamma)-size)
+			# print(math.log(2000)-3)
+			# print("res",res)
+			# exit()
+			# print(math.exp(1500))
+			# print(size)
+			res = math.exp(1850-size)
+			# todo: set gamma
+			return res
+			# return math.exp(math.log(self.lambdaForComputingGamma)-size)
 			# return self.lambdaForComputingGamma/math.exp(size) # param.lambdaForComputingGamma = 2000
 
-	def initializeFirstMarkovChainUsingExistingZ(self,Z2):
+	def initializeFirstMarkovChainUsingExistingZ(self, Z2):
 		print("initialize First MarkovChain Using Existing Z")
-		for d in range(self.dpre.docs_count):
+		for d in range(self.dpre.docs_withlabel_count):
 			N = self.dpre.docs[d].length
 			for n in range(N):
 				word = self.dpre.docs[d].words[n]
@@ -133,7 +147,7 @@ class MDKLDAmodel(object):
 				self.Z[d][n] = topic
 
 				# Sample a must-set.
-				mustsetList = self.mustsets_obj.getMustSetListGivenWordstr(wordstr)
+				mustsetList = self.mustsets_obj.getMustSetListGivenWordid(word)
 				if(len(mustsetList)>1):
 					ms = random.choice(mustsetList)
 				else:
@@ -142,7 +156,24 @@ class MDKLDAmodel(object):
 				self.Y[d][n] = ms
 				# print(d,topic,n)
 				# print(self.ndt[d][topic])
-				self.updateCount(d,topic,ms,word,wordstr,+1)
+				self.updateCount(d, topic, ms, word, wordstr, +1)
+
+		for d in range(self.dpre.docs_withlabel_count, self.dpre.docs_count):
+			N = self.dpre.docs[d].length
+			for n in range(N):
+				word = self.dpre.docs[d].words[n]
+				wordstr = self.dpre.id2word[word]
+
+				topic = Z2[d][n]
+				self.Z[d][n] = topic
+
+				# Sample a must-set.
+				mustsetList = self.test_lab[d-self.dpre.docs_withlabel_count]
+				set_idx = [i for i in range(len(mustsetList)) if mustsetList[i] == 1]
+				ms = random.choice(set_idx)
+
+				self.Y[d][n] = ms
+				self.updateCount(d, topic, ms, word, wordstr, +1)
 
 		# mustset类型统计
 		# totalmustlist = []
@@ -156,20 +187,35 @@ class MDKLDAmodel(object):
 		# for item in list(keylist):
 		# 	print(item,totalmustlist.count(item))
 
-	def updateCount(self,d,topic,ms,word,wordstr,flag):
+	def updateCount(self, d, topic, ms, word, wordstr, flag):
 		self.ndt[d][topic] += flag
 		self.ndsum[d] += flag
+
 		current_mustset = self.mustsets_obj.mustsets[ms]
-		w1_i = current_mustset.index(wordstr)
+		w1_i = current_mustset.index(word)
+		relatedwordset_w1 = self.mustsets_obj.relatedword[ms][w1_i]
+		w2_idx_list = [pair[0] for pair in relatedwordset_w1]
+
+		self.ntsw[topic][ms][w1_i] += flag
+		self.ntssum[topic][ms] += flag
+
 		for w2_i in range(len(current_mustset)):
-			# double count = flag * urn[ms][w1_i][w2_i];
-			count = flag*1
+			if(w1_i==w2_i):
+				count = flag*1
+			else:
+				# count = flag * urn[ms][w1_i][w2_i];
+				count = flag*0.5
+
 			self.nts[topic][ms] += count
 			self.ntsum[topic] += count
+			if(self.nts[topic][ms]<0):
+				print("nts[topic][ms] < 0")
+				print(d,topic,ms,word,wordstr,flag)
+				exit()
 
 			# todo: This is different from M-LDA.
-			self.ntsw[topic][ms][w2_i] += count
-			self.ntssum[topic][ms] += count
+			# self.ntsw[topic][ms][w2_i] += count # 移到上面
+			# self.ntssum[topic][ms] += count
 
 	def run(self):
 		self.runGibbsSampling()
@@ -181,11 +227,20 @@ class MDKLDAmodel(object):
 			for d in range(self.dpre.docs_count):
 				N = self.dpre.docs[d].length
 				for n in range(N):
-					self.sampleTopicAssignment(d,n)
-		# self.updatePosteriorDistribution()
-		print("updating posterior distribution")
-		if (i >= self.nBurnin and self.sampleLag > 0 and i % self.sampleLag == 0):
-			self.updatePosteriorDistribution();
+					self.sampleTopicAssignment(d, n)
+
+			# print("updating posterior distribution")
+			if (i >= self.nBurnin and self.sampleLag > 0 and i % self.sampleLag == 0):
+				print("caocluting coherence")
+				self.updatePosteriorDistribution()
+				self.computePosteriorDistribution()
+				print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
+
+			# # if(i%==0):
+			# self.updatePosteriorDistribution()
+			# self.computeDocumentTopicDistribution()
+			# print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
+
 
 	def updatePosteriorDistribution(self):
 		for d in range(self.dpre.docs_count):
@@ -193,11 +248,11 @@ class MDKLDAmodel(object):
 				self.thetasum[d][t] += (self.ndt[d][t]+self.alpha)/(self.ndsum[d]+self.tAlpha)
 
 		for t in range(self.K):
-			for ms in self.MS:
+			for ms in range(self.MS):
 				self.phisum[t][ms] += (self.nts[t][ms]+self.beta)/(self.ntsum[t]+self.sBeta)
 
 		for t in range(self.K):
-			for ms in self.MS:
+			for ms in range(self.MS):
 				size = len(self.mustsets_obj.mustsets[ms])
 				for i in range(size):
 					self.etasum[t][ms][i] += (self.ntsw[t][ms][i]+self.gamma[ms][i])/(self.ntssum[t][ms]+self.vGamma[t][ms])
@@ -209,17 +264,23 @@ class MDKLDAmodel(object):
 		ms = self.Y[d][n]
 		word = self.dpre.docs[d].words[n]
 		wordstr = self.dpre.id2word[word]
-		self.updateCount(d,old_topic,ms,word,wordstr,-1)
+		self.updateCount(d, old_topic, ms, word, wordstr, -1)
 
-		mustsetList = self.mustsets_obj.getMustSetListGivenWordstr(wordstr)
+		if(d<self.dpre.docs_withlabel_count):
+			mustsetList = self.mustsets_obj.getMustSetListGivenWordid(word)
+		else:
+			mustsetList = self.test_lab[d-self.dpre.docs_withlabel_count]
+			mustsetList = [i for i in range(len(mustsetList)) if mustsetList[i] == 1]
+
 		len_current_mustlist = len(mustsetList)
+		# print(d,mustsetList)
 		self.p = np.zeros(self.K*len_current_mustlist,dtype='float64')
 		mustsets = self.mustsets_obj.mustsets
 		for t in range(self.K):
 			for si in range(len_current_mustlist):
 				s = mustsetList[si] # si是mustsetList的索引 s是label的实际编号 e.g. mustsetList = [1, 2]
 				mustset = mustsets[s]
-				wordIndex = mustset.index(wordstr)
+				wordIndex = mustset.index(word)
 				try:
 					self.p[t * len(mustsetList)+si] = ((self.ndt[d][t] + self.alpha)/(self.ndsum[d] + self.tAlpha))\
 				*((self.nts[t][s] + self.beta)/ (self.ntsum[t] + self.sBeta))\
@@ -228,6 +289,7 @@ class MDKLDAmodel(object):
 					print(t,s,wordIndex)
 				if(self.p[t * len(mustsetList)+si]<=0):
 					print("The probability is negative!")
+					print(self.ndt[d][t],self.ndsum[d],self.nts[t][s],self.ntsum[t],self.ntsw[t][s],self.gamma[s][wordIndex],self.ntssum[t][s],self.vGamma[t][s])
 					exit()
 		# Sample a topic and amust - set.
 		pairIndex = self.sample(self.p,random.random())
@@ -242,12 +304,12 @@ class MDKLDAmodel(object):
 
 	def computePosteriorDistribution(self):
 		print("computing posterior distribution")
-		self.computeDocumentTopicDistribution();
-		self.computeTopicMustsetDistribution();
-		self.computeTopicMustsetWordDistribution();
-		self.computeTopicWordDistribution();
+		self.computeDocumentTopicDistribution()
+		self.computeTopicMustsetDistribution()
+		self.computeTopicMustsetWordDistribution()
+		self.computeTopicWordDistribution()
 
-	def sample(self,p,randSeed):
+	def sample(self, p, randSeed):
 		length = len(p)
 		# Cumulative multinomial parameters
 		cdf = [0] * length
@@ -315,9 +377,9 @@ class MDKLDAmodel(object):
 
 		for t in range(self.K):
 			for ms in range(self.MS):
-				wordstrList = self.mustsets_obj.mustsets[ms]
-				for i in range(len(wordstrList)):
-					word = self.dpre.word2id[wordstrList[i]]
+				wordidList = self.mustsets_obj.mustsets[ms]
+				for i in range(len(wordidList)):
+					word = wordidList[i]
 					prob = self.phi[t][ms] * self.eta[t][ms][i]
 					self.omega[t][word] += prob
 	# def sampling(self, i, j):
@@ -390,7 +452,7 @@ class MDKLDAmodel(object):
 		topnwords = []
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
 		for x in range(self.K):
-			twords = [(n, self.omega[x][n]) for n in range(1, self.dpre.words_count)]  # todo:topicN不够的时候怎么办
+			twords = [(n, self.omega[x][n]) for n in range(2, self.dpre.words_count)]  # todo:topicN不够的时候怎么办
 			twords.sort(key=lambda i: i[1], reverse=True)  # 根据phi[x][n]排序
 			twords = twords[0:self.top_words_num]
 			# self.phi[i] = (self.nw.T[i] + self.beta) / (self.nwsum[i] + self.dpre.words_count * self.beta)
@@ -400,10 +462,10 @@ class MDKLDAmodel(object):
 			# if ((1, num) in twords):
 			# 	invalid_topic += 1
 			# 	twords = twords[:twords.index((1, num))]
-			print("top n words:",topnwords)
 			if (len(twords) > 1):
 				list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
 				topnwords.append(list)
+		print("top n words:", topnwords)
 		print("topic number in setting: %d   invalid topic number: %d   final topic number: %d" % (
 		self.K, invalid_topic, len(topnwords)))
 		cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,

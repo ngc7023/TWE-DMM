@@ -9,7 +9,6 @@ import os
 import tensorflow as tf
 import pandas as pd
 import math
-import emoji
 import re
 
 # start1=time.time()
@@ -223,3 +222,12 @@ import re
 # X -= np.mean(X,axis=0)
 # X /= np.std(X,axis=0)
 # print(X)
+
+# print(math.log(2000))
+
+x = [1,2,3,4,5]
+x_1 = list(set(x))
+x2 = [4,3,5,1,6]
+x_1+=x2
+res = list(set(x_1))
+print(res)

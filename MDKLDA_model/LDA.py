@@ -33,14 +33,18 @@ class DataPreprocessing(object):
 		self.id2word = {}
 
 class LDAmodel(object):
-	def __init__(self, loadpath,opt):
-		x_data = cPickle.load(open(loadpath, "rb"))
-		train = x_data[0]
-		wordtoix, ixtoword = x_data[2], x_data[3]
-		del x_data
+	def __init__(self, train,test,wordtoix,ixtoword,opt):
+		# x_data = cPickle.load(open(loadpath, "rb"))
+		# train, val, test = x_data[0],x_data[1],x_data[2]
+		# train_lab, val_lab, test_lab = x_data[3],x_data[4], x_data[5],
+		# wordtoix, ixtoword = x_data[6], x_data[7]
+		# train+=val
+		# train_lab += val
+		# del x_data, val, val_lab
+		# train作为有label的text，test作为无label的text
 
 		# 由opt控制的变量
-		self.K = opt.num_class  # 主题个数
+		self.K = opt.num_topic  # 主题个数
 		self.corpus_path = opt.corpus_path
 		self.phifile = opt.phifile  # 词-主题分布文件phi
 		self.thetafile = opt.thetafile
@@ -48,25 +52,25 @@ class LDAmodel(object):
 		self.tagassignfile = opt.tagassignfile  # 最后分派结果文件
 
 		dpre = DataPreprocessing()
-		dpre.docs_count = len(train)
+		dpre.docs_count = len(train)+len(test)
+		dpre.docs_withlabel_count = len(train)
+		dpre.docs_withoutlabel_count = len(test)
 		dpre.words_count = len(wordtoix)
-		for i in range(len(train)):
-			doc = Document()
-			doc.words = train[i]
-			doc.length = len(train[i])
-			dpre.docs.append(doc)
+		# print("total words:",dpre.words_count)
+		# print(ixtoword[2227])
 		dpre.word2id = wordtoix
 		dpre.id2word = ixtoword
 		del wordtoix, ixtoword
+
+		# 为了用Gensim_getTopicCoherence()
 		df = pd.read_csv(self.corpus_path, names=[''])
 		list_df = df.values.tolist()
-		# # print(dpre.docs_count)
-		# # print(len(list_df))
 		self.text = [0] * dpre.docs_count
 		count_text = 0
 		for line in list_df:
 			self.text[count_text] = line[0].split()
 			count_text += 1
+		self._dict = Dictionary(self.text)
 
 		for i in range(len(train)):  # train[i]是某篇文档
 			doc = Document()
@@ -75,17 +79,23 @@ class LDAmodel(object):
 			# self.text[i] = list(map(lambda x: dpre.id2word[x], train[i]))
 			# self.text[i] = train[i].apply(lambda x : self.ixtoword[x])
 			doc.length = word_length
-			doc.WordtopicAssignments = np.zeros(word_length, dtype='int')
 			dpre.docs.append(doc)
-		# print(self.text)
-		self._dict = Dictionary(self.text)
+
+		for i in range(len(test)):  # train[i]是某篇文档
+			doc = Document()
+			word_length = len(test[i])
+			doc.words = test[i]
+			# self.text[i] = list(map(lambda x: dpre.id2word[x], train[i]))
+			# self.text[i] = train[i].apply(lambda x : self.ixtoword[x])
+			doc.length = word_length
+			dpre.docs.append(doc)
 
 		self.dpre = dpre  # 获取预处理参数（文档预处理实例）
 		# 模型参数
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = opt.alpha  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
 		self.iter_times = 1  # 最大迭代次数
-		self.top_words_num = opt.top_words_num  # 每个主题特征词个数？？？？
+		self.top_words_num = opt.top_words_num  # 每个主题特征词个数
 
 		self.p = np.zeros(self.K)  # 概率向量double类型，存储采样的临时变量
 		self.nw = np.zeros((self.dpre.words_count, self.K), dtype = 'int')  # 词word在主题topic上的分布（未归一化）
@@ -228,6 +238,7 @@ class LDAmodel(object):
 			if (len(twords) > 1):
 				list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
 				topnwords.append(list)
+		print(topnwords)
 		print("topic number in setting: %d   invalid topic number: %d   final topic number: %d" % (
 		self.K, invalid_topic, len(topnwords)))
 		cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
@@ -242,6 +253,5 @@ if __name__=='__main__':
 	loadpath='../data/classifydata2/langdetect_tweet.p'
 	lda=LDAmodel(loadpath)
 	lda.est()
-	lda.Gensim_getTopicCoherence()
 	# print(lda.getTopicCoherence())
 
