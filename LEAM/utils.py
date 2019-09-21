@@ -85,8 +85,10 @@ def get_minibatches_idx(n, minibatch_size, shuffle=False):
 
 def load_class_embedding( wordtoidx, opt):
     print("load class embedding")
-    name_list = [ k.lower().split(' ') for k in opt.class_name]
+    name_list = [ k.lower().split('.') for k in opt.class_name]
     id_list = [ [ wordtoidx[i] for i in l] for l in name_list]
+    print(len(opt.W_emb))
     value_list = [ [ opt.W_emb[i] for i in l]    for l in id_list]
     value_mean = [ np.mean(l,0)  for l in value_list]
     return np.asarray(value_mean)
+

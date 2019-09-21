@@ -32,7 +32,7 @@ class DataPreprocessing(object):
 		self.id2word = {}
 
 class MDKLDAmodel(object):
-	def __init__(self, loadpath,opt,lda,mustsets_obj):
+	def __init__(self, loadpath, opt, lda, mustsets_obj):
 		self.dpre = lda.dpre # 定义在LDA里
 		self.text = lda.text
 		self._dict = lda._dict
@@ -53,9 +53,10 @@ class MDKLDAmodel(object):
 		# todo 参数设定
 		self.nBurnin = 0
 		# 	The number of Gibbs sampling iterations.
-		self.iter_times = 200  # 最大迭代次数
+		self.iter_times = 500  # 最大迭代次数
 		# 	The length of interval to sample for calculating posterior distribution.
 		self.sampleLag = 5
+		self.lambdaForComputingGamma = 2000
 
 		# Hyperparameters
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
@@ -70,13 +71,16 @@ class MDKLDAmodel(object):
 		self.sBeta = self.MS * self.beta
 
 		self.gamma = [0] * self.MS
-		for i in range(self.MS):
-			size = len(self.mustsets_obj.mustsets[i])
-			self.gamma[i] = [0] * size
-			for j in range(size):
-				self.gamma[i][j] = self.getGammaBasedOnMustsetSize(size)
-
 		self.vGamma = np.zeros((self.K,self.MS), dtype='float64')
+		for i in range(self.MS):
+			size = self.mustsets_obj.len_mustsets[i]
+			print(self.mustsets_obj.normalized_size)
+			size_normalized = self.mustsets_obj.normalized_size[i]
+			self.gamma[i] = [0] * size
+
+			for j in range(size):
+				self.gamma[i][j] = self.getGammaBasedOnMustsetSize(size_normalized)
+
 		for t in range(self.K):
 			for ms in range(self.MS):
 				size = len(self.mustsets_obj.mustsets[ms])
@@ -124,16 +128,10 @@ class MDKLDAmodel(object):
 			return 1
 		else:
 			# res = math.exp(math.log(self.lambdaForComputingGamma)-size)
-			# print(math.log(2000)-3)
-			# print("res",res)
-			# exit()
-			# print(math.exp(1500))
-			# print(size)
-			res = math.exp(1850-size)
+			# res = math.exp(1850-size)
 			# todo: set gamma
-			return res
 			# return math.exp(math.log(self.lambdaForComputingGamma)-size)
-			# return self.lambdaForComputingGamma/math.exp(size) # param.lambdaForComputingGamma = 2000
+			return self.lambdaForComputingGamma/math.exp(size) # param.lambdaForComputingGamma = 2000
 
 	def initializeFirstMarkovChainUsingExistingZ(self, Z2):
 		print("initialize First MarkovChain Using Existing Z")
@@ -154,8 +152,6 @@ class MDKLDAmodel(object):
 					ms = mustsetList[0]
 
 				self.Y[d][n] = ms
-				# print(d,topic,n)
-				# print(self.ndt[d][topic])
 				self.updateCount(d, topic, ms, word, wordstr, +1)
 
 		for d in range(self.dpre.docs_withlabel_count, self.dpre.docs_count):
@@ -193,25 +189,46 @@ class MDKLDAmodel(object):
 
 		current_mustset = self.mustsets_obj.mustsets[ms]
 		w1_i = current_mustset.index(word)
-		relatedwordset_w1 = self.mustsets_obj.relatedword[ms][w1_i]
-		w2_idx_list = [pair[0] for pair in relatedwordset_w1]
 
 		self.ntsw[topic][ms][w1_i] += flag
 		self.ntssum[topic][ms] += flag
 
-		for w2_i in range(len(current_mustset)):
-			if(w1_i==w2_i):
-				count = flag*1
-			else:
-				# count = flag * urn[ms][w1_i][w2_i];
-				count = flag*0.5
-
+		relatedwordset_w1 = self.mustsets_obj.relatedword[ms][w1_i]
+		w2_idx_list = [pair[0] for pair in relatedwordset_w1]
+		if(len(w2_idx_list)==0): # 有可能w1的beta为0
+			count = flag * 1
 			self.nts[topic][ms] += count
 			self.ntsum[topic] += count
-			if(self.nts[topic][ms]<0):
+			if (self.nts[topic][ms] < 0):
 				print("nts[topic][ms] < 0")
-				print(d,topic,ms,word,wordstr,flag)
+				print(d, topic, ms, word, wordstr, flag)
 				exit()
+
+		else:
+			for w2_i in w2_idx_list:
+				if (w1_i == w2_i):
+					count = flag * 1
+				else:
+					count = flag * 0.5
+				self.nts[topic][ms] += count
+				self.ntsum[topic] += count
+				if (self.nts[topic][ms] < 0):
+					print("nts[topic][ms] < 0")
+					print(d, topic, ms, word, wordstr, flag)
+					exit()
+		# for w2_i in range(len(current_mustset)):
+		# 	if(w1_i==w2_i):
+		# 		count = flag*1
+		# 	else:
+		# 		# count = flag * urn[ms][w1_i][w2_i];
+		# 		count = flag*0.5
+        #
+		# 	self.nts[topic][ms] += count
+		# 	self.ntsum[topic] += count
+		# 	if(self.nts[topic][ms]<0):
+		# 		print("nts[topic][ms] < 0")
+		# 		print(d,topic,ms,word,wordstr,flag)
+		# 		exit()
 
 			# todo: This is different from M-LDA.
 			# self.ntsw[topic][ms][w2_i] += count # 移到上面
@@ -220,6 +237,7 @@ class MDKLDAmodel(object):
 	def run(self):
 		self.runGibbsSampling()
 		self.computePosteriorDistribution()
+		print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 
 	def runGibbsSampling(self):
 		for i in range(self.iter_times):
@@ -288,14 +306,12 @@ class MDKLDAmodel(object):
 				except:
 					print(t,s,wordIndex)
 				if(self.p[t * len(mustsetList)+si]<=0):
-					print("The probability is negative!")
+					print("The probability is xnegative!")
 					print(self.ndt[d][t],self.ndsum[d],self.nts[t][s],self.ntsum[t],self.ntsw[t][s],self.gamma[s][wordIndex],self.ntssum[t][s],self.vGamma[t][s])
 					exit()
 		# Sample a topic and amust - set.
 		pairIndex = self.sample(self.p,random.random())
 		new_topic = pairIndex // len_current_mustlist # 向下取整
-		# print(new_topic)
-		# exit()
 		new_ms = mustsetList[pairIndex % len_current_mustlist]
 		self.Z[d][n] = new_topic
 		self.Y[d][n] = new_ms
@@ -382,6 +398,7 @@ class MDKLDAmodel(object):
 					word = wordidList[i]
 					prob = self.phi[t][ms] * self.eta[t][ms][i]
 					self.omega[t][word] += prob
+
 	# def sampling(self, i, j):
 	# 	# 换主题
 	# 	topic = self.Z[i][j]  # 第i个文档第j个词的主题

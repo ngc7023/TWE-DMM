@@ -8,7 +8,8 @@ class MustSets(object):
         self.wordstrToMustsetListMap = dict()
         self.wordidToMustsetListMap = dict()
         self.wordidToMustsetListMapForNoLabel = dict()
-        self.threshold = 0.1
+        self.threshold = 0.1 # 过滤attention_score
+        self.normalized_size = None
 
         # MS * len(mset)
         self.realtedword = None
@@ -32,7 +33,7 @@ class MustSets(object):
         for line in text:
             for key in label_dic.keys():
                 if(label_list[idx_label]==key):
-                    tmp_mustsets[label_dic[key]]+=line
+                    tmp_mustsets[label_dic[key]] += line
                     idx_label+=1
                     break
 
@@ -60,16 +61,13 @@ class MustSets(object):
             if j not in self.wordidToMustsetListMapForNoLabel.get(word_id):
                 self.wordidToMustsetListMapForNoLabel.get(word_id).append(j)
 
-    def getMustSetListGivenWordstr(self,wordstr):
-        return self.wordstrToMustsetListMap.get(wordstr)
-
     def getMustSetListGivenWordid(self, wordid):
         return self.wordidToMustsetListMap.get(wordid)
 
     def getMustSetListGivenNoLabelWordid(self, wordid):
         return self.wordidToMustsetListMapForNoLabel.get(wordid)
 
-    def InitMustsetUseLEAM(self, train, train_lab, test, test_lab, wordtoix,ixtoword):
+    def InitMustsetUseLEAM(self, train, train_lab, test, test_lab, wordtoix, ixtoword):
         # label_list = train_lab
         self.MS = len(train_lab[0])
 
@@ -100,6 +98,13 @@ class MustSets(object):
         for i in range(self.MS):
             self.mustsets[i] = list(set(tmp_mustsets[i]))
             self.len_mustsets.append(len(self.mustsets[i]))
+
+        self.normalized_size = [0] * self.MS
+        min_size = min(self.len_mustsets)
+        max_size = max(self.len_mustsets)
+        k = (10-1)/(max_size-min_size) # 线性映射到[1,10]
+        for i in range(self.MS):
+            self.normalized_size[i] = 1 + k * (self.len_mustsets[i] - min_size)
 
     def InitializeRelatedWord(self,train,train_lab,test,test_lab,Att_List):
         # MS * len(mset)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Guoyin Wang
-This code is never used in our project
+
 LEAM
 """
 
@@ -24,10 +24,10 @@ class Options(object):
         self.dataset = 'mimic'
         self.fix_emb = True
         self.restore = False
-        self.W_emb = 64 # default_none
-        self.W_class_emb = 64 # default_none
+        self.W_emb = None
+        self.W_class_emb = None
         self.maxlen = 305
-        self.n_words = 1 # default_none
+        self.n_words = None
         self.embed_size = 300
         self.lr = 1e-3
         self.batch_size = 10

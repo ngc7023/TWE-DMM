@@ -8,6 +8,8 @@ def embedding(features, opt, prefix='', is_reuse=None):
     with tf.variable_scope(prefix + 'embed', reuse=is_reuse):
         if opt.fix_emb:
             assert (hasattr(opt, 'W_emb'))
+            print(np.shape(np.array(opt.W_emb)))
+            print(opt.n_words)
             assert (np.shape(np.array(opt.W_emb)) == (opt.n_words, opt.embed_size))
             W = tf.get_variable('W', initializer=opt.W_emb, trainable=True)
             print("initialize word embedding finished")
@@ -20,7 +22,6 @@ def embedding(features, opt, prefix='', is_reuse=None):
     word_vectors = tf.nn.embedding_lookup(W, features)
 
     return word_vectors, W
-
 
 def embedding_class(features, opt, prefix='', is_reuse=None):
     """Customized function to transform batched y into embeddings."""
@@ -39,28 +40,6 @@ def embedding_class(features, opt, prefix='', is_reuse=None):
 
     return word_vectors, W
 
-# label embedding 函数（topic embedding函数） # Qingtt
-def embedding_class1(opt, prefix = '', is_reuse = None):
-	"""Customized function to transform batched y into embeddings."""
-	# Convert indexes of words into embeddings.
-	with tf.variable_scope(prefix + 'embed', reuse = is_reuse):
-		weightInit = tf.random_uniform_initializer(-0.001, 0.001)
-		W = tf.get_variable('W_class', [opt.num_class, opt.embed_size], initializer = weightInit)
-		print("initialize topic embedding finished")
-	if hasattr(opt, 'relu_w') and opt.relu_w:
-		W = tf.nn.relu(W)
-	return  W
-
-def embedding_class2(opt, prefix = '', is_reuse = None): # 0726 利用dmm做初始化 Pangjy
-	"""Customized function to transform batched y into embeddings."""
-	# Convert indexes of words into embeddings.
-	with tf.variable_scope(prefix + 'embed', reuse = is_reuse):
-		W = opt.topic_emb
-		print("initialize topic embedding by using topic_distribution")
-	if hasattr(opt, 'relu_w') and opt.relu_w:
-		W = tf.nn.relu(W)
-	return  W
-
 def att_emb_ngram_encoder_maxout(x_emb, x_mask, W_class, W_class_tran, opt):
     x_mask = tf.expand_dims(x_mask, axis=-1) # b * s * 1
     x_emb_0 = tf.squeeze(x_emb,) # b * s * e
@@ -70,49 +49,13 @@ def att_emb_ngram_encoder_maxout(x_emb, x_mask, W_class, W_class_tran, opt):
     W_class_norm = tf.nn.l2_normalize(W_class_tran, dim = 0) # e * c
     G = tf.contrib.keras.backend.dot(x_emb_norm, W_class_norm) # b * s * c
     x_full_emb = x_emb_0
-    Att_v = tf.contrib.layers.conv2d(G, num_outputs=opt.num_class, kernel_size=[opt.ngram], padding='SAME',activation_fn=tf.nn.relu) #b * s *  c
-
+    Att_v = tf.contrib.layers.conv2d(G, num_outputs=opt.num_class,kernel_size=[opt.ngram], padding='SAME',activation_fn=tf.nn.relu) #b * s *  c
     Att_v = tf.reduce_max(Att_v, axis=-1, keep_dims=True)
     Att_v_max = partial_softmax(Att_v, x_mask, 1, 'Att_v_max') # b * s * 1
 
     x_att = tf.multiply(x_full_emb, Att_v_max)
     H_enc = tf.reduce_sum(x_att, axis=1)  
-    return H_enc
-
-# 引入注意力机制，进行加权求和得到文本表示
-def att_emb_ngram_encoder_maxout1(x_emb, W_class, W_class_tran, opt,gamma):
-    # x_mask = tf.expand_dims(x_mask, axis = -1)  # b * s * 1
-    x_emb_0 = tf.squeeze(x_emb, )  # b * s * e   # tf.squeeze：将原始张量中所有维度为1的那些维都删掉的结果
-    # x_emb_1 = tf.multiply(x_emb_0, x_mask)  # b * s * e
-    x_emb_norm = tf.nn.l2_normalize(x_emb_0, axis = 2)  # b * s * e
-
-    # W_class_tran = tf.multiply(W_class_tran, opt.topic_distribution) # 点乘，加入gamma
-    W_class_norm = tf.nn.l2_normalize(W_class_tran, axis = 0)  # e * c
-    G = tf.contrib.keras.backend.dot(x_emb_norm, W_class_norm)  # b * s * c   # Ghat：归一化矩阵
-    #print(opt.topic_distribution)
-    gamma = tf.expand_dims(gamma,1)
-    if(opt.ifGammaUse):
-        G = tf.multiply(gamma,G)
-    Gammatmp = gamma
-    G = tf.expand_dims(G,-1) #点乘/L2范式 = 余弦相似度 # 每个小格代表一个单词和一个主题的相似程度 # 30 * 30 * 40 * 1
-    Gtmp = G 
-    x_full_emb = x_emb_0
-    Att_v = tf.contrib.layers.conv2d(G, num_outputs = 1, kernel_size = [opt.ngram,opt.num_class], padding = 'SAME',
-									 activation_fn = tf.nn.relu)  # b * s * c # 30 * 30 * 40 * 1 # 每个单词对每个主题的attention
-    Att_v = tf.squeeze(Att_v) # 减维
-    Att_v = tf.reduce_max(Att_v, axis = -1, keepdims = True) # 取最大值 # b * s * 1
-    # Att_v_max = partial_softmax(Att_v, 1, 'Att_v_max')  # b * s * 1 # 注意力分数
-	# x_att = tf.multiply(x_full_emb, Att_v_max)  # b * s * e
-	# H_enc = tf.reduce_sum(x_att, axis = 1)  # b * 1 * e
-
-	# x_full_emb (30, 30, 64)
-	# Att_v (30, 30, 1)
-	# x_att (30, 30, 64)
-	# H-enc (30, 64)
-    x_att = tf.multiply(x_full_emb, Att_v)  # b * s * e # embedding * 注意力分数 = u 两个矩阵的数元素各自相乘
-    H_enc = tf.reduce_sum(x_att, axis = 1)  # b * 1 * e # 把sequence相加，降维，得到文本表示
-
-    return H_enc, Att_v,Gtmp,Gammatmp
+    return H_enc, Att_v_max
 
 def att_emb_ngram_encoder_cnn(x_emb, x_mask, W_class, W_class_tran, opt):
     x_mask = tf.expand_dims(x_mask, axis=-1) # b * s * 1

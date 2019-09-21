@@ -9,7 +9,7 @@ import csv
 import numpy as np
 import os
 import re
-import pickle as cPickle
+import cPickle
 import string
 import pdb
 
@@ -20,10 +20,10 @@ def is_number(s):
     except ValueError:
         return False
 #==============================================================================
-loadpath = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/LEAM/data/langdetect_tweet.txt'
+loadpath = './test.csv'
 
 x = []
-with open(loadpath, 'r') as f:
+with open(loadpath, 'rb') as f:
     for line in f:
         x.append(line)
 
@@ -61,10 +61,9 @@ vocab = {}
 
 for i in range(60000):
     # lab.append(clean_str(x[i].split(",")[0]))
-    print(x[i])
-    m = re.search(' ', x[i])
+    m = re.search(',', x[i])
     rest = x[i][m.start()+1:]
-    m = re.search(' ', rest)
+    m = re.search(',', rest)
     temp = clean_str(rest[:m.start()]).split()
     # temp = clean_str(x[i][m.start()+1 : n + 1]).split()
     temp = [ j if not is_number(j) else '0' for j in temp]

@@ -94,7 +94,7 @@ class LDAmodel(object):
 		# 模型参数
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = opt.alpha  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
-		self.iter_times = 1  # 最大迭代次数
+		self.iter_times = 500  # 最大迭代次数
 		self.top_words_num = opt.top_words_num  # 每个主题特征词个数
 
 		self.p = np.zeros(self.K)  # 概率向量double类型，存储采样的临时变量
@@ -146,13 +146,15 @@ class LDAmodel(object):
 	# 训练LDA模型
 	def est(self):
 		for x in range(self.iter_times):
-			if(x%25==0):
+			print("LDA Iteration:", x)
+			if((x+1)%5==1):
 				self._phi()
 				print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 			for i in range(self.dpre.docs_count):
 				for j in range(self.dpre.docs[i].length):
 					topic = self.sampling(i, j)
 					self.Z[i][j] = topic
+		print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 		self._theta()
 		self._phi()
 		self.save()

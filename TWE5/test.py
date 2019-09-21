@@ -225,9 +225,4 @@ import re
 
 # print(math.log(2000))
 
-x = [1,2,3,4,5]
-x_1 = list(set(x))
-x2 = [4,3,5,1,6]
-x_1+=x2
-res = list(set(x_1))
-print(res)
+# print(math.exp(math.log()-1500))

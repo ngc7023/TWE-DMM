@@ -1,8 +1,0 @@
--model	LDA
--corpus	test/classify_corpus_less2.txt
--ntopics	40
--alpha	0.1
--beta	0.01
--niters	2000
--twords	20
--name	LDA/k_40/testLDA

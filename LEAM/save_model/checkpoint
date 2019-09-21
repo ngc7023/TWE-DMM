@@ -1,0 +1,6 @@
+model_checkpoint_path: "model.ckpt"
+all_model_checkpoint_paths: "../save/-146"
+all_model_checkpoint_paths: "../save/-147"
+all_model_checkpoint_paths: "../save/-148"
+all_model_checkpoint_paths: "../save/-149"
+all_model_checkpoint_paths: "model.ckpt"

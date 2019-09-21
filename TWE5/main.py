@@ -28,14 +28,14 @@ class TopicModel_Setting(object):
 	def __init__(self):
 		# LDA/DMM参数
 		self.restore = False
-		self.num_topic = 4         # 主题个数
+		self.num_topic = 10         # 主题个数
 		self.num_class = 4          # Label个数
-		self.top_words_num = 20
+		self.top_words_num = 5
 		self.beta = 0.1
 		self.alpha = 1
 
 		self.dataset = 'Tweet'
-		self.emb_type = "word2vec"  # or glove
+		self.emb_type = "glove"  # or glove
 
 		self.save_path = ""
 		self.log_path = ""
@@ -74,11 +74,11 @@ def main():
 
 
 	elif opt.dataset == 'Tweet':
-		opt.corpus_path = '../data/classifydata2/tweet_filtered.txt'
-		opt.loadpath = '../data/classifydata2/tweet_filtered0.7.p'
-		opt.embpath = '../data/classifydata2/tweet_filtered_emb.p'
-		att_filename = '../LEAM_data/attention_score.txt'
-		predicted_label_file = '../data/classifydata2/tweetlabel0.7.txt'
+		opt.corpus_path = '../LEAM/data/tweet_filtered.txt' # 文本始终使用这个
+		opt.loadpath = '../LEAM/data/tweet_filtered0.5.p'
+		opt.embpath = '../LEAM/data/tweet_filtered_emb.p'
+		att_filename = '../LEAM/attention_score.txt'
+		predicted_label_file = '../LEAM/record_prob.txt'
 
 		opt.save_path = "./save/save_tweet/"
 		opt.log_path = "./log/log_tweet/"
@@ -109,7 +109,8 @@ def main():
 			if(row[i]!=0):
 				tmp_lab[i] = 1
 		test_lab.append(tmp_lab)
-
+	print("train:",len(train))
+	print("test",len(test))
 	lda = LDAmodel(train, test, wordtoix, ixtoword, opt)
 	lda.est()
 
@@ -122,26 +123,13 @@ def main():
 		Att_List.append(line_list)
 	mustsets_obj = MustSets()
 	mustsets_obj.InitMustsetUseLEAM(train, train_lab, test, test_lab, wordtoix, ixtoword)
-	# print(len(mustsets_obj.mustsets[0]),len(mustsets_obj.mustsets[1]),len(mustsets_obj.mustsets[2]),len(mustsets_obj.mustsets[3]))
-	mustsets_obj.ExtendMustSetsWithPredictLabelText(test, test_lab,ixtoword)
+	mustsets_obj.ExtendMustSetsWithPredictLabelText(test, test_lab, ixtoword)
 	mustsets_obj.InitializeRelatedWord(train, train_lab, test, test_lab, Att_List)
-
-	# print(len(mustsets_obj.mustsets[0]),len(mustsets_obj.mustsets[1]),len(mustsets_obj.mustsets[2]),len(mustsets_obj.mustsets[3]))
-
-	# idx = wordtoix['crack']
-	# print(mustsets_obj.wordidToMustsetListMap.get(idx))
-	# exit()
-
-	# opt.labelpath = '../data/classifydata2/langdetect_tweet_label.txt'
-	# mustsets_obj.InitMustSets(lda.dpre.word2id,lda.text,opt.labelpath)
-	#
-	# opt.n_words = lda.dpre.words_count
 
 	mdklda = MDKLDAmodel(opt.loadpath, opt, lda, mustsets_obj)
 	mdklda.test_lab = test_lab
 	del test_lab
 	mdklda.initializeFirstMarkovChainUsingExistingZ(lda.Z)
-	# exit()
 	mdklda.run()
 
 if __name__ == '__main__':
