@@ -2,39 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="034f7777-ce2c-41a1-ba1b-6f2b0cf0eca5" name="Default Changelist" comment="Initial commit">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/data_preprocess_tweet.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short0.3.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short_label.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered0.3.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short_emb.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.3.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.4.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.5.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.6.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.7.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/preprocess_tweet.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/实验结果.xlsx" afterPath="$PROJECT_DIR$/实验结果.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt" afterPath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel.txt" afterPath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.4.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.4.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.5.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.5.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.6.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.6.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.7.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.7.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/main.py" afterPath="$PROJECT_DIR$/LEAM/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MDKLDA_model/LDA.py" afterPath="$PROJECT_DIR$/MDKLDA_model/LDA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" afterPath="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/Classify.py" afterPath="$PROJECT_DIR$/TWE5/Classify.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/main.py" afterPath="$PROJECT_DIR$/TWE5/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/test.py" afterPath="$PROJECT_DIR$/TWE5/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,11 +75,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LEAM/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-361">
               <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="phifile.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/phifile.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tassginfile.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/tassginfile.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="thetafile.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/thetafile.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="topNfile.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/topNfile.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -156,31 +167,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tweet_filtered.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-19">
-              <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="preprocess_tweet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_tweet.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
               <caret line="244" column="20" selection-start-line="244" selection-start-column="20" selection-end-line="244" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tweet_filteredlabel.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="3085" column="7" selection-start-line="3085" selection-start-column="7" selection-end-line="3085" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -403,28 +394,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="re_MDKLDA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TWE-DMM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TWE-DMM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TWE5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="re_LDA" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="re_tweet" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -902,13 +871,13 @@
     <frame x="-32" y="23" width="1305" height="777" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28115264" sideWeight="0.6853933" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28115264" sideWeight="0.6853933" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28613138" sideWeight="0.6163622" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34890512" sideWeight="0.16744548" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3620438" sideWeight="0.7720413" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4452555" sideWeight="0.47498015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30656934" sideWeight="0.47974584" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34890512" sideWeight="0.8325545" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34890512" sideWeight="0.8325545" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2488263" sideWeight="0.492126" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3080292" sideWeight="0.49007148" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26767275" sideWeight="0.31460676" order="2" side_tool="true" content_ui="tabs" />
@@ -1000,38 +969,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/LEAM/preprocess_tweet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4237">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DatasetProcess/Tweet_Preprocess/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DatasetProcess/Tweet_Preprocess/data_preprocess_tweet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/preprocess_yahoo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1410,6 +1347,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-361">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/phifile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/tassginfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/thetafile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/10/0.3/topNfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
