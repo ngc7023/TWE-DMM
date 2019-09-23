@@ -32,7 +32,7 @@ class DataPreprocessing(object):
 		self.id2word = {}
 
 class MDKLDAmodel(object):
-	def __init__(self, loadpath, opt, lda, mustsets_obj):
+	def __init__(self,  opt, lda, mustsets_obj):
 		self.dpre = lda.dpre # 定义在LDA里
 		self.text = lda.text
 		self._dict = lda._dict
@@ -44,18 +44,18 @@ class MDKLDAmodel(object):
 		# 由opt控制的变量
 		self.K = opt.num_topic  # 主题个数
 		self.corpus_path = opt.corpus_path
-		self.phifile = opt.phifile  # 词-主题分布文件phi
-		self.thetafile = opt.thetafile
-		self.topNfile = opt.topNfile  # 每个主题topN词文件
-		self.tagassignfile = opt.tagassignfile  # 最后分派结果文件
+		self.phifile = opt.MDKLDA_phifile  # 词-主题分布文件phi
+		self.thetafile = opt.MDKLDA_thetafile
+		self.topNfile = opt.MDKLDA_topNfile  # 每个主题topN词文件
+		self.tagassignfile = opt.MDKLDA_tagassignfile  # 最后分派结果文件
 
 		# 	The number of iterations for burn-in period.
 		# todo 参数设定
 		self.nBurnin = 0
 		# 	The number of Gibbs sampling iterations.
-		self.iter_times = 500  # 最大迭代次数
+		self.iter_times = 200  # 最大迭代次数
 		# 	The length of interval to sample for calculating posterior distribution.
-		self.sampleLag = 5
+		self.sampleLag = 0
 		self.lambdaForComputingGamma = 2000
 
 		# Hyperparameters
@@ -236,8 +236,8 @@ class MDKLDAmodel(object):
 
 	def run(self):
 		self.runGibbsSampling()
-		self.computePosteriorDistribution()
-		print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
+		# self.computePosteriorDistribution()
+		# print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 
 	def runGibbsSampling(self):
 		for i in range(self.iter_times):
@@ -248,11 +248,16 @@ class MDKLDAmodel(object):
 					self.sampleTopicAssignment(d, n)
 
 			# print("updating posterior distribution")
-			if (i >= self.nBurnin and self.sampleLag > 0 and i % self.sampleLag == 0):
-				print("caocluting coherence")
-				self.updatePosteriorDistribution()
+
+			if((i+1)%10==0):
 				self.computePosteriorDistribution()
 				print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
+
+			# if (i >= self.nBurnin and self.sampleLag > 0 and i % self.sampleLag == 0):
+			# 	print("calculating coherence")
+			# 	self.updatePosteriorDistribution()
+			# 	self.computePosteriorDistribution()
+			# 	print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 
 			# # if(i%==0):
 			# self.updatePosteriorDistribution()
@@ -399,69 +404,41 @@ class MDKLDAmodel(object):
 					prob = self.phi[t][ms] * self.eta[t][ms][i]
 					self.omega[t][word] += prob
 
-	# def sampling(self, i, j):
-	# 	# 换主题
-	# 	topic = self.Z[i][j]  # 第i个文档第j个词的主题
-	# 	word = self.dpre.docs[i].words[j]  # 获取第i个文档第j个词的编号
-	# 	self.nw[word][topic] -= 1
-	# 	self.nd[i][topic] -= 1
-	# 	self.nwsum[topic] -= 1
-	# 	self.ndsum[i] -= 1  # 文档i的词总数-1
-    #
-	# 	Vbeta = self.dpre.words_count * self.beta
-	# 	Kalpha = self.K * self.alpha
-	# 	# gibbs sample 公式（LDA数学八卦公式29）
-	# 	self.p = (self.nw[word] + self.beta) / (self.nwsum + Vbeta) * (self.nd[i] + self.alpha) / (
-	# 			self.ndsum[i] + Kalpha)
-    #
-	# 	p = np.squeeze(np.array(self.p / np.sum(self.p)))  # squeeze:去掉数组形状中单维度条目
-	# 	topic = np.argmax(np.random.multinomial(1, p))  # 以概率p的分布随机选择主题
-    #
-	# 	self.nw[word][topic] += 1
-	# 	self.nwsum[topic] += 1
-	# 	self.nd[i][topic] += 1
-	# 	self.ndsum[i] += 1
-    #
-	# 	return topic
+	def save(self):
+		# 保存theta document-topic分布
+		with codecs.open(self.thetafile, 'w') as f:
+			for x in range(self.dpre.docs_count):
+				for y in range(self.K):
+					f.write(str(self.theta[x][y]) + '\t')
+				f.write('\n')
 
+		# 保存phi topic-mustset分布
+		with codecs.open(self.phifile, 'w') as f:
+			for x in range(self.K):
+				for y in range(self.MS):
+					f.write(str(self.phi[x][y]) + '\t')
+				f.write('\n')
 
+		# 保存omega topic-word distribution
+		with codecs.open(self.topNfile, 'w', 'utf-8') as f:
+			self.top_words_num = min(self.top_words_num, self.dpre.words_count)
+			for x in range(self.K):
+				f.write('第' + str(x) + '个主题：' + '\n')
+				twords = [(n, self.omega[x][n]) for n in range(self.dpre.words_count)]
+				twords.sort(key = lambda i: i[1], reverse = True)
+				for y in range(self.top_words_num):
+					word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
+					f.write('\t' * 2 + word + '\t' + str(twords[y][1]) + '\n')
+				# f.write('\t' * 2 + str(twords[y][0]) + '\t' + str(twords[y][1]) + '\n')
 
-	# def _theta(self):
-	# 	for i in range(self.dpre.docs_count):
-	# 		self.theta[i] = (self.nd[i] + self.alpha) / (self.ndsum[i] + self.K * self.alpha)
-    #
-	# def _phi(self):
-	# 	for i in range(self.K):
-	# 		self.phi[i] = (self.nw.T[i] + self.beta) / (self.nwsum[i] + self.dpre.words_count * self.beta)
-    #
-	# def save(self):
-	# 	with codecs.open(self.thetafile, 'w') as f:
-	# 		for x in range(self.dpre.docs_count):
-	# 			for y in range(self.K):
-	# 				f.write(str(self.theta[x][y]) + '\t')
-	# 			f.write('\n')
-	# 	# 保存phi词-主题分布
-	# 	with codecs.open(self.phifile, 'w') as f:
-	# 		for x in range(self.K):
-	# 			for y in range(self.dpre.words_count):
-	# 				f.write(str(self.phi[x][y]) + '\t')
-	# 			f.write('\n')
-	# 	# 保存每个主题topic的词
-	# 	with codecs.open(self.topNfile, 'w', 'utf-8') as f:
-	# 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
-	# 		for x in range(self.K):
-	# 			f.write('第' + str(x) + '个主题：' + '\n')
-	# 			twords = [(n, self.phi[x][n]) for n in range(self.dpre.words_count)]
-	# 			twords.sort(key = lambda i: i[1], reverse = True)
-	# 			for y in range(self.top_words_num):
-	# 				word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
-	# 				f.write('\t' * 2 + word + '\t' + str(twords[y][1]) + '\n')
-	# 			# f.write('\t' * 2 + str(twords[y][0]) + '\t' + str(twords[y][1]) + '\n')
-	# 	# 保存最后退出时，文档的词分配的主题
-	# 	with codecs.open(self.tagassignfile, 'w') as f:
-	# 		for x in range(self.dpre.docs_count):
-	# 			for y in range(self.dpre.docs[x].length):
-	# 				f.write(str(self.dpre.docs[x].words[y]) + ':' + str(self.Z[x][y]) + '\t')
+		# 保存eta topic-mustset-word distribution
+		with codecs.open(self.tagassignfile, 'w') as f:
+			for t in range(self.K):
+				for ms in range(self.MS):
+					size = len(self.mustsets_obj.mustsets[ms])
+					for i in range(size):
+						f.write(str(self.mustsets_obj.mustsets[ms][i])+':'+str(self.eta[t][ms][i])+'\t')
+					f.write('\n')
 
 	def Gensim_getTopicCoherence(self):
 		invalid_topic = 0
@@ -486,9 +463,9 @@ class MDKLDAmodel(object):
 		print("topic number in setting: %d   invalid topic number: %d   final topic number: %d" % (
 		self.K, invalid_topic, len(topnwords)))
 		cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-                            window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
+                            window_size=5, coherence='c_uci', topn=self.top_words_num, processes=4)
 		cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-                             window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
+                             window_size=5, coherence='c_npmi', topn=self.top_words_num, processes=4)
 		return cm.get_coherence(), cm2.get_coherence()
 
 

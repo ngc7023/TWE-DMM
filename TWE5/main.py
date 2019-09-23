@@ -22,7 +22,6 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 from MDKLDA_model.LDA import *
 from MDKLDA_model.MDKLDA import *
 from MDKLDA_model.MustSet import *
-from TWE5.data_process import *
 import cProfile
 class TopicModel_Setting(object):
 	def __init__(self):
@@ -35,16 +34,18 @@ class TopicModel_Setting(object):
 		self.alpha = 1
 
 		self.dataset = 'Tweet'
-		self.emb_type = "glove"  # or glove
+		self.proportion = 0.3
+		self.emb_type = "glove"
 
-		self.save_path = ""
-		self.log_path = ""
-		self.topicwordemb_path = ""
-		self.phifile = ""  # 词-主题分布文件phi
-		self.thetafile = ""
-		self.topNfile = "" # 每个主题topN词文件
-		self.tagassignfile = ""  # 最后分派结果文件
+		self.LDA_phifile = ""  # 词-主题分布文件phi
+		self.LDA_thetafile = ""
+		self.LDA_topNfile = "" # 每个主题topN词文件
+		self.LDA_tagassignfile = ""  # 最后分派结果文件
 
+		self.MDKLDA_phifile = ""  # 词-主题分布文件phi
+		self.MDKLDA_thetafile = ""
+		self.MDKLDA_topNfile = "" # 每个主题topN词文件
+		self.MDKLDA_tagassignfile = ""  # 最后分派结果文件
 
 	def __iter__(self):
 		for attr, value in self.__dict__.iteritems():
@@ -54,45 +55,47 @@ def main():
 	np.set_printoptions(threshold=np.inf)
 
 	opt = TopicModel_Setting()
+	if opt.dataset == 'Tweet':
+		opt.corpus_path = '../DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt' # 文本始终使用这个
+		opt.loadpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered'+str(opt.proportion)+'.p'
+		opt.embpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p'
+		att_filename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score'+str(opt.proportion)+'.txt'
+		predicted_label_file = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob'+str(opt.proportion)+'.txt'
 
-	if opt.dataset == 'N20short':
-		opt.setSampleNumber = 24326 # number of subsequence
-		opt.corpus_path = '../data/TACL-datasets/N20short.txt'
-		opt.loadpath = '../data/TACL-datasets/N20short.p'
+		opt.LDA_phifile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/phifile.txt'  # 词-主题分布文件phi
+		opt.LDA_thetafile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/thetafile.txt'
+		opt.LDA_topNfile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/topNfile.txt'  # 每个主题topN词文件
+		opt.LDA_tagassignfile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/tassginfile.txt'  # 最后分派结果文件
+
+		opt.MDKLDA_phifile = './re_MDKLDA/re_tweet/' +str(opt.num_topic)+'/'+ str(opt.proportion) + '/phifile.txt'  # 词-主题分布文件phi
+		opt.MDKLDA_thetafile = './re_MDKLDA/re_tweet/' +str(opt.num_topic)+'/'+ str(opt.proportion) + '/thetafile.txt'
+		opt.MDKLDA_topNfile = './re_MDKLDA/re_tweet/'+str(opt.num_topic)+'/' + str(opt.proportion) + '/topNfile.txt'  # 每个主题topN词文件
+		opt.MDKLDA_tagassignfile = './re_MDKLDA/re_tweet/'+str(opt.num_topic)+'/' + str(opt.proportion) + '/tassginfile.txt'  # 最后分派结果文件
+
+	elif opt.dataset == 'N20short':
+		opt.corpus_path = '../DatasetProcess/TACL-datasets/N20short.txt'
+		opt.loadpath = '../DatasetProcess/TACL-datasets/N20short'+str(opt.proportion)+'.p'
 		if(opt.emb_type=='word2vec'):
 			opt.embpath = '../data/TACL-datasets/N20short_word2vec_emb.p'
 		elif(opt.emb_type=='glove'):
 			opt.embpath = '../data/TACL-datasets/N20short_glove_emb.p'
-		opt.save_path = "./save/save_N20short/"
-		opt.log_path = "./log/log_N20short/"
 
-		opt.topicwordemb_path = './re/re_N20short/topic-wordemb.p'
-		opt.phifile = './re/re_N20short/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re/re_N20short/thetafile.txt'
-		opt.topNfile = './re/re_N20short/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re/re_N20short/tassginfile.txt'  # 最后分派结果文件
+		opt.LDA_phifile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/phifile.txt'  # 词-主题分布文件phi
+		opt.LDA_thetafile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/thetafile.txt'
+		opt.LDA_topNfile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/topNfile.txt'  # 每个主题topN词文件
+		opt.LDA_tagassignfile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/tassginfile.txt'  # 最后分派结果文件
 
-
-	elif opt.dataset == 'Tweet':
-		opt.corpus_path = '../LEAM/data/tweet_filtered.txt' # 文本始终使用这个
-		opt.loadpath = '../LEAM/data/tweet_filtered0.5.p'
-		opt.embpath = '../LEAM/data/tweet_filtered_emb.p'
-		att_filename = '../LEAM/attention_score.txt'
-		predicted_label_file = '../LEAM/record_prob.txt'
-
-		opt.save_path = "./save/save_tweet/"
-		opt.log_path = "./log/log_tweet/"
-
-		opt.topicwordemb_path = './re/re_tweet/topic-wordemb.p'
-		opt.phifile = './re/re_tweet/phifile.txt'  # 词-主题分布文件phi
-		opt.thetafile = './re/re_tweet/thetafile.txt'
-		opt.topNfile = './re/re_tweet/topNfile.txt'  # 每个主题topN词文件
-		opt.tagassignfile = './re/re_tweet/tassginfile.txt'  # 最后分派结果文件
+		opt.MDKLDA_phifile = './re_MDKLDA/re_N20short/' +str(opt.num_topic)+'/'+ str(opt.proportion) + '/phifile.txt'  # 词-主题分布文件phi
+		opt.MDKLDA_thetafile = './re_MDKLDA/re_N20short/'+str(opt.num_topic)+'/' + str(opt.proportion) + '/thetafile.txt'
+		opt.MDKLDA_topNfile = './re_MDKLDA/re_N20short/'+str(opt.num_topic)+'/' + str(opt.proportion) + '/topNfile.txt'  # 每个主题topN词文件
+		opt.MDKLDA_tagassignfile = './re_MDKLDA/re_N20short/' +str(opt.num_topic)+'/'+ str(opt.proportion) + '/tassginfile.txt'  # 最后分派结果文件
 
 	else:
 		pass
 
 	# Initilaize LDA
+	print("topic number:",opt.num_topic)
+	print("class number:",opt.num_class)
 	print("dataset:", opt.dataset)
 	x_data = cPickle.load(open(opt.loadpath, "rb"))
 	train, val, test = x_data[0], x_data[1], x_data[2]
@@ -113,6 +116,8 @@ def main():
 	print("test",len(test))
 	lda = LDAmodel(train, test, wordtoix, ixtoword, opt)
 	lda.est()
+	lda.save()
+	print("lda save success")
 
 	f = open(att_filename, 'r')
 	Att_List = []
@@ -126,11 +131,17 @@ def main():
 	mustsets_obj.ExtendMustSetsWithPredictLabelText(test, test_lab, ixtoword)
 	mustsets_obj.InitializeRelatedWord(train, train_lab, test, test_lab, Att_List)
 
-	mdklda = MDKLDAmodel(opt.loadpath, opt, lda, mustsets_obj)
-	mdklda.test_lab = test_lab
-	del test_lab
-	mdklda.initializeFirstMarkovChainUsingExistingZ(lda.Z)
-	mdklda.run()
+	try:
+		mdklda = MDKLDAmodel(opt, lda, mustsets_obj)
+		mdklda.test_lab = test_lab
+		del test_lab
+		mdklda.initializeFirstMarkovChainUsingExistingZ(lda.Z)
+		mdklda.run()
+		mdklda.save()
+
+	except:
+		print("Interrupt! MDKLDA model saved!")
+		mdklda.save()
 
 if __name__ == '__main__':
 	main()

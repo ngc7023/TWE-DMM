@@ -46,10 +46,10 @@ class LDAmodel(object):
 		# 由opt控制的变量
 		self.K = opt.num_topic  # 主题个数
 		self.corpus_path = opt.corpus_path
-		self.phifile = opt.phifile  # 词-主题分布文件phi
-		self.thetafile = opt.thetafile
-		self.topNfile = opt.topNfile  # 每个主题topN词文件
-		self.tagassignfile = opt.tagassignfile  # 最后分派结果文件
+		self.phifile = opt.LDA_phifile  # 词-主题分布文件phi
+		self.thetafile = opt.LDA_thetafile
+		self.topNfile = opt.LDA_topNfile  # 每个主题topN词文件
+		self.tagassignfile = opt.LDA_tagassignfile  # 最后分派结果文件
 
 		dpre = DataPreprocessing()
 		dpre.docs_count = len(train)+len(test)
@@ -94,7 +94,7 @@ class LDAmodel(object):
 		# 模型参数
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = opt.alpha  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
-		self.iter_times = 500  # 最大迭代次数
+		self.iter_times = 2000  # 最大迭代次数
 		self.top_words_num = opt.top_words_num  # 每个主题特征词个数
 
 		self.p = np.zeros(self.K)  # 概率向量double类型，存储采样的临时变量
@@ -147,7 +147,7 @@ class LDAmodel(object):
 	def est(self):
 		for x in range(self.iter_times):
 			print("LDA Iteration:", x)
-			if((x+1)%5==1):
+			if((x+1)%10==0):
 				self._phi()
 				print("Gensim topic coherence:", self.Gensim_getTopicCoherence())
 			for i in range(self.dpre.docs_count):
@@ -173,12 +173,14 @@ class LDAmodel(object):
 				for y in range(self.K):
 					f.write(str(self.theta[x][y]) + '\t')
 				f.write('\n')
+
 		# 保存phi词-主题分布
 		with codecs.open(self.phifile, 'w') as f:
 			for x in range(self.K):
 				for y in range(self.dpre.words_count):
 					f.write(str(self.phi[x][y]) + '\t')
 				f.write('\n')
+
 		# 保存每个主题topic的词
 		with codecs.open(self.topNfile, 'w', 'utf-8') as f:
 			self.top_words_num = min(self.top_words_num, self.dpre.words_count)
@@ -190,11 +192,13 @@ class LDAmodel(object):
 					word = OrderedDict({value: key for key, value in self.dpre.word2id.items()})[twords[y][0]]
 					f.write('\t' * 2 + word + '\t' + str(twords[y][1]) + '\n')
 				# f.write('\t' * 2 + str(twords[y][0]) + '\t' + str(twords[y][1]) + '\n')
+
 		# 保存最后退出时，文档的词分配的主题
 		with codecs.open(self.tagassignfile, 'w') as f:
 			for x in range(self.dpre.docs_count):
 				for y in range(self.dpre.docs[x].length):
 					f.write(str(self.dpre.docs[x].words[y]) + ':' + str(self.Z[x][y]) + '\t')
+				f.write('\n')
 
 	def getTopicCoherence(self):
 		self.top_words_num = min(self.top_words_num, self.dpre.words_count)
@@ -240,20 +244,12 @@ class LDAmodel(object):
 			if (len(twords) > 1):
 				list = [self.dpre.id2word[wordid] for (wordid, num) in twords[0:self.top_words_num]]
 				topnwords.append(list)
-		print(topnwords)
+		print("topnwords:",topnwords)
 		print("topic number in setting: %d   invalid topic number: %d   final topic number: %d" % (
 		self.K, invalid_topic, len(topnwords)))
 		cm = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-                            window_size=10, coherence='c_uci', topn=self.top_words_num, processes=4)
+                            window_size=5, coherence='c_uci', topn=self.top_words_num, processes=4)
 		cm2 = CoherenceModel(topics=topnwords, texts=self.text, dictionary=self._dict,
-                             window_size=10, coherence='c_npmi', topn=self.top_words_num, processes=4)
+                             window_size=5, coherence='c_npmi', topn=self.top_words_num, processes=4)
 		return cm.get_coherence(), cm2.get_coherence()
-
-if __name__=='__main__':
-	# modified by Pangjy
-	# loadpath='../data/news_train_text.p'
-	loadpath='../data/classifydata2/langdetect_tweet.p'
-	lda=LDAmodel(loadpath)
-	lda.est()
-	# print(lda.getTopicCoherence())
 
