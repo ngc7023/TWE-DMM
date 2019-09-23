@@ -44,7 +44,6 @@ class Options(object):
         self.H_dis = 300
         self.predict_class_threshold = 0.3
 
-
     def __iter__(self):
         for attr, value in self.__dict__.items():
             yield attr, value
@@ -81,7 +80,7 @@ def emb_classifier(x, x_mask, y, dropout, opt, class_penalty):
         optimizer=opt.optimizer,
         learning_rate=opt.lr)
 
-    return accuracy, loss, train_op, W_norm, global_step, prob, Att_v_softmax
+    return accuracy, loss, train_op, W_norm, W_class_tran, global_step, prob, Att_v_softmax
 
 
 def main():
@@ -90,10 +89,11 @@ def main():
     # load data
     if opt.dataset == 'Tweet':
         opt.topnlabel = 2 # 保留几个分类 todo: 别的数据集
-        loadpath = "./data/tweet_filtered0.6.p"
-        embpath = "./data/tweet_filtered_emb.p"
-        probfilename = 'record_prob0.6.txt'
-        attentionfilename = 'attention_score0.6.txt'
+        loadpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.4.p"
+        embpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p"
+        probfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt'
+        attentionfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt'
+        topicwordemb_path = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p'
         opt.num_class = 4
         opt.class_name = ['apple','google','microsoft','twitter']
     if opt.dataset == 'N20short':
@@ -180,7 +180,7 @@ def main():
         keep_prob = tf.placeholder(tf.float32,name='keep_prob')
         y_ = tf.placeholder(tf.float32, shape=[opt.batch_size, opt.num_class],name='y_')
         class_penalty_ = tf.placeholder(tf.float32, shape=())
-        accuracy_, loss_, train_op, W_norm_, global_step, prob_, Att_v_softmax_ = emb_classifier(x_, x_mask_, y_, keep_prob, opt, class_penalty_)
+        accuracy_, loss_, train_op, W_norm_, W_class_, global_step, prob_, Att_v_softmax_ = emb_classifier(x_, x_mask_, y_, keep_prob, opt, class_penalty_)
     uidx = 0
     max_val_accuracy = 0.
     max_test_accuracy = 0.
@@ -225,7 +225,7 @@ def main():
                     x_labels = np.array(x_labels)
                     x_labels = x_labels.reshape((len(x_labels), opt.num_class))
                     x_batch, x_batch_mask = prepare_data_for_emb(sents, opt)
-                    _, loss, step,  = sess.run([train_op, loss_, global_step], feed_dict={x_: x_batch, x_mask_: x_batch_mask, y_: x_labels, keep_prob: opt.dropout, class_penalty_:opt.class_penalty})
+                    _, loss, step, word_emb, class_emb  = sess.run([train_op, loss_, global_step, W_norm_, W_class_], feed_dict={x_: x_batch, x_mask_: x_batch_mask, y_: x_labels, keep_prob: opt.dropout, class_penalty_:opt.class_penalty})
 
                     if uidx % opt.valid_freq == 0:
                         train_correct = 0.0
@@ -287,8 +287,11 @@ def main():
                 # print("Epoch %d: Max Test accuracy %f" % (epoch, max_test_accuracy))
                 saver.save(sess, opt.save_path, global_step=epoch)
                 saver.save(sess, "save_model/model.ckpt")
+
+            cPickle.dump([word_emb, class_emb], open(topicwordemb_path, 'wb'))
             # print("Max Test accuracy %f " % max_test_accuracy)
 
+            # 训练已完成，求AttentionScore和得到的分类结果Prob
             test_correct = 0.0
             Att_v = []
 
@@ -349,8 +352,6 @@ def main():
 
                 for prob in predict_prob:
                     topnlabel_onedoc = [0] * opt.num_class
-                    # print(prob)
-                    # exit()
                     for i in range(opt.num_class):
                         if(prob[i] > opt.predict_class_threshold):
                             topnlabel_onedoc[i] = prob[i]
@@ -363,9 +364,7 @@ def main():
                     #     topnlabel_onedoc[index_label[0][0]] = prob[index_label][0][0]
                     #     prob[index_label] = -1
                     topnlabel_docwithoutlabel.append(topnlabel_onedoc)
-
                 test_correct += test_accuracy * len(test_index)
-            # print(topnlabel_docwithoutlabel)
 
             file = open(attentionfilename, 'w')
             for i in range(len(Att_v)):
@@ -376,18 +375,12 @@ def main():
             file.close()
 
             file = open(probfilename, 'w')
-            file.write(str(len(test)))
-            file.write('\n')
-
             for topic_prob in topnlabel_docwithoutlabel:
                 # print(topic_prob)
                 for prob_each_label in topic_prob:
                     file.write(str(prob_each_label))
                     file.write(" ")
                 file.write('\n')
-
-
-
 
         except KeyboardInterrupt:
             print('Training interupted')

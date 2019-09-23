@@ -2,284 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="034f7777-ce2c-41a1-ba1b-6f2b0cf0eca5" name="Default Changelist" comment="Initial commit">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DMM/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DMM/model.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/DMM/model2.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/Classify.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/Coherence.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/attention_vis.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/cloud_word" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/dis0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/dis1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/dis2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/dis3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/emb0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/emb1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/emb2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/emb3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/llacoherence.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/new_tsne.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/plot/PMI.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/plot/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topNwordschose.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topicEmb.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topic_dis_emb.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topic_dis_emb_0.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topic_emb.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/topic_emb_dis_cloud.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Evaluation/word_cloud.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_10/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_20/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_30/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/DMM/k_40/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_10/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.theta.PurityNMI" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_20/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_30/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LDA/k_40/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/DMMModel.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_10/testLFDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_10/testLFDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_10/testLFDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_10/testLFDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_10/testLFDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_20/testLFDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_20/testLFDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_20/testLFDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_20/testLFDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_20/testLFDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_30/testLFDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_30/testLFDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_30/testLFDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_30/testLFDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_30/testLFDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_40/testLFDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_40/testLFDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_40/testLFDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_40/testLFDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/k_40/testLFDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFDMM/main.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_10/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_10/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_10/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_10/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_10/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_20/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_20/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_20/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_20/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_20/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_30/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_30/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_30/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_30/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_30/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_40/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_40/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_40/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_40/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE/LFLDA/k_40/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_10/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_20/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_30/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/DMM/k_40/testDMM.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_10/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.theta.PurityNMI" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_20/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_30/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LDA/k_40/testLDA.vocabulary" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_10/Tweet10.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_10/Tweet10.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_10/Tweet10.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_10/Tweet10.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_10/Tweet10.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_20/Tweet20.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_20/Tweet20.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_20/Tweet20.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_20/Tweet20.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_20/Tweet20.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_30/Tweet30.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_30/Tweet30.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_30/Tweet30.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_30/Tweet30.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_30/Tweet30.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_40/Tweet40.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_40/Tweet40.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_40/Tweet40.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_40/Tweet40.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/glove/k_40/Tweet40.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_10/Tweet10.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_10/Tweet10.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_10/Tweet10.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_10/Tweet10.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_10/Tweet10.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_20/Tweet20.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_20/Tweet20.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_20/Tweet20.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_20/Tweet20.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_20/Tweet20.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_30/Tweet30.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_30/Tweet30.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_30/Tweet30.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_30/Tweet30.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_30/Tweet30.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_40/Tweet40.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_40/Tweet40.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_40/Tweet40.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_40/Tweet40.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFDMM/word2vec/k_40/Tweet40.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_10/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_10/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_10/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_10/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_10/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_20/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_20/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_20/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_20/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_20/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_30/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_30/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_30/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_30/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_30/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_40/testLFLDA.paras" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_40/testLFLDA.phi" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_40/testLFLDA.theta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_40/testLFLDA.topWords" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RE2/LFLDA/k_40/testLFLDA.topicAssignments" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/data_process.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/main.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/phifile.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/res.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/tassginfile.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/thetafile.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/topNfile.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/re/topic-wordemb.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/save/save_tweet/checkpoint" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/TWE4/test.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/palmetto-py-master/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/palmetto-py-master/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/palmetto-py-master/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/palmetto-py-master/endpointtest.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/palmetto-py-master/setup.cfg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/convergence_compare/convergence_compare.npz" afterPath="$PROJECT_DIR$/LEAM/plots/convergence_compare/convergence_compare.npz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/convergence_compare/filter_size.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/convergence_compare/filter_size.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/convergence_compare/yahoo_iteration.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/convergence_compare/yahoo_iteration.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/Covariance_matrix_yahoo.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/Covariance_matrix_yahoo.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/Covariance_matrix_yahoo_label.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/Covariance_matrix_yahoo_label.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/covariance.npy" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/covariance.npy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_legend.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_legend.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_tsne.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_tsne.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_tsne2.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/yahoo_tsne2.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_a.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_a.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_a.png" afterPath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_a.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_b.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_b.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_b.png" afterPath="$PROJECT_DIR$/LEAM/plots/schemes/scheme_b.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/text_attention/yahoo_examples_1.npz" afterPath="$PROJECT_DIR$/LEAM/plots/text_attention/yahoo_examples_1.npz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/yahoo_partial/yahoo_partial.pdf" afterPath="$PROJECT_DIR$/LEAM/plots/yahoo_partial/yahoo_partial.pdf" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/data_preprocess_tweet.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short0.3.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short_label.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered0.3.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short_emb.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.3.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.4.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.5.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.6.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.7.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/preprocess_tweet.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/实验结果.xlsx" afterPath="$PROJECT_DIR$/实验结果.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/.idea/LEAM.iml" afterPath="$PROJECT_DIR$/LEAM/.idea/LEAM.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/.idea/misc.xml" afterPath="$PROJECT_DIR$/LEAM/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/.idea/workspace.xml" afterPath="$PROJECT_DIR$/LEAM/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/README.md" afterPath="$PROJECT_DIR$/LEAM/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/evaluation.py" afterPath="$PROJECT_DIR$/LEAM/evaluation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/generate_emb.py" afterPath="$PROJECT_DIR$/LEAM/generate_emb.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/glove_generate.py" afterPath="$PROJECT_DIR$/LEAM/glove_generate.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt" afterPath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel.txt" afterPath="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.4.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.4.p" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.5.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.5.p" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.6.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.6.p" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.7.p" afterPath="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.7.p" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p" afterPath="$PROJECT_DIR$/DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/main.py" afterPath="$PROJECT_DIR$/LEAM/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/main_multiclass.py" afterPath="$PROJECT_DIR$/LEAM/main_multiclass.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/model.py" afterPath="$PROJECT_DIR$/LEAM/model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/convergence_compare/Convergence_compare_plot.ipynb" afterPath="$PROJECT_DIR$/LEAM/plots/convergence_compare/Convergence_compare_plot.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/convergence_compare/filter_size_compare.ipynb" afterPath="$PROJECT_DIR$/LEAM/plots/convergence_compare/filter_size_compare.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/correlation/paper_plot_covariance_yahoo.ipynb" afterPath="$PROJECT_DIR$/LEAM/plots/correlation/paper_plot_covariance_yahoo.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/text_attention/attention plot.ipynb" afterPath="$PROJECT_DIR$/LEAM/plots/text_attention/attention plot.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/plots/yahoo_partial/SWEN_plot.ipynb" afterPath="$PROJECT_DIR$/LEAM/plots/yahoo_partial/SWEN_plot.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/preprocess_yahoo.py" afterPath="$PROJECT_DIR$/LEAM/preprocess_yahoo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LEAM/utils.py" afterPath="$PROJECT_DIR$/LEAM/utils.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MDKLDA_model/LDA.py" afterPath="$PROJECT_DIR$/MDKLDA_model/LDA.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" afterPath="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MDKLDA_model/MustSet.py" afterPath="$PROJECT_DIR$/MDKLDA_model/MustSet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/Classify.py" afterPath="$PROJECT_DIR$/TWE5/Classify.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/main.py" afterPath="$PROJECT_DIR$/TWE5/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWE5/test.py" afterPath="$PROJECT_DIR$/TWE5/test.py" />
     </list>
@@ -351,107 +104,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/main.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LEAM/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1767">
-              <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
-              <folding>
-                <element signature="e#51#65#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="99" column="24" selection-start-line="99" selection-start-column="24" selection-end-line="99" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_preprocess_tweet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE5/Tweet数据处理/data_preprocess_tweet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-825">
-              <caret line="181" column="27" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="27" />
+            <state relative-caret-position="-361">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preprocess_tweet.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/LEAM/preprocess_tweet.py">
+      <file leaf-file-name="Partition_Dataset.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/Partition_Dataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3610">
+              <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generate_emb.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preprocess_N20short.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_N20short.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MustSet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MDKLDA_model/MustSet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1596">
-              <caret line="85" column="39" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MDKLDA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MDKLDA_model/MDKLDA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5149">
-              <caret line="279" column="8" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LDA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MDKLDA_model/LDA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2432">
-              <caret line="136" column="32" selection-start-line="136" selection-start-column="32" selection-end-line="136" selection-end-column="32" />
+              <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
               <folding>
-                <element signature="e#185#203#0" expanded="true" />
+                <element signature="e#317#336#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LDA/model.py">
+      <file leaf-file-name="tweet_filtered0.3.p" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered0.3.p">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1330">
-              <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
+            <state relative-caret-position="133">
+              <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model2.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/DMM/model2.py">
+      <file leaf-file-name="tweet_filtered.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2926">
-              <caret line="162" column="48" selection-start-line="162" selection-start-column="48" selection-end-line="162" selection-end-column="48" />
+            <state relative-caret-position="-19">
+              <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/TWE4/main.py">
+      <file leaf-file-name="preprocess_tweet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_tweet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4294">
-              <caret line="235" column="10" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+            <state relative-caret-position="228">
+              <caret line="244" column="20" selection-start-line="244" selection-start-column="20" selection-end-line="244" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tweet_filteredlabel.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="3085" column="7" selection-start-line="3085" selection-start-column="7" selection-end-line="3085" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -496,24 +225,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TWE/preprocess_classifydata.py" />
-        <option value="$PROJECT_DIR$/TWE4/preprocess_classifydata_modified.py" />
-        <option value="$PROJECT_DIR$/Evaluation/Classify.py" />
-        <option value="$PROJECT_DIR$/TWE4/data_preprocessing.py" />
-        <option value="$PROJECT_DIR$/TWE4/data_preprocess_tweet.py" />
-        <option value="$PROJECT_DIR$/TWE4/data_preprocess_en.py" />
-        <option value="$PROJECT_DIR$/TWE4/generate_emb_zh.py" />
-        <option value="$PROJECT_DIR$/TWE4/glove_to_word2vec.py" />
-        <option value="$PROJECT_DIR$/TWE4/data_process.py" />
-        <option value="$PROJECT_DIR$/DMM/model.py" />
-        <option value="$PROJECT_DIR$/RE2/LFDMM/main.py" />
-        <option value="$PROJECT_DIR$/RE/LFDMM/DMMModel.py" />
-        <option value="$PROJECT_DIR$/RE2/LFDMM/DMMModel.py" />
-        <option value="$PROJECT_DIR$/TWE4/main.py" />
-        <option value="$PROJECT_DIR$/TWE/main.py" />
-        <option value="$PROJECT_DIR$/TWE4/generate_emb_en.py" />
-        <option value="$PROJECT_DIR$/TWE4/test.py" />
-        <option value="$PROJECT_DIR$/LDA/model.py" />
         <option value="$PROJECT_DIR$/TWE4/SimilarityMatrix.py" />
         <option value="$PROJECT_DIR$/model/GKLDA.py" />
         <option value="$PROJECT_DIR$/MDK-LDA/MDK-LDA.py" />
@@ -535,24 +246,43 @@
         <option value="$PROJECT_DIR$/data/classifydata2/tweet_filtered0.7.p" />
         <option value="$PROJECT_DIR$/MDKLDA_model/WordCorelation.py" />
         <option value="$PROJECT_DIR$/LEAM_data/attention_score.txt" />
-        <option value="$PROJECT_DIR$/TWE5/test.py" />
         <option value="$PROJECT_DIR$/TWE5/AttentionScoreProcess.py" />
         <option value="$PROJECT_DIR$/LEAM/MDKLDA_model/MDKLDA.py" />
         <option value="$PROJECT_DIR$/MDKLDA_model/MustSet.py" />
-        <option value="$PROJECT_DIR$/MDKLDA_model/LDA.py" />
-        <option value="$PROJECT_DIR$/LEAM/preprocess_tweet.py" />
         <option value="$PROJECT_DIR$/TWE5/Tweet数据处理/data_preprocess_tweet.py" />
-        <option value="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" />
-        <option value="$PROJECT_DIR$/LEAM/generate_emb.py" />
-        <option value="$PROJECT_DIR$/TWE5/main.py" />
-        <option value="$PROJECT_DIR$/LEAM/main.py" />
         <option value="$PROJECT_DIR$/TWE-DMM-pjy/TWE4/main.py" />
+        <option value="$PROJECT_DIR$/LEAM/generate_emb.py" />
+        <option value="$PROJECT_DIR$/LEAM/preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/LEAM/Classify.py" />
+        <option value="$PROJECT_DIR$/TWE-DMM-pjy/LEAM/main.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/Tweet数据处理/data_preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/Tweet数据处理/test.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/Tweet_Preprocess/test.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset/preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset/generate_emb.py" />
+        <option value="$PROJECT_DIR$/LEAM/test.py" />
+        <option value="$PROJECT_DIR$/TWE5/main.py" />
+        <option value="$PROJECT_DIR$/MDKLDA_model/MDKLDA.py" />
+        <option value="$PROJECT_DIR$/MDKLDA_model/LDA.py" />
+        <option value="$PROJECT_DIR$/LEAM/main.py" />
+        <option value="$PROJECT_DIR$/TWE5/Classify.py" />
+        <option value="$PROJECT_DIR$/TWE5/test.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/preprocess_N20short.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/data_preprocess_N20short.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt" />
+        <option value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/data_preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel_tmp2.txt" />
+        <option value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_tweet.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/Partition_Dataset.py" />
+        <option value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-32" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
+    <option name="width" value="1305" />
     <option name="height" value="777" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -602,6 +332,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -630,7 +362,101 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LEAM" />
+              <option name="myItemId" value="TWE5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_MDKLDA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_tweet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_MDKLDA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_LDA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_tweet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="re_LDA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MDKLDA_model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -647,38 +473,148 @@
               <option name="myItemId" value="LEAM" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2_Partition_Dataset_and_Generate_Embedding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2_Partition_Dataset_and_Generate_Embedding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="outputdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2_Partition_Dataset_and_Generate_Embedding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inputdata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="1_Tweet_Preprocess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TWE-DMM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatasetProcess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="1_Tweet_Preprocess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="outputdata" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="结构层数&#9;null&#9;null" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/MDKLDA_model/WordCorelation.py" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../LEAM/main_multiclass.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/DatasetProcess" />
+      <recent name="$PROJECT_DIR$/TWE-DMM-pjy" />
       <recent name="$PROJECT_DIR$/TWE4/Tweet数据处理" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/TWE2" />
-      <recent name="$PROJECT_DIR$/TWE/re" />
-      <recent name="$PROJECT_DIR$/LLA/re/topic/k_40" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/LEAM_data" />
-      <recent name="$PROJECT_DIR$/TWE5" />
-      <recent name="$PROJECT_DIR$/data/classifydata2" />
-      <recent name="$PROJECT_DIR$/TWE5/Tweet数据处理" />
-      <recent name="$PROJECT_DIR$/LEAM/data" />
+      <recent name="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata" />
+      <recent name="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess" />
+      <recent name="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/inputdata" />
+      <recent name="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding" />
+      <recent name="$PROJECT_DIR$/LEAM" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -693,20 +629,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.LEAM-main">
-    <configuration default="false" name="TWE5-main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.generate_emb">
+    <configuration default="false" name="Partition_Dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TWE5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE5/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/Partition_Dataset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -718,46 +654,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TWE5/Tweet数据处理" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE5/Tweet数据处理/data_preprocess_tweet.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="preprocess_tweet" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LEAM" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LEAM/preprocess_tweet.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LEAM-main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LEAM" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LEAM/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_tweet.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -769,12 +671,29 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/LEAM" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LEAM/generate_emb.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="data_preprocess_N20short" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TWE-DMM" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_N20short.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -916,74 +835,18 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="LLA-main" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/anaconda3/python.app/Contents/MacOS/python" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Documents/Work/Work/TWE-DMM/LLA" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Documents/Work/Work/TWE-DMM/LLA/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TWE2-server-main" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/anaconda3/python.app/Contents/MacOS/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TWE2_server" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TWE2_server/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="WordCorelation" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MDKLDA_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TWE-DMM" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MDKLDA_model/WordCorelation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="Python.LLA-main" />
-      <item index="1" class="java.lang.String" itemvalue="Python.TWE2-server-main" />
-      <item index="2" class="java.lang.String" itemvalue="Python.WordCorelation" />
-      <item index="3" class="java.lang.String" itemvalue="Python.TWE5-main" />
-      <item index="4" class="java.lang.String" itemvalue="Python.data_preprocess_tweet" />
-      <item index="5" class="java.lang.String" itemvalue="Python.preprocess_tweet" />
-      <item index="6" class="java.lang.String" itemvalue="Python.LEAM-main" />
-      <item index="7" class="java.lang.String" itemvalue="Python.generate_emb" />
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Python.Partition_Dataset" />
+      <item index="1" class="java.lang.String" itemvalue="Python.data_preprocess_tweet" />
+      <item index="2" class="java.lang.String" itemvalue="Python.generate_emb" />
+      <item index="3" class="java.lang.String" itemvalue="Python.data_preprocess_N20short" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.LEAM-main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.TWE5-main" />
-        <item index="2" class="java.lang.String" itemvalue="Python.generate_emb" />
-        <item index="3" class="java.lang.String" itemvalue="Python.preprocess_tweet" />
-        <item index="4" class="java.lang.String" itemvalue="Python.data_preprocess_tweet" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.generate_emb" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Partition_Dataset" />
+        <item index="2" class="java.lang.String" itemvalue="Python.data_preprocess_tweet" />
+        <item index="3" class="java.lang.String" itemvalue="Python.data_preprocess_N20short" />
       </list>
     </recent_temporary>
   </component>
@@ -1036,26 +899,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="-32" y="23" width="1305" height="777" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26767275" sideWeight="0.6968974" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28115264" sideWeight="0.6853933" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28613138" sideWeight="0.6163622" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28467155" sideWeight="0.13343924" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34890512" sideWeight="0.16744548" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3620438" sideWeight="0.7720413" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4452555" sideWeight="0.47498015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30656934" sideWeight="0.47974584" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34890512" sideWeight="0.8325545" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2488263" sideWeight="0.492126" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3080292" sideWeight="0.49007148" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26303127" sideWeight="0.3031026" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26767275" sideWeight="0.31460676" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.40729928" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="16" y="238" width="1247" height="463" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39854014" sideWeight="0.86656076" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211679" sideWeight="0.49154747" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.40729928" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="16" y="238" width="1247" height="463" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28613138" sideWeight="0.6163622" order="6" side_tool="false" content_ui="tabs" />
@@ -1128,7 +991,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="54" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -1137,261 +1000,39 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TWE5/Tweet数据处理/tweet_filtered.txt">
+    <entry file="file://$PROJECT_DIR$/LEAM/preprocess_tweet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE5/data_preprocess_en.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE5/Tweet数据处理/emnlp_dict.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/classifydata2/test.txt" />
-    <entry file="file://$PROJECT_DIR$/data/classifydata2/tweet_filtered.txt" />
-    <entry file="file://$PROJECT_DIR$/data/classifydata2/tweet_filtered_emb.p" />
-    <entry file="file://$PROJECT_DIR$/data/classifydata2/tweet_filtered0.7.p" />
-    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/importlib/_bootstrap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="310" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="264" column="0" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29336">
-          <caret line="1579" column="0" selection-start-line="1579" selection-start-column="0" selection-end-line="1579" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM_data/langdetect_tweet0.7.p" />
-    <entry file="file://$PROJECT_DIR$/MDKLDA_model/WordCorelation.py" />
-    <entry file="file://$PROJECT_DIR$/TWE4/main.py" />
-    <entry file="file://$PROJECT_DIR$/TWE5/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/preprocess_yahoo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/test.py" />
-    <entry file="file://$PROJECT_DIR$/LEAM/test.txt" />
-    <entry file="file://$PROJECT_DIR$/TWE5/AttentionScoreProcess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/classifydata2/tweetlabel0.7.txt" />
-    <entry file="file://$PROJECT_DIR$/LEAM_data/tweet_filtered.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-67489">
-          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM_data/tweet_filtered0.7.p">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/MDKLDA_model/LDA.py" />
-    <entry file="file://$PROJECT_DIR$/LEAM/MDKLDA_model/MDKLDA.py" />
-    <entry file="file://$PROJECT_DIR$/LEAM/classemb.py" />
-    <entry file="file://$PROJECT_DIR$/LEAM/tweetlabel0.7.txt" />
-    <entry file="file://$PROJECT_DIR$/TWE5/Tweet数据处理/tweet_filteredlabel.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM_data/tweetlabel0.7.txt" />
-    <entry file="file://$PROJECT_DIR$/LEAM/glove_generate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/site-packages/pandas/io/parsers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="1707" column="0" selection-start-line="1707" selection-start-column="0" selection-end-line="1707" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM_data/tweetlabel_predict.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3472">
-          <caret line="2526" column="15" selection-start-line="2526" selection-start-column="15" selection-end-line="2526" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/generate_emb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/attention_score.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5225">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/record_prob.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9462">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM_data/attention_score.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="3615" column="83" selection-start-line="3615" selection-start-column="83" selection-end-line="3615" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE5/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2204">
-          <caret line="125" column="68" selection-start-line="125" selection-start-column="68" selection-end-line="125" selection-end-column="68" />
+        <state relative-caret-position="4237">
+          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/main.py">
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/Tweet_Preprocess/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="92" column="44" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
-          <folding>
-            <element signature="e#51#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MDKLDA_model/MustSet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="85" column="39" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
+        <state relative-caret-position="38">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MDKLDA_model/LDA.py">
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/Tweet_Preprocess/data_preprocess_tweet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2432">
-          <caret line="136" column="32" selection-start-line="136" selection-start-column="32" selection-end-line="136" selection-end-column="32" />
-          <folding>
-            <element signature="e#185#203#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LDA/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1330">
-          <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/DMM/model2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2926">
-          <caret line="162" column="48" selection-start-line="162" selection-start-column="48" selection-end-line="162" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MDKLDA_model/MDKLDA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5149">
-          <caret line="279" column="8" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/TWE4/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4294">
-          <caret line="235" column="10" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+        <state relative-caret-position="19">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1767">
-          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
-          <folding>
-            <element signature="e#51#65#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="304">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/attention_score0.6.txt">
+    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/preprocess_yahoo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1399,28 +1040,376 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LEAM/model.py">
+    <entry file="file://$PROJECT_DIR$/LEAM/Classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="99" column="24" selection-start-line="99" selection-start-column="24" selection-end-line="99" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TWE5/Tweet数据处理/data_preprocess_tweet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-825">
-          <caret line="181" column="27" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="27" />
+        <state relative-caret-position="114">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LEAM/preprocess_tweet.py">
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset/generate_emb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset/preprocess_tweet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/AttentionScoreProcess.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE-DMM-pjy/LLA/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/data_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1229">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/data_preprocess_en.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="116" column="30" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/generate_emb_en.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1881">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/data_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_LDA/re_tweet/0.3/tassginfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/re_MDKLDA/re_tweet/0.4/tassginfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11020">
+          <caret line="0" column="760" selection-start-line="0" selection-start-column="760" selection-end-line="0" selection-end-column="760" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/site-packages/sklearn/metrics/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="1439" column="25" selection-start-line="1439" selection-start-column="25" selection-end-line="1439" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MDKLDA_model/MustSet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1653">
+          <caret line="113" column="32" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MDKLDA_model/MDKLDA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2126">
+          <caret line="393" column="22" selection-start-line="393" selection-start-column="22" selection-end-line="393" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MDKLDA_model/LDA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="96" column="38" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
+          <folding>
+            <element signature="e#185#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="51" column="84" selection-start-line="51" selection-start-column="84" selection-end-line="51" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/site-packages/smart_open/smart_open_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="452" column="0" selection-start-line="452" selection-start-column="0" selection-end-line="452" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///anaconda3/envs/LEAM/lib/python3.5/site-packages/gensim/models/utils_any2vec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/Classify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="135" column="29" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+          <folding>
+            <element signature="e#147#174#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TWE5/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="237" column="5" selection-start-line="236" selection-start-column="22" selection-end-line="237" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/inputdata/N20short_label.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33138">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/inputdata/N20short.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/N20short_filtered.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/备份/tweet_filteredlabel.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/preprocess_N20short.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="50" column="26" selection-start-line="44" selection-start-column="4" selection-end-line="50" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short_filteredlabel.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/outputdata/N20short_filteredlabel.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short0.3.p">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="3085" column="20" selection-start-line="3085" selection-start-column="20" selection-end-line="3085" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered_tmp.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/N20short_filtered.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel_tmp2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel_tmp.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered_tmp2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filteredlabel.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filteredlabel.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="3085" column="7" selection-start-line="3085" selection-start-column="7" selection-end-line="3085" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/inputdata/tweet_filtered0.3.p">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/Partition_Dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3610">
+          <caret line="194" column="13" selection-start-line="194" selection-start-column="13" selection-end-line="194" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/generate_emb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_N20short.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="96" column="17" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
+          <folding>
+            <element signature="e#317#336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetProcess/1_Tweet_Preprocess/preprocess_tweet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="244" column="20" selection-start-line="244" selection-start-column="20" selection-end-line="244" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LEAM/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-361">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>

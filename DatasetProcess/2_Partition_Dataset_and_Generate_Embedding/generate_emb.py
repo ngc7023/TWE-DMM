@@ -25,7 +25,7 @@ train, val, test = x[0], x[1], x[2]
 train_lab, val_lab, test_lab = x[3], x[4], x[5]
 wordtoix, ixtoword = x[6], x[7]
 print(len(wordtoix))
-filename = './data/glove.42B.300d.word2vecformat.txt'
+filename = 'inputdata/glove.42B.300d.word2vecformat.txt'
 model = gensim.models.KeyedVectors.load_word2vec_format(filename)
 vector_size = model.vector_size
 embedding_vectors = np.random.uniform(-0.001, 0.001, (len(wordtoix), vector_size))

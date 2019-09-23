@@ -226,3 +226,13 @@ import re
 # print(math.log(2000))
 
 # print(math.exp(math.log()-1500))
+filtered = ["test a b c","test a e b"]
+dic = ['a','b','c']
+for line in filtered:
+    token_list = line.split()
+    token_list2 = []
+    for word in token_list:
+        if word not in dic:
+            token_list2.append(word)
+    line = token_list2
+print(filtered)
