@@ -9,38 +9,39 @@ import os, sys, pickle as cPickle
 import tensorflow as tf
 from tensorflow.contrib import layers
 import numpy as np
-from LEAM.model import *
+from model import *
 import scipy.io as sio
 from math import floor
 
-from LEAM.utils import get_minibatches_idx, restore_from_save, tensors_key_in_file, prepare_data_for_emb, load_class_embedding
+from utils import get_minibatches_idx, restore_from_save, tensors_key_in_file, prepare_data_for_emb, load_class_embedding
 
 class Options(object):
     def __init__(self):
         self.GPUID = 0
-        self.dataset = 'Tweet'
+        self.dataset = 'N20short'
+        self.proportion = 0.7
+        self.topnlabel = 0
         self.fix_emb = True
         self.restore = False
         self.W_emb = None
         self.W_class_emb = None
-        self.maxlen = 15
+        self.maxlen = None
         self.n_words = None
         self.embed_size = 300
         self.lr = 1e-3
         self.batch_size = 2
-        self.max_epochs = 150
+        self.max_epochs = 200
         self.dropout = 0.5
         self.part_data = False
         self.portion = 1.0 
         self.save_path = "./save/"
         self.log_path = "./log/"
-        self.print_freq = 100
-        self.valid_freq = 100
+        self.valid_freq = 200
 
         self.optimizer = 'Adam'
         self.clip_grad = None
         self.class_penalty = 1.0
-        self.ngram = 2
+        self.ngram = 5
         self.H_dis = 300
         self.predict_class_threshold = 0.3
 
@@ -89,17 +90,16 @@ def main():
     # load data
     if opt.dataset == 'Tweet':
         opt.topnlabel = 2 # 保留几个分类 todo: 别的数据集
-        loadpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered0.4.p"
+        loadpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered"+str(opt.proportion)+".p"
         embpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p"
-        probfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob0.4.txt'
-        attentionfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score0.4.txt'
-        topicwordemb_path = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/word_class_emb.p'
+        probfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/tweet/record_prob'+str(opt.proportion)+'.txt'
+        attentionfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/tweet/attention_score'+str(opt.proportion)+'.txt'
+        topicwordemb_path = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/tweet/word_class_emb'+str(opt.proportion)+'.p'
         opt.num_class = 4
+        opt.maxlen = 15
         opt.class_name = ['apple','google','microsoft','twitter']
     if opt.dataset == 'N20short':
-        opt.topnlabel = 4 # todo: 别的数据集
-        loadpath = "./data/N20short0.7.p"
-        embpath = "./data/N20short_emb.p"
+        opt.topnlabel = 2 # todo: 别的数据集
         opt.class_name = ['rec.autos', 'talk.politics.misc', 'sci.electronics', 'comp.sys.ibm.pc.hardware',
                       'talk.politics.guns',
                       'sci.med', 'rec.motorcycles', 'soc.religion.christian', 'comp.sys.mac.hardware', 'comp.graphics',
@@ -107,42 +107,15 @@ def main():
                       'comp.os.ms-windows.misc', 'misc.forsale', 'talk.politics.mideast', 'sci.crypt',
                       'rec.sport.hockey']
         opt.num_class = len(opt.class_name)
-    elif opt.dataset == 'agnews':
-        loadpath = "./data/ag_news.p"
-        embpath = "./data/ag_news_glove.p"
-        opt.num_class = 4
-        opt.class_name = ['World',
-                        'Sports',
-                        'Business',
-                        'Science']    
-    elif opt.dataset == 'dbpedia':
-        loadpath = "./data/dbpedia.p"
-        embpath = "./data/dbpedia_glove.p"
-        opt.num_class = 14
-        opt.class_name = ['Company',
-            'Educational Institution',
-            'Artist',
-            'Athlete',
-            'Office Holder',
-            'Mean Of Transportation',
-            'Building',
-            'Natural Place',
-            'Village',
-            'Animal',
-            'Plant',
-            'Album',
-            'Film',
-            'Written Work',
-            ]
-    elif opt.dataset == 'yelp_full':
-        loadpath = "./data/yelp_full.p"
-        embpath = "./data/yelp_full_glove.p"
-        opt.num_class = 5
-        opt.class_name = ['worst',
-                        'bad',
-                        'middle',
-                        'good',
-                        'best']
+        loadpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short" + str(opt.proportion) + ".p"
+        embpath = "../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short_emb.p"
+        probfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/N20short/record_prob' + str(opt.proportion) + '.txt'
+        attentionfilename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/N20short/attention_score' + str(opt.proportion) + '.txt'
+        topicwordemb_path = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/N20short/word_class_emb' + str(opt.proportion) + '.p'
+        opt.maxlen = 20
+    print("dataset:", opt.dataset)
+    print("proportion for data without label:", opt.proportion)
+    print("number of class:", opt.num_class)
     x = cPickle.load(open(loadpath, "rb"),encoding='iso-8859-1')
     train, val, test = x[0], x[1], x[2]
     train_lab, val_lab, test_lab = x[3], x[4], x[5]
@@ -225,23 +198,24 @@ def main():
                     x_labels = np.array(x_labels)
                     x_labels = x_labels.reshape((len(x_labels), opt.num_class))
                     x_batch, x_batch_mask = prepare_data_for_emb(sents, opt)
-                    _, loss, step, word_emb, class_emb  = sess.run([train_op, loss_, global_step, W_norm_, W_class_], feed_dict={x_: x_batch, x_mask_: x_batch_mask, y_: x_labels, keep_prob: opt.dropout, class_penalty_:opt.class_penalty})
+                    train_acc, _, loss, step, word_emb, class_emb  = sess.run([accuracy_,train_op, loss_, global_step, W_norm_, W_class_], feed_dict={x_: x_batch, x_mask_: x_batch_mask, y_: x_labels, keep_prob: opt.dropout, class_penalty_:opt.class_penalty})
 
                     if uidx % opt.valid_freq == 0:
+                        # print("train accuracy:", train_acc)
                         train_correct = 0.0
                         # sample evaluate accuaccy on 500 sample data
-                        kf_train = get_minibatches_idx(500, opt.batch_size, shuffle=True)
+                        kf_train = get_minibatches_idx(len(train), opt.batch_size, shuffle=True)
                         for _, train_index in kf_train:
                             train_sents = [train[t] for t in train_index]
                             train_labels = [train_lab[t] for t in train_index]
                             train_labels = np.array(train_labels)
                             train_labels = train_labels.reshape((len(train_labels), opt.num_class))
-                            x_train_batch, x_train_batch_mask = prepare_data_for_emb(train_sents, opt)  
+                            x_train_batch, x_train_batch_mask = prepare_data_for_emb(train_sents, opt)
                             train_accuracy = sess.run(accuracy_, feed_dict={x_: x_train_batch, x_mask_: x_train_batch_mask, y_: train_labels, keep_prob: 1.0, class_penalty_:0.0})
 
                             train_correct += train_accuracy * len(train_index)
 
-                        train_accuracy = train_correct / 500
+                        train_accuracy = train_correct / len(train)
 
                         print("Iteration %d: Training loss %f " % (uidx, loss))
                         print("Train accuracy %f " % train_accuracy)

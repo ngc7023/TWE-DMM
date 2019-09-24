@@ -23,18 +23,21 @@ from sklearn.naive_bayes import MultinomialNB
 def classifier(data):
     train_x=data[0][0]
     train_y=data[0][1]
+    # print(train_y)
     clf = SVC(kernel='rbf', probability=True)
     # clf=KNeighborsClassifier()
     clf.fit(train_x, train_y)
     test_x=data[1][0]
     test_y=data[1][1]
     test_predicted=clf.predict(test_x)
+    # print(test_y)
+    # print(test_predicted)
     accuracy = np.mean(test_predicted == test_y)
 
     print("The accuracy for classification of non-label text is %s" % accuracy)
     print(metrics.classification_report(test_y, test_predicted, digits=3))
 
-def getdata3(datapath,thetafile):
+def getdata3(datapath, thetafile):
     x = cPickle.load(open(datapath, "rb"),encoding='iso-8859-1')
     # train, val, test = x[0], x[1], x[2]
     # wordtoix, ixtoword = x[6], x[7]
@@ -45,11 +48,9 @@ def getdata3(datapath,thetafile):
     for i in range(len(train_lab)):
         label_index = int(np.where(train_lab[i]>0)[0])
         train_lab_index.append(label_index)
-
     for i in range(len(test_lab)):
         label_index = int(np.where(test_lab[i]>0)[0])
         test_lab_index.append(label_index)
-
     docfeature_list = []
     f=codecs.open(thetafile, 'r')
     for line in f:
@@ -60,6 +61,11 @@ def getdata3(datapath,thetafile):
         # else:
         #     docfeature_list.append([float(t) for t in tokens])
     f.close()
+    print(len(train_lab))
+    print(len(test_lab))
+    print(len(docfeature_list))
+    print(len(train_lab_index))
+    print(len(test_lab_index))
     data_train = [docfeature_list[:len(train_lab)], train_lab_index]
     data_test = [docfeature_list[len(train_lab):], test_lab_index]
     return [data_train, data_test]
@@ -124,35 +130,35 @@ if __name__=='__main__':
     # 	classifier(data)
 
     # Tweet-LDA
-    for k in [10]:
-        for proportion in [0.3]:
-            thetafile = '../TWE5/re_LDA/re_tweet/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
-            datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered' + str(proportion) + '.p'
-            data = getdata3(datapath, thetafile)
-            classifier(data)
+    # for k in [10]:
+    #     for proportion in [0.7]:
+    #         thetafile = '../TWE5/re_LDA/re_tweet/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
+    #         datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered' + str(proportion) + '.p'
+    #         data = getdata3(datapath, thetafile)
+    #         classifier(data)
+    #
+    # # Tweet-MDKLDA
+    # for k in [10]:
+    #     for proportion in [0.7]:
+    #         thetafile = '../TWE5/re_MDKLDA/re_tweet/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
+    #         datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered' + str(proportion) + '.p'
+    #         data = getdata3(datapath, thetafile)
+    #         classifier(data)
+
+
+    # Tweet-LDA
+    # for k in [10]:
+    #     for proportion in [0.3]:
+    #         thetafile = '../TWE5/re_LDA/re_N20short/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
+    #         datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short' + str(proportion) + '.p'
+    #         data = getdata3(datapath, thetafile)
+    #         classifier(data)
 
     # Tweet-MDKLDA
     for k in [10]:
-        for proportion in [0.3]:
-            thetafile = '../TWE5/re_MDKLDA/re_tweet/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
-            datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered' + str(proportion) + '.p'
+        for proportion in [0.7]:
+            thetafile = '../TWE5/re_MDKLDA/re_N20short/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
+            datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short' + str(proportion) + '.p'
             data = getdata3(datapath, thetafile)
             classifier(data)
-
-    # # N20short-LDA
-    # for k in [10]:
-    #     for proportion in [0.3]:
-    #         thetafile = '/Users/wuyuanfujie/Code/PycharmCode/TWE-DMM/TWE5/re_LDA/re_N20short/'+str(k)+'/'+str(proportion)+'/thetafile.txt'
-    #         # datapath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered' + str(proportion) + '.p'
-    #         data = getdata3(datapath, thetafile)
-
-
-    # datafile='../data/classifydata2/langdetect_tweet_label.txt'
-    # for k in [10, 20, 30, 40]:
-    #     lfdmmthetafileprefix = '../RE2/LFDMM/glove/k_'
-    #     lfdmmthetafilesuffix = '/Tweet' + str(k) + '.theta'
-    #     print('lfdmm model classify result: k =', k)
-    #     lfdmmthetafile = lfdmmthetafileprefix + str(k) + lfdmmthetafilesuffix
-    #     data = getdata2(datafile, lfdmmthetafile)
-    #     classifier(data)
 

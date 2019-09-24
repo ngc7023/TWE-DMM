@@ -28,13 +28,13 @@ class TopicModel_Setting(object):
 		# LDA/DMM参数
 		self.restore = False
 		self.num_topic = 10         # 主题个数
-		self.num_class = 4          # Label个数
+		self.num_class = None          # Label个数
 		self.top_words_num = 5
 		self.beta = 0.1
 		self.alpha = 1
 
 		self.dataset = 'Tweet'
-		self.proportion = 0.3
+		self.proportion = 0.7
 		self.emb_type = "glove"
 
 		self.LDA_phifile = ""  # 词-主题分布文件phi
@@ -56,11 +56,13 @@ def main():
 
 	opt = TopicModel_Setting()
 	if opt.dataset == 'Tweet':
+		opt.num_class = 4
+		opt.columnname = ['0','1','2','3']
 		opt.corpus_path = '../DatasetProcess/1_Tweet_Preprocess/tweet_filtered.txt' # 文本始终使用这个
 		opt.loadpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered'+str(opt.proportion)+'.p'
 		opt.embpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/tweet_filtered_emb.p'
-		att_filename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/attention_score'+str(opt.proportion)+'.txt'
-		predicted_label_file = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/record_prob'+str(opt.proportion)+'.txt'
+		att_filename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/tweet/attention_score'+str(opt.proportion)+'.txt'
+		predicted_label_file = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/tweet/record_prob'+str(opt.proportion)+'.txt'
 
 		opt.LDA_phifile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/phifile.txt'  # 词-主题分布文件phi
 		opt.LDA_thetafile = './re_LDA/re_tweet/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/thetafile.txt'
@@ -73,12 +75,14 @@ def main():
 		opt.MDKLDA_tagassignfile = './re_MDKLDA/re_tweet/'+str(opt.num_topic)+'/' + str(opt.proportion) + '/tassginfile.txt'  # 最后分派结果文件
 
 	elif opt.dataset == 'N20short':
-		opt.corpus_path = '../DatasetProcess/TACL-datasets/N20short.txt'
-		opt.loadpath = '../DatasetProcess/TACL-datasets/N20short'+str(opt.proportion)+'.p'
-		if(opt.emb_type=='word2vec'):
-			opt.embpath = '../data/TACL-datasets/N20short_word2vec_emb.p'
-		elif(opt.emb_type=='glove'):
-			opt.embpath = '../data/TACL-datasets/N20short_glove_emb.p'
+		opt.num_class = 20
+		opt.columnname = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19']
+		opt.corpus_path = '../DatasetProcess/1_Tweet_Preprocess/outputdata/N20short_filtered.txt'
+		# opt.loadpath = '/home/zliu/topic_modeling/TWE-DMM/DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short0.3.p'
+		opt.loadpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short'+str(opt.proportion)+'.p'
+		opt.embpath = '../DatasetProcess/2_Partition_Dataset_and_Generate_Embedding/outputdata/N20short_emb.p'
+		att_filename = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/N20short/attention_score'+str(opt.proportion)+'.txt'
+		predicted_label_file = '../DatasetProcess/3_Predict_Class_and_Get_Attention_Score/outputdata_fromLEAM/N20short/record_prob'+str(opt.proportion)+'.txt'
 
 		opt.LDA_phifile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/phifile.txt'  # 词-主题分布文件phi
 		opt.LDA_thetafile = './re_LDA/re_N20short/'+str(opt.num_topic)+'/'+str(opt.proportion)+'/thetafile.txt'
@@ -97,6 +101,7 @@ def main():
 	print("topic number:",opt.num_topic)
 	print("class number:",opt.num_class)
 	print("dataset:", opt.dataset)
+	print("proportion:",opt.proportion)
 	x_data = cPickle.load(open(opt.loadpath, "rb"))
 	train, val, test = x_data[0], x_data[1], x_data[2]
 	train_lab, val_lab, test_lab_true = x_data[3], x_data[4], x_data[5],
@@ -104,9 +109,9 @@ def main():
 	train += val
 	train_lab += val_lab
 	test_lab = []
-
-	df = pd.read_csv(predicted_label_file,sep=' ',names=['0','1','2','3'])
-	for ix,row in df.iterrows():
+	print("load loadpath success")
+	df = pd.read_csv(predicted_label_file,sep=' ',names=opt.columnname)
+	for ix, row in df.iterrows():
 		tmp_lab = [0] * opt.num_class
 		for i in range(opt.num_class):
 			if(row[i]!=0):
@@ -114,6 +119,7 @@ def main():
 		test_lab.append(tmp_lab)
 	print("train:",len(train))
 	print("test",len(test))
+	print("load label success")
 	lda = LDAmodel(train, test, wordtoix, ixtoword, opt)
 	lda.est()
 	lda.save()

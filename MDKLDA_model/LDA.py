@@ -94,7 +94,7 @@ class LDAmodel(object):
 		# 模型参数
 		self.beta = opt.beta  # 每个主题下词的狄利克雷分布先验参数beta（超参数）
 		self.alpha = opt.alpha  # 每个文档下主题的狄利克雷分布先验参数alpha（超参数）
-		self.iter_times = 2000  # 最大迭代次数
+		self.iter_times = 2000  # 最大迭代次数 1000
 		self.top_words_num = opt.top_words_num  # 每个主题特征词个数
 
 		self.p = np.zeros(self.K)  # 概率向量double类型，存储采样的临时变量

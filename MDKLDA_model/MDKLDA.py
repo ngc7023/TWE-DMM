@@ -53,7 +53,7 @@ class MDKLDAmodel(object):
 		# todo 参数设定
 		self.nBurnin = 0
 		# 	The number of Gibbs sampling iterations.
-		self.iter_times = 200  # 最大迭代次数
+		self.iter_times = 2000  # 最大迭代次数 200
 		# 	The length of interval to sample for calculating posterior distribution.
 		self.sampleLag = 0
 		self.lambdaForComputingGamma = 2000
@@ -74,7 +74,7 @@ class MDKLDAmodel(object):
 		self.vGamma = np.zeros((self.K,self.MS), dtype='float64')
 		for i in range(self.MS):
 			size = self.mustsets_obj.len_mustsets[i]
-			print(self.mustsets_obj.normalized_size)
+			# print(self.mustsets_obj.normalized_size)
 			size_normalized = self.mustsets_obj.normalized_size[i]
 			self.gamma[i] = [0] * size
 

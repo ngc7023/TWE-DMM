@@ -85,10 +85,8 @@ class MustSets(object):
 
     def ExtendMustSetsWithPredictLabelText(self, test, test_lab, ixtoword):
         tmp_mustsets = self.mustsets
-
         for word_id in list(ixtoword.keys()):
             self.wordidToMustsetListMapForNoLabel[word_id] = []
-
         for i in range(len(test)):
             for j in range(self.MS):
                 if(test_lab[i][j]!=0):
